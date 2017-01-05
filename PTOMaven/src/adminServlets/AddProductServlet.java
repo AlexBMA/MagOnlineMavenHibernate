@@ -46,12 +46,12 @@ public class AddProductServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		int numberOfItems = Integer.parseInt(request.getParameter("numberofitems"));
-		int priceOfItem = Integer.parseInt(request.getParameter("priceofproduct"));
+		int numberOfItems = Integer.parseInt(request.getParameter("numberofitems").trim());
+		int priceOfItem = Integer.parseInt(request.getParameter("priceofproduct").trim());
 		
-		String productName = request.getParameter("productname");
-		String productTypeName = request.getParameter("productType");
-		String linkImage = request.getParameter("linkimage");
+		String productName = request.getParameter("productname").trim();
+		String productTypeName = request.getParameter("productType").trim();
+		String linkImage = request.getParameter("linkimage").trim();
 		
 		int indexProductType=0;
 		

@@ -49,10 +49,12 @@
 				Map<Integer,ProductType> productTypeMap= (Map)request.getAttribute("mapproducttype");
 			%>
 			
-			<form action="" method="post">
+			<form action="${pageContext.request.contextPath}/SaveEditServlet" method="post">
 				
 				<h4>Edit Product</h4>
 				
+				<input type="number" name="indexproduct" value="<%=productLocal.getId() %>" readonly>
+				<br/>
 				<label>Product name: </label>
 				<input type="text"  name="productname" value="<%=productLocal.getName() %>" >
 				<br/>
@@ -60,10 +62,10 @@
 				<input type="number"  min="1"  name="numberofitems" value="<%=productLocal.getNumberOfItems() %>" >
 				<br/>
 				<label>Price: </label>
-				<input type="number"  min="1"  name="price" value="<%=productLocal.getPrice() %>">
+				<input type="number"  min="1"  name="priceofproduct" value="<%=productLocal.getPrice() %>">
 				<br/>
 				<label>Product type: </label>
-				<select name="categorie" required>
+				<select name="producttype" required>
                     <% 	
   						if( productTypeMap!=null)
   						{
@@ -78,7 +80,7 @@
                     </select>
 				<br/>
 				<label>Image link</label>
-				<input type="text" name="link image" value="<%=productLocal.getLinkImg() %>">
+				<input type="text" name="linkimage" value="<%=productLocal.getLinkImg() %>">
 				<br/>
 				<button type="submit">Save edit </button>
 				<button type="reset">Rest fields</button>

@@ -42,7 +42,7 @@ public class EditProductServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		int indexProduct = Integer.parseInt( request.getParameter("idproduct"));
+		int indexProduct = Integer.parseInt(request.getParameter("idproduct"));
 		
 		AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 		
