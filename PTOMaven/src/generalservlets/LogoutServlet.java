@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import servicies.AddPrefixAndSufix;
-import servicies.AddPrefixAndSufixImplementation;
+
 
 /**
  * Servlet implementation class LogoutServlet
@@ -37,7 +36,7 @@ public class LogoutServlet extends HttpServlet {
 		theSession.invalidate();
 		
 		
-		AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+	
 		String nextPage="index.jsp";
 		
 		response.sendRedirect(nextPage);

@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dboperations.DB;
-import dboperations.DBOperationUser;
-import dboperations.DBOperations2;
-import modelMag.User;
 import servicies.AddPrefixAndSufix;
 import servicies.AddPrefixAndSufixImplementation;
 import servicies.LoginService;
@@ -75,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 			requestDispatcher.forward(request, response);
 
 		} else {
-			System.out.println("^^^");
+			
 		}
 
 	}

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 
-import dboperations.DB;
 
 import dboperations.DBOperations2;
 import dboperations.DBOperationsProduct;

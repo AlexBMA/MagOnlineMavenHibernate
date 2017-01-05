@@ -95,7 +95,9 @@
 			<hr>
 			
 			<form action="${pageContext.request.contextPath}/AddProductServlet" method="post">
-				<legend>New Product</legend>
+				
+				<h4>New Product</h4>
+				
 				<input type="text" placeholder="name of product" name="productname">
 				<input type="number"  min="1" placeholder="number of items" name="numberofitems">
 				<input type="number"  min="1" placeholder="price" name="priceofproduct">
@@ -116,7 +118,7 @@
 				<input type="text" placeholder="link image" name="linkimage">
 				
 				<button type="submit">Add product</button>
-				<button type="reset">Rest Fields</button>
+				<button type="reset">Rest fields</button>
 			</form>
 			
 		</main>

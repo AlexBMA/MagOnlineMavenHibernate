@@ -28,7 +28,7 @@
 						
 					</li>
 					<li>
-						<form action="${pageContext.request.contextPath}/ViewAllProductTypeServlet" method="get">
+						<form action="${pageContext.request.contextPath}/ViewAllProductTypeServlet" method="post">
 							<button type="submit">ProductType options</button>
 						</form>
 					</li>
@@ -44,10 +44,51 @@
 		<br/>
 		<main>
 			
-			<p>here in product type operations</p>
+			<%
+				List<ProductType> listProductType = (List)request.getAttribute("listproducttype");
+			%>
+			<table>
+			
+				<tr>
+					<th>Id product type </th>
+					<th>Product type name </th>
+					<th>Options</th>
+				</tr>
+				<tbody>
+					<%
+						for(ProductType temp:listProductType)
+						{
+					%>
+					<tr>
+						<td><%=temp.getId() %> </td>
+						<td><%=temp.getProductTypeName() %> </td>
+						<td>
+							<form action="${pageContext.request.contextPath}/" method="post">
+								<input type="number" value="<%=temp.getId() %>" name="idproduct">
+								<button type="submit">Edit</button>
+							</form>
+							
+							<form action="${pageContext.request.contextPath}/DeleteProductTypeServlet" method="post">
+								<input type="number" value="<%=temp.getId() %>" name="idproduct">
+								<button type="submit">Delete</button>
+							</form>
+						</td>
+					</tr>
+					<%} %>
+				</tbody>
+				
+			</table>
 			
 			
 			<hr>
+			
+			<form action="${pageContext.request.contextPath}/AddProductTypeServlet" method="post" >
+				<h4>Add new product type</h4>
+				<input type="text" placeholder="name of product type" name="nameofproducttype">
+				
+				<button type="submit">Add product type</button>
+				<button type="reset">Reset field</button>
+			</form>
 			
 			
 			

@@ -50,7 +50,8 @@
 			%>
 			
 			<form action="" method="post">
-				<legend>Edit Product</legend>
+				
+				<h4>Edit Product</h4>
 				
 				<label>Product name: </label>
 				<input type="text"  name="productname" value="<%=productLocal.getName() %>" >
