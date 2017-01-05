@@ -3,6 +3,7 @@ package adminServlets;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dboperations.DB;
+import modelMag.Product;
 import modelMag.ProductType;
 import servicies.GeneralServiceInterface;
+import servicies.ProductService;
 import servicies.ProductTypeService;
 
 /**
@@ -48,12 +51,16 @@ public class SaveEditServlet extends HttpServlet {
 		System.out.println(request.getParameter("indexproduct"));
 		int productIndex = Integer.parseInt(request.getParameter("indexproduct").toString().trim());
 		
-		int numberOfItems = Integer.parseInt(request.getParameter("numberofitems").toString().trim());
-		int priceOfItem = Integer.parseInt(request.getParameter("priceofproduct").toString().trim());
 
 		String productName = request.getParameter("productname").trim();
 		String productTypeName = request.getParameter("producttype").trim();
 		String linkImage = request.getParameter("linkimage").trim();
+		
+		int numberOfItems = Integer.parseInt(request.getParameter("numberofitems").trim());
+		double priceOfItem = Double.parseDouble(request.getParameter("priceofproduct").trim());
+		
+		System.out.println("## "+request.getParameter("numberofitems").trim());
+		System.out.println("### "+request.getParameter("priceofproduct").trim());
 
 		int indexProductType = 0;
 
@@ -68,7 +75,25 @@ public class SaveEditServlet extends HttpServlet {
 			}
 		}
 		
+		GeneralServiceInterface<Product> productService = new ProductService();
 		
+		Product tempProduct = productService.getItem(productIndex, DB.getSessionFactory());
+		tempProduct.setLinkImg(linkImage);
+		tempProduct.setPrice(priceOfItem);
+		tempProduct.setNumberOfItmes(numberOfItems);
+		tempProduct.setProductTypeId(indexProductType);
+		tempProduct.setName(productName);
+		
+		
+		
+		productService.insertItem(tempProduct, DB.getSessionFactory());
+		
+		String nextPage="ViewAllProductsServlet";
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+		requestDispatcher.forward(request, response);
+		
+		System.out.println("done with edit");
 	}
 
 }

@@ -62,7 +62,7 @@
 				<input type="number"  min="1"  name="numberofitems" value="<%=productLocal.getNumberOfItems() %>" >
 				<br/>
 				<label>Price: </label>
-				<input type="number"  min="1"  name="priceofproduct" value="<%=productLocal.getPrice() %>">
+				<input type="number"  min="1"  step="0.01" name="priceofproduct" value="<%=productLocal.getPrice() %>">
 				<br/>
 				<label>Product type: </label>
 				<select name="producttype" required>

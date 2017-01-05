@@ -100,7 +100,7 @@
 				
 				<input type="text" placeholder="name of product" name="productname">
 				<input type="number"  min="1" placeholder="number of items" name="numberofitems">
-				<input type="number"  min="1" placeholder="price" name="priceofproduct">
+				<input type="number"  min="1" step="0.01" placeholder="price" name="priceofproduct">
 				
 				<select name="productType">
                     <% 	
