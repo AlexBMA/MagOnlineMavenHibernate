@@ -37,8 +37,14 @@ header h3{
 }
 
 main {
-	
 	 text-align: center;
+	
+}
+main table{
+	 margin: 0px auto 0px;
+}
+main table tr th{
+	padding: 0 15px 0px;
 }
 main h2{
 	margin-top:20px;

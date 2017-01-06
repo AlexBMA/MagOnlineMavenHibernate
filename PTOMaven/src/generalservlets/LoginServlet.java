@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dboperations.DB;
+import modelMag.Cart;
 import servicies.AddPrefixAndSufix;
 import servicies.AddPrefixAndSufixImplementation;
 import servicies.LoginService;
@@ -66,6 +67,9 @@ public class LoginServlet extends HttpServlet {
 			if (role.equals("c")) {
 				nextPage = addSAndP.createPath("ClientPage");
 
+				Cart cart = new Cart();
+				
+				theSession.setAttribute("cart",cart);
 			}
 
 			requestDispatcher = request.getRequestDispatcher(nextPage);

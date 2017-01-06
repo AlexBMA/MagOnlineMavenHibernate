@@ -48,7 +48,8 @@
 				</ul>
 			</nav>
 		</header>
-		<br />
+		<hr/>
+		<br/>
 		<main> 
 		<%
 			ProductType temp = (ProductType)request.getAttribute("producttype");
@@ -62,7 +63,8 @@
 
 
 		</main>
-		<br />
+		<br/>
+		<hr/>
 		<footer id="footer"> </footer>
 	</div>
 </body>

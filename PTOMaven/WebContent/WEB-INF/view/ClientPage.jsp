@@ -27,7 +27,7 @@
 					</li>
 					
 					<li>
-						<form action="${pageContext.request.contextPath}/" method="get">
+						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get">
 							<button type="submit">View products</button>
 						</form>
 						

@@ -44,6 +44,7 @@
 				</ul>
 			</nav>
 		</header>
+		<hr/>
 		<br/>
 		<main>
 			
@@ -98,6 +99,7 @@
 			
 		</main>
 		<br/>
+		<hr/>
 		<footer id="footer">
 		</footer>
 	

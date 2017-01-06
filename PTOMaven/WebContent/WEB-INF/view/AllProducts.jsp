@@ -44,6 +44,7 @@
 				</ul>
 			</nav>
 		</header>
+		<hr/>
 		<br/>
 		<main>
 			<% 
@@ -77,12 +78,12 @@
 							<td><%=p.getLinkImg() %></td>
 							<td> <form action="${pageContext.request.contextPath}/EditProductServlet" method="post">
 								
-								<input type="text" value="<%=p.getId() %>" readonly name="idproduct">
+								<input type="text" value="<%=p.getId() %>" readonly name="idproduct" hidden>
 								<button type="submit">Edit</button> 
 								 </form> 
 								 
 								 <form action="${pageContext.request.contextPath}/DeleteProductServlet" method="post">
-								 	<input type="text" value="<%=p.getId() %>" readonly name="idproduct">
+								 	<input type="text" value="<%=p.getId() %>" readonly name="idproduct" hidden>
 								 	<button type="submit">Delete</button>
 								 </form>
 							
@@ -126,6 +127,7 @@
 			
 		</main>
 		<br/>
+		<hr/>
 		<footer id="footer">
 		</footer>
 	
