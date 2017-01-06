@@ -1,0 +1,53 @@
+/*  Reset */
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+/* General Styling */
+body {
+    color: white;
+    background: #E4ADA9;
+    
+}
+
+a {
+    text-decoration: none;
+}
+
+ul li {
+    list-style: none;
+}
+
+#container{
+    margin: 10px auto 10px;
+    width: 75%;
+    background: #7C8BC3;
+    border-radius: 15px;
+}
+
+header{
+    margin: 0 auto 20px;
+    
+}
+
+header h3{
+	padding-top: 10px; 
+	text-align: center;
+}
+
+main {
+	
+	 text-align: center;
+}
+main h2{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+footer{
+    margin-top: 20px;
+    align-content: center;
+    padding-bottom: 20px;;
+    text-align: center;
+}

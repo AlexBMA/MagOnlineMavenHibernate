@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*" %>
+<%@ page import="modelMag.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +10,16 @@
 	   type="text/css"
 	   rel="stylesheet" >
 <title>Admin Page</title>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
 </head>
 <body>
 	<div id="container">
 	
 		<header id="header">
-			
-			<h3>Welcome admin <%=session.getAttribute("userName")%></h3>
-			
+		
 			<nav>
 				<ul>
 					<li>
@@ -23,14 +27,14 @@
 					</li>
 					
 					<li>
-						<form action="${pageContext.request.contextPath}/ViewAllProductsServlet" method="get">
-							<button type="submit">Product options</button>
+						<form action="${pageContext.request.contextPath}/" method="get">
+							<button type="submit">View products</button>
 						</form>
 						
 					</li>
 					<li>
-						<form action="${pageContext.request.contextPath}/ViewAllProductTypeServlet" method="post">
-							<button type="submit">ProductType options</button>
+						<form action="${pageContext.request.contextPath}/" method="post">
+							<button type="submit">View cart</button>
 						</form>
 					</li>
 					<li>
@@ -41,15 +45,18 @@
 					</li>
 				</ul>
 			</nav>
+		
 		</header>
 		<br/>
 		<main>
 			
-			<p> Some text here </p>
+			
 			
 		</main>
 		<br/>
 		<footer id="footer">
+		
+		
 		</footer>
 	
 	</div>

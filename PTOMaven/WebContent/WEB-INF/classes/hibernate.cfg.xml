@@ -18,6 +18,8 @@
         <!-- Select our SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
+        
+        
         <!-- Echo the SQL to stdout -->
         <property name="show_sql">true</property>
 

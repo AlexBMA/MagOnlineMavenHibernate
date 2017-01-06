@@ -6,6 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link  href="${pageContext.request.contextPath}/resources/css/style.css" 
+	   type="text/css"
+	   rel="stylesheet" >
 <title>Admin Page</title>
 </head>
 <body>
@@ -67,11 +70,12 @@
 								<input type="number" value="<%=temp.getId() %>" name="idproduct">
 								<button type="submit">Edit</button>
 							</form>
-							
+							<!-- 
 							<form action="${pageContext.request.contextPath}/DeleteProductTypeServlet" method="post">
 								<input type="number" value="<%=temp.getId() %>" name="idproduct">
 								<button type="submit">Delete</button>
 							</form>
+							 -->
 						</td>
 					</tr>
 					<%} %>
