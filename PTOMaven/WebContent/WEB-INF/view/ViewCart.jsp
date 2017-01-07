@@ -1,7 +1,8 @@
+<%@page import="servicies.ProductService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
-<%@ page import="modelMag.*" %>    
+<%@ page import="modelMag.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
 	   type="text/css"
 	   rel="stylesheet" />
       
-<title>Admin Page</title>
+<title>Client Page</title>
 
 </head>
 <body>
@@ -18,7 +19,7 @@
 	
 		<header id="header">
 			<h2>Welcome <%=session.getAttribute("userName")%></h2>
-			
+		
 			<nav>
 				<ul>
 					<li>
@@ -32,7 +33,7 @@
 						
 					</li>
 					<li>
-						<form action="${pageContext.request.contextPath}/ViewCartClientServlet" method="get">
+						<form action="${pageContext.request.contextPath}/" method="post">
 							<button type="submit">View cart</button>
 						</form>
 					</li>
@@ -44,30 +45,35 @@
 					</li>
 				</ul>
 			</nav>
-		<br/>
+			<br/>
 		</header>
 		<br/>
 		<main>
-			<% Product temp = (Product)request.getAttribute("product"); %>
+			<%
+				Cart theCart = (Cart)session.getAttribute("cart");
+			%>
 			
-			<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post">
-				<input type="number" value="<%=temp.getId() %>" readonly hidden name="indexofproduct"/>
+			<h4><%=theCart.getTotalPriceForProductFormCart() %></h4>
 			
-				<img src="<%=temp.getLinkImg() %>"/>
-				<br/>
-				<label id="priceinrealtime">Price per unit: <%=temp.getPrice() %></label>
-				<br/>
-				<input type="number" min="1" max="<%=temp.getNumberOfItems() %>" name="numberofitems" value="1">
+			<%
+				List<ProductFromCart> list = theCart.getProductsFromCart();
+			
+				for(ProductFromCart temp:list)
+				{%>
 				
-				<button type="submit">Add to cart</button>
-			</form>
-		
+				
+				<p><%=temp.getProdus().getName() %>    <%=temp.getCantitateComandata() %>  </p>
+					
+			<%	}
+			%>
+			
 		</main>
 		<br/>
 		<footer id="footer">
 		
 		
 		</footer>
+	
 	</div>
 </body>
 </html>

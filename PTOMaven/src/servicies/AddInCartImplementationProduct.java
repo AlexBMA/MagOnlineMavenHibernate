@@ -41,7 +41,7 @@ public class AddInCartImplementationProduct implements AddInCart<Product,Cart> {
 		
 		for(ProductFromCart temp :list)
 		{
-			if(temp.getId() == item.getId())  return temp.getId();
+			if(temp.getProdus().getId() == item.getId())  return temp.getId();
 		}
 		
 		return -1;

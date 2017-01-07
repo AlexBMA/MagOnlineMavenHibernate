@@ -32,7 +32,7 @@
 						
 					</li>
 					<li>
-						<form action="${pageContext.request.contextPath}/" method="post">
+						<form action="${pageContext.request.contextPath}/ViewCartClientServlet" method="get">
 							<button type="submit">View cart</button>
 						</form>
 					</li>

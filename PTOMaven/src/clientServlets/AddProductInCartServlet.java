@@ -1,6 +1,8 @@
 package clientServlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,6 +62,12 @@ public class AddProductInCartServlet extends HttpServlet {
 		Cart theCart = (Cart) theSession.getAttribute("cart");
 		addInCartProducts.addInCartOneItemMultipleTimes(temp, numberOfItems, theCart);
 		
+		
+		String nextPage="ViewProductsClient";
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+		requestDispatcher.forward(request, response);
+		
+		System.out.println("$$$$");
 		
 		System.out.println("All good here %$%$$$");
 		
