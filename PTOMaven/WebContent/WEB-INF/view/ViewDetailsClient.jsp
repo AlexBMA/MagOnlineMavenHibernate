@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
-<%@ page import="modelMag.*" %>
+<%@ page import="modelMag.*" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,16 +47,24 @@
 		</header>
 		<br/>
 		<main>
+			<% Product temp = (Product)request.getAttribute("product"); %>
 			
+			<form action="${pageContext.request.contextPath}/" method="post">
 			
-			
+				<img src="<%=temp.getLinkImg() %>"/>
+				<br/>
+				<label>Price per unit:</label>
+				<input type="number" min="1" max="" id="numberofitems">
+				
+				<button type="submit">Add to cart</button>
+			</form>
+		
 		</main>
 		<br/>
 		<footer id="footer">
 		
 		
 		</footer>
-	
 	</div>
 </body>
 </html>

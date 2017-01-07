@@ -68,7 +68,7 @@
 						<td><%=temp.getProductTypeName() %> </td>
 						<td>
 							<form action="${pageContext.request.contextPath}/EditProductTypeServlet" method="post">
-								<input type="number" value="<%=temp.getId() %>" name="idproduct">
+								<input type="number" value="<%=temp.getId() %>" name="idproduct" hidden>
 								<button type="submit">Edit</button>
 							</form>
 							<!-- 

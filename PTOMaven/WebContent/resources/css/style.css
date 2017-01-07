@@ -6,7 +6,7 @@
 }
 /* General Styling */
 body {
-    color: white;
+    color: black;
     background: #e1e100;
     
 }
@@ -38,10 +38,12 @@ header h3{
 
 main {
 	 text-align: center;
+	 
+	 font-size: 20px;
 	
 }
 main table{
-	 margin: 0px auto 0px;
+	 margin: 10px auto 10px;
 }
 main table tr th{
 	padding: 0 15px 0px;
@@ -49,6 +51,25 @@ main table tr th{
 main h2{
 	margin-top:20px;
 	margin-bottom:20px;
+}
+main form input{
+	
+	margin: 8px 0 8px;
+}
+main form select{
+	margin: 8px 0 8px;
+}
+
+main table td img{
+	
+	height: 80px;
+	width: 70px;
+}
+main img{
+	
+	width: 370px;
+	height: 500px;
+	border-radius:5%;
 }
 
 footer{

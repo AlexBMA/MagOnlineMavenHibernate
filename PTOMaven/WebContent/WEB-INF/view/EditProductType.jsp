@@ -54,10 +54,10 @@
 		<%
 			ProductType temp = (ProductType)request.getAttribute("producttype");
 		%>
-			<form action="${pageContext.request.contextPath}/" method="post">
-				<input type="number" readonly value="<%=temp.getId() %>" name="idproducttype">
+			<form action="${pageContext.request.contextPath}/SaveEditProductTypeServlet" method="post">
+				<input type="number" readonly value="<%=temp.getId() %>" name="idproducttype" hidden>
 				<br/>
-				<input type="text" value="<%=temp.getProductTypeName() %>" name="nameofproducttype">
+				<input type="text" value="<%=temp.getProductTypeName() %>" name="nameofproducttype" size="20">
 				<button type="submit">Save edit</button>
 			</form>
 
