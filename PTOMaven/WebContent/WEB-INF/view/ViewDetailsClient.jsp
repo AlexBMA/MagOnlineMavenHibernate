@@ -55,7 +55,7 @@
 			
 				<img src="<%=temp.getLinkImg() %>"/>
 				<br/>
-				<label>Price per unit: <%=temp.getPrice() %></label>
+				<label id="priceinrealtime">Price per unit: <%=temp.getPrice() %></label>
 				<br/>
 				<input type="number" min="1" max="<%=temp.getNumberOfItems() %>" name="numberofitems" value="1">
 				

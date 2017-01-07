@@ -7,4 +7,6 @@ public interface AddInCart<E, C> {
 
 	int checkIfItemAlreadyInCart(E item,int numberOfItems,C cart);
 	
+	double calculateTotalPriceForCart(C cart);
+	
 }

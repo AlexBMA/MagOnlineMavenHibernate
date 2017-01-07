@@ -47,4 +47,23 @@ public class AddInCartImplementationProduct implements AddInCart<Product,Cart> {
 		return -1;
 	}
 
+	@Override
+	public double calculateTotalPriceForCart(Cart cart) {
+		
+		
+		double total=0;
+		List<ProductFromCart> list =cart.getProductsFromCart();
+		
+		for( ProductFromCart temp: list)
+		{
+
+			total = total + (temp.getProdus().getPrice()*temp.getCantitateComandata());
+
+		}
+		
+		cart.setTotalPriceForProductFromCart(total);
+		
+		return total;
+	}
+
 }
