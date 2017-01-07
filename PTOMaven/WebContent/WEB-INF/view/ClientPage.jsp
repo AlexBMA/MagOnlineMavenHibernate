@@ -10,13 +10,14 @@
 	   type="text/css"
 	   rel="stylesheet" />
       
-<title>Admin Page</title>
+<title>Client Page</title>
 
 </head>
 <body>
 	<div id="container">
 	
 		<header id="header">
+			<h2>Welcome <%=session.getAttribute("userName")%></h2>
 		
 			<nav>
 				<ul>
@@ -43,7 +44,7 @@
 					</li>
 				</ul>
 			</nav>
-		
+			<br/>
 		</header>
 		<br/>
 		<main>

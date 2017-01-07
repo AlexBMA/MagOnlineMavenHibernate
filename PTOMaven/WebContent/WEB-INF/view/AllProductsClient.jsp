@@ -14,7 +14,7 @@
 	<div id="container">
 
 		<header id="header">
-
+			<h2>Welcome <%=session.getAttribute("userName")%></h2>
 			<nav>
 				<ul>
 					<li>Home</li>
@@ -39,7 +39,7 @@
 					</li>
 				</ul>
 			</nav>
-
+			<br/>
 		</header>
 		<hr />
 		<br />

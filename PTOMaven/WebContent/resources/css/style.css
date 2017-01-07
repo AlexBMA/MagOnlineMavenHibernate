@@ -28,12 +28,35 @@ ul li {
 
 header{
     margin: 0 auto 20px;
-    
+ 	
 }
 
+header h2{
+	
+	margin: 5px 10px 10px;
+	padding-top: 10px;
+	padding-left: 10px;
+}
 header h3{
 	padding-top: 10px; 
 	text-align: center;
+}
+header nav {
+	margin: 20px auto 20px;
+	
+}
+header nav  ul{
+	margin: 0px auto 0px;
+	
+}
+header nav ul li{
+	float: left;
+	margin:0px 10px 0px;
+}
+
+header nav ul li button{
+	padding: 5px 10px 5px;
+	border-radius :20%;
 }
 
 main {

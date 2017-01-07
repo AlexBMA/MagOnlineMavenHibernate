@@ -17,7 +17,8 @@
 	<div id="container">
 	
 		<header id="header">
-		
+			<h2>Welcome <%=session.getAttribute("userName")%></h2>
+			
 			<nav>
 				<ul>
 					<li>
@@ -43,18 +44,20 @@
 					</li>
 				</ul>
 			</nav>
-		
+		<br/>
 		</header>
 		<br/>
 		<main>
 			<% Product temp = (Product)request.getAttribute("product"); %>
 			
-			<form action="${pageContext.request.contextPath}/" method="post">
+			<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post">
+				<input type="number" value="<%=temp.getId() %>" readonly hidden name="indexofproduct"/>
 			
 				<img src="<%=temp.getLinkImg() %>"/>
 				<br/>
-				<label>Price per unit:</label>
-				<input type="number" min="1" max="" id="numberofitems">
+				<label>Price per unit: <%=temp.getPrice() %></label>
+				<br/>
+				<input type="number" min="1" max="<%=temp.getNumberOfItems() %>" name="numberofitems" value="1">
 				
 				<button type="submit">Add to cart</button>
 			</form>

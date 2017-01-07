@@ -39,24 +39,24 @@ public class Cart  {
 	// totalPriceOfCart
 	
 	
-	public double getTotalPretProdusDinCos() {
+	public double getTotalPriceForProductFormCart() {
 		return totalPriceOfCart;
 	}
 
-	public void setTotalPretProdusDinCos(double totalPretProdusDinCos) {
-		this.totalPriceOfCart = totalPretProdusDinCos;
+	public void setTotalPriceForProductFromCart(double totalPriceOfCart) {
+		this.totalPriceOfCart = totalPriceOfCart;
 	}
 
 	public Cart() {
 		productsFromCart = new ArrayList<>();
 	}
 
-	public List<ProductFromCart> getProduseDinCos() {
+	public List<ProductFromCart> getProductsFromCart() {
 		return productsFromCart;
 	}
 
-	public void setProduseDinCos(List<ProductFromCart> produseDinCos) {
-		this.productsFromCart = produseDinCos;
+	public void setProductsFromCart(List<ProductFromCart> productsFromCart) {
+		this.productsFromCart = productsFromCart;
 	}
 
 	public int getId() {
