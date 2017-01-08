@@ -67,6 +67,10 @@
 			<%	}
 			%>
 			
+			<form action="${pageContext.request.contextPath}/SaveCartServlet" method="post">
+			
+				<button type="submit">Save cart</button>
+			</form>
 		</main>
 		<br/>
 		<footer id="footer">
