@@ -51,6 +51,12 @@
 		<main>
 			<%
 				Cart theCart = (Cart)session.getAttribute("cart");
+				String msg = (String)request.getAttribute("msg");
+			%>
+			<% if(msg!=null){    %>
+				<h4><%=msg %></h4>
+			
+			<%}
 			%>
 			
 			<h4><%=theCart.getTotalPriceForProductFormCart() %></h4>

@@ -1,6 +1,8 @@
 package clientServlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import dboperations.DB;
 import modelMag.Cart;
+import servicies.AddPrefixAndSufix;
+import servicies.AddPrefixAndSufixImplementation;
 import servicies.CartService;
 import servicies.GeneralServiceInterface;
 
@@ -50,8 +54,23 @@ public class SaveCartServlet extends HttpServlet {
 		
 		cartService.insertItem(cart, DB.getSessionFactory());
 		
-		System.out.println("done");
+		cart = new Cart();
 		
+		theSession.setAttribute("cart", cart);
+		
+		
+		
+		String nextPage="ViewCart";
+		AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+		nextPage = addPrefixAndSufix.createPath(nextPage);
+		
+		String msg = "Tranzaction complete";
+		
+		request.setAttribute("msg", msg);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+		requestDispatcher.forward(request, response);
+		
+		System.out.println("done");
 		
 	}
 

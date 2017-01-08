@@ -48,6 +48,7 @@ public class Cart  {
 	}
 
 	public Cart() {
+		totalPriceOfCart = 0;
 		productsFromCart = new ArrayList<>();
 	}
 
