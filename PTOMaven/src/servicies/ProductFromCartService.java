@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 
-import dboperations.DBOperations2;
+import dboperations.DBOperations;
 import dboperations.DBOperationsCart;
 import dboperations.DBOperationsProductFromCart;
 import modelMag.Cart;
@@ -45,7 +45,7 @@ public class ProductFromCartService implements GeneralServiceInterface<ProductFr
 	@Override
 	public void insertItem(ProductFromCart item, SessionFactory session) {
 	
-		DBOperations2<ProductFromCart> productFromOperations = new DBOperationsProductFromCart();
+		DBOperations<ProductFromCart> productFromOperations = new DBOperationsProductFromCart();
 		productFromOperations.insert(session, item);
 		
 	}

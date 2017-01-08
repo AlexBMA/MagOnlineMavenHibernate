@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 
-import dboperations.DBOperations2;
+import dboperations.DBOperations;
 import dboperations.DBOperationsCart;
 import modelMag.Cart;
 
@@ -43,7 +43,7 @@ public class CartService implements GeneralServiceInterface<Cart> {
 	@Override
 	public void insertItem(Cart item, SessionFactory session) {
 		
-		DBOperations2<Cart> cartOperations = new DBOperationsCart();
+		DBOperations<Cart> cartOperations = new DBOperationsCart();
 		cartOperations.insert(session, item);
 		
 	}

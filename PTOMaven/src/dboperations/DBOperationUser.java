@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 
 import modelMag.User;
 
-public class DBOperationUser implements DBOperations2<User> {
+public class DBOperationUser implements DBOperations<User> {
 
 	@Override
 	public void insert(SessionFactory theSessionFactory, User ob) {

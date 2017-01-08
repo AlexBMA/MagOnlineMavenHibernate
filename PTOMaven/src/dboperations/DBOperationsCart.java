@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 
 import modelMag.Cart;
 
-public class DBOperationsCart implements DBOperations2<Cart> {
+public class DBOperationsCart implements DBOperations<Cart> {
 
 	@Override
 	public void insert(SessionFactory theSessionFactory, Cart ob) {

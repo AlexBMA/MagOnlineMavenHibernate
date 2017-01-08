@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 
-public interface DBOperations2<T> {
+public interface DBOperations<T> {
 
 	public void insert(SessionFactory theSessionFactory,T ob);
 	public T getARow(SessionFactory theSessionFactory,int id);

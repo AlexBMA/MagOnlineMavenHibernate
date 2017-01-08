@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 
 import modelMag.ProductType;
 
-public class DBOperationProductType implements DBOperations2<ProductType> {
+public class DBOperationProductType implements DBOperations<ProductType> {
 
 	@Override
 	public void insert(SessionFactory theSessionFactory, ProductType ob) {

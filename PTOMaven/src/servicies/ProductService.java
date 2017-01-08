@@ -6,7 +6,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 
 
-import dboperations.DBOperations2;
+import dboperations.DBOperations;
 import dboperations.DBOperationsProduct;
 import modelMag.Product;
 
@@ -17,7 +17,7 @@ public class ProductService implements GeneralServiceInterface<Product>{
 	public List<Product> getAllItems(SessionFactory sesssion) {
 		// TODO Auto-generated method stub
 	
-		DBOperations2< Product> dbOperations = new DBOperationsProduct();
+		DBOperations< Product> dbOperations = new DBOperationsProduct();
 			
 		
 		return dbOperations.getAllRow(sesssion);
@@ -26,7 +26,7 @@ public class ProductService implements GeneralServiceInterface<Product>{
 	@Override
 	public Product getItem(int id,SessionFactory sesssion) {
 		
-		DBOperations2< Product> dbOperations = new DBOperationsProduct();
+		DBOperations< Product> dbOperations = new DBOperationsProduct();
 		return dbOperations.getARow(sesssion, id);
 	}
 
@@ -36,7 +36,7 @@ public class ProductService implements GeneralServiceInterface<Product>{
 	public void deleteItem(int id,SessionFactory session) {
 		
 		
-		DBOperations2<Product> opProduct = new DBOperationsProduct();
+		DBOperations<Product> opProduct = new DBOperationsProduct();
 		
 	
 		opProduct.deleteRow(session, id);
@@ -45,7 +45,7 @@ public class ProductService implements GeneralServiceInterface<Product>{
 	@Override
 	public void updateItem(Product item,SessionFactory session) {
 		
-		DBOperations2<Product> opProduct = new DBOperationsProduct();
+		DBOperations<Product> opProduct = new DBOperationsProduct();
 		
 		opProduct.insert(session, item);
 		
@@ -55,7 +55,7 @@ public class ProductService implements GeneralServiceInterface<Product>{
 	public void insertItem(Product item, SessionFactory session) {
 		
 		
-		DBOperations2<Product> opProduct = new DBOperationsProduct();
+		DBOperations<Product> opProduct = new DBOperationsProduct();
 		
 		
 		opProduct.insert(session, item);
@@ -65,7 +65,7 @@ public class ProductService implements GeneralServiceInterface<Product>{
 	@Override
 	public List<Product> getRecommendedItems(SessionFactory session, int idType) {
 		
-		DBOperations2<Product> opProduct = new DBOperationsProduct();
+		DBOperations<Product> opProduct = new DBOperationsProduct();
 		
 		List<Product> listRecommendation = opProduct.getAllSimilarRows(session, idType);
 		
