@@ -46,11 +46,15 @@ public class AddProductInCartServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println(request.getParameter("indexofproduct"));
-		System.out.println(request.getParameter("numberofitems"));
+		
+		
+		int numberOfItems =1;
+		
+		if(request.getParameter("numberofitems")!=null)
+			numberOfItems = Integer.parseInt(request.getParameter("numberofitems").trim());
 		
 		int indexOfItem = Integer.parseInt(request.getParameter("indexofproduct").trim());
-		int numberOfItems = Integer.parseInt(request.getParameter("numberofitems").trim());
+	
 		
 		AddInCart<Product,Cart> addInCartProducts = new AddInCartImplementationProduct();
 		

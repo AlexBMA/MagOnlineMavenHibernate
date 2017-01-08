@@ -20,7 +20,7 @@
 					<li>Home</li>
 
 					<li>
-						<form action="${pageContext.request.contextPath}/" method="get">
+						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get">
 							<button type="submit">View products</button>
 						</form>
 
@@ -43,10 +43,11 @@
 		</header>
 		<hr />
 		<br />
-		<main> <%
- 	List<Product> productList = (List) request.getAttribute("listproduct");
- 	Map<Integer, ProductType> productTypeMap = (Map) request.getAttribute("mapproducttype");
- %>
+		<main> 
+		<%
+ 			List<Product> productList = (List) request.getAttribute("listproduct");
+ 			Map<Integer, ProductType> productTypeMap = (Map) request.getAttribute("mapproducttype");
+ 		%>
 
 		<section>
 			<nav>
@@ -92,9 +93,9 @@
 					<td><img src="<%=temp.getLinkImg()%>  " /></td>
 					<td><%=productTypeMap.get(temp.getProductTypeId()).getProductTypeName()%></td>
 					<td>
-						<form action="" method="post">
+						<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post">
 							<input type="text" readonly value="<%=temp.getId()%>"
-								name="idproduct">
+								name="indexofproduct">
 							<button type="submit">Add in cart</button>
 						</form>
 						<form

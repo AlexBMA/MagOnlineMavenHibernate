@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import modelMag.Product;
+import modelMag.ProductType;
 
 public class DBOperationsProduct implements DBOperations2<Product> {
 
@@ -13,7 +14,7 @@ public class DBOperationsProduct implements DBOperations2<Product> {
 	@Override
 	public void deleteRow(SessionFactory theSessionFactory, int id) {
 		
-			 //get the session
+				//get the session
 				Session theSession = theSessionFactory.getCurrentSession();
 				
 				//begin transaction
@@ -100,6 +101,27 @@ public class DBOperationsProduct implements DBOperations2<Product> {
 		
 		
 		return	theList;
+	}
+
+	@Override
+	public List<Product> getAllSimilarRows(SessionFactory theSessionFactory, int idType) {
+		// get the session
+		Session theSession = theSessionFactory.getCurrentSession();
+
+		// begin transaction
+		theSession.beginTransaction();
+
+		String hql = "from Product where productTypeId = ? ";
+
+		List<Product> theList = theSession.createQuery(hql).setParameter(0, idType).getResultList();
+
+		// commit the operation
+		theSession.getTransaction().commit();
+
+		// close the session
+		theSession.close();
+
+		return theList;
 	}
 
 }

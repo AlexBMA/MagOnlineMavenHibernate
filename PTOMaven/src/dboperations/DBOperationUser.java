@@ -65,4 +65,10 @@ public class DBOperationUser implements DBOperations2<User> {
 		else 	return null;
 	}
 
+	@Override
+	public List<User> getAllSimilarRows(SessionFactory theSessionFactory, int idType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

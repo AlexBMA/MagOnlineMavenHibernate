@@ -63,6 +63,7 @@ main {
 	 text-align: center;
 	 
 	 font-size: 20px;
+	 margin-bottom: 30px;
 	
 }
 main table{
@@ -88,6 +89,23 @@ main table td img{
 	height: 80px;
 	width: 70px;
 }
+
+main #productrecoo ul {
+	margin: 20px 10px 20px;
+	
+}
+main #productreco ul li{
+	float:left;
+	margin: 0px 10px 0px;
+	padding: 10px 20px 20px;
+	
+}
+
+main #productreco ul li img {
+	height: 120px;
+	width: 100px;
+}
+
 main img{
 	
 	width: 370px;
@@ -95,9 +113,12 @@ main img{
 	border-radius:5%;
 }
 
+
 footer{
-    margin-top: 20px;
-    align-content: center;
+    margin-top: 20px; 
+    margin-bottom: 20px;
     padding-bottom: 20px;;
     text-align: center;
 }
+
+

@@ -48,4 +48,10 @@ public class ProductTypeService implements GeneralServiceInterface<ProductType> 
 
 	}
 
+	@Override
+	public List<ProductType> getRecommendedItems(SessionFactory session, int idType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

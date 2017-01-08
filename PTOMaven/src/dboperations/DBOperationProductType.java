@@ -92,4 +92,10 @@ public class DBOperationProductType implements DBOperations2<ProductType> {
 
 	}
 
+	@Override
+	public List<ProductType> getAllSimilarRows(SessionFactory theSessionFactory, int idType) {
+				
+			return null;
+	}
+
 }

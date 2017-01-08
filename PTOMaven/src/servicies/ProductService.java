@@ -62,6 +62,16 @@ public class ProductService implements GeneralServiceInterface<Product>{
 			
 	}
 
+	@Override
+	public List<Product> getRecommendedItems(SessionFactory session, int idType) {
+		
+		DBOperations2<Product> opProduct = new DBOperationsProduct();
+		
+		List<Product> listRecommendation = opProduct.getAllSimilarRows(session, idType);
+		
+		return listRecommendation;
+	}
+
 	
 	
 	//public void insert

@@ -10,6 +10,7 @@ public interface DBOperations2<T> {
 	public T getARow(SessionFactory theSessionFactory,int id);
 	public List<T> getAllRow(SessionFactory theSessionFactory);
 	public void deleteRow(SessionFactory theSessionFactory,int id);
+	public List<T> getAllSimilarRows(SessionFactory theSessionFactory,int idType );
 	
 	
 }

@@ -1,6 +1,7 @@
 package clientServlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,11 +51,15 @@ public class ViewDetailsProductClient extends HttpServlet {
 		
 		Product temp = productService.getItem(indexProduct, DB.getSessionFactory());
 		
+		List<Product> listRecommendation  =productService.getRecommendedItems(DB.getSessionFactory(), temp.getProductTypeId());
+				
+		
 		String nextPage="ViewDetailsClient";
 		AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 		nextPage = addPrefixAndSufix.createPath(nextPage);
 		
 		request.setAttribute("product",temp);
+		request.setAttribute("listofrecommended", listRecommendation);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		
 		requestDispatcher.forward(request, response);
