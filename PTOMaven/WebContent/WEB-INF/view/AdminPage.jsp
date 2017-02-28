@@ -18,9 +18,7 @@
 			
 			<nav>
 				<ul>
-					<li>
-						Home
-					</li>
+					
 					
 					<li>
 						<form action="${pageContext.request.contextPath}/ViewAllProductsServlet" method="get">

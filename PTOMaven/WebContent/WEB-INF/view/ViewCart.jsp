@@ -22,9 +22,6 @@
 		
 			<nav>
 				<ul>
-					<li>
-						Home
-					</li>
 					
 					<li>
 						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get">
@@ -33,7 +30,7 @@
 						
 					</li>
 					<li>
-						<form action="${pageContext.request.contextPath}/" method="post">
+						<form action="${pageContext.request.contextPath}/ViewCartClientServlet" method="get">
 							<button type="submit">View cart</button>
 						</form>
 					</li>
@@ -48,7 +45,7 @@
 			<br/>
 		</header>
 		<br/>
-		<main>
+		<main id="cart">
 			<%
 				Cart theCart = (Cart)session.getAttribute("cart");
 				String msg = (String)request.getAttribute("msg");
@@ -59,19 +56,22 @@
 			<%}
 			%>
 			
-			<h4><%=theCart.getTotalPriceForProductFormCart() %></h4>
-			
-			<%
-				List<ProductFromCart> list = theCart.getProductsFromCart();
-			
+			<%  List<ProductFromCart> list = theCart.getProductsFromCart();
 				for(ProductFromCart temp:list)
 				{%>
-				
-				
-				<p><%=temp.getProdus().getName() %>    <%=temp.getCantitateComandata() %>  </p>
+					<img src="<%=temp.getProdus().getLinkImg() %>" id="cosimg"/>
+					<label>Number of items <%=temp.getCantitateComandata()%></label>
+					<label>Price of items <%=temp.calculeazaPretPentruProdosuDinCos()%></label>
+					
+				<form action="${pageContext.request.contextPath}" method="get">
+					
+					<button type="submit">Delete product from cart</button>
+				</form>
 					
 			<%	}
 			%>
+			
+			<h4><%=theCart.getTotalPriceForProductFormCart() %></h4>
 			
 			<form action="${pageContext.request.contextPath}/SaveCartServlet" method="post">
 			

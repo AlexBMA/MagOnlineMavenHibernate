@@ -17,7 +17,7 @@
 			<h2>Welcome <%=session.getAttribute("userName")%></h2>
 			<nav>
 				<ul>
-					<li>Home</li>
+					
 
 					<li>
 						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get">
@@ -64,8 +64,8 @@
 								<option value="empty">...</option>
 								<option value="priceup">Price up</option>
 								<option value="pricedown">Price down</option>
-								<option value="abcaup">ABC up</option>
-								<option value="abcdown">ABC down</option>
+								<option value="abcaup">A-Z </option>
+								<option value="abcdown">Z-A </option>
 							</select>
 						</form>
 					</li>
@@ -95,14 +95,14 @@
 					<td>
 						<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post">
 							<input type="text" readonly value="<%=temp.getId()%>"
-								name="indexofproduct">
+								name="indexofproduct" hidden>
 							<button type="submit">Add in cart</button>
 						</form>
 						<form
 							action="${pageContext.request.contextPath}/ViewDetailsProductClient"
 							method="post">
 							<input type="text" readonly value="<%=temp.getId()%>"
-								name="idproduct">
+								name="idproduct" hidden>
 							<button type="submit">View details</button>
 						</form>
 					</td>

@@ -21,9 +21,7 @@
 			
 			<nav>
 				<ul>
-					<li>
-						Home
-					</li>
+					
 					
 					<li>
 						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get">
