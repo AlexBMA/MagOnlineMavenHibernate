@@ -7,6 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dboperations.DB;
+import generalServices.UserAndPassCheck;
+import generalServices.UserAndPassCheckImpl;
+import generalServices.UserService;
+import modelMag.User;
+import servicies.GeneralServiceInterface;
+import servicies.LoginService;
+
 /**
  * Servlet implementation class CreateNewUser
  */
@@ -35,8 +43,40 @@ public class CreateNewUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String  username="";
-		String pass="";
+		if(DB.getSessionFactory()== null) DB.DBConnect();
+		
+		
+		String  username=request.getParameter("username");
+		String pass=request.getParameter("passone");
+		String passAgain=request.getParameter("passtwo");
+		String role =request.getParameter("role");
+		
+		if(pass.contentEquals(passAgain))
+		{
+				User u= new User();
+				
+				UserAndPassCheck userAndPassCheck = new UserAndPassCheckImpl();
+				
+				String passForDb = userAndPassCheck.createPass(username, pass);
+				
+				u.setUsername(username);
+				u.setRole(role);
+				u.setPass(passForDb);
+				
+				GeneralServiceInterface<User> userService = new UserService();
+				
+				userService.updateItem(u, DB.getSessionFactory());
+				
+				String NEXT_PAGE="index.jsp";
+				
+				response.sendRedirect(NEXT_PAGE);
+				
+		}
+	
+		
+		
+		
+		
 		
 		
 	

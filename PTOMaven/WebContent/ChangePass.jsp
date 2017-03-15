@@ -52,9 +52,9 @@
 		<main>
 			<br/>
 		
-			<form action="${pageContext.request.contextPath}/" method="post">
-				<input type ="text" placeholder="new pass">
-				<input type="text" placeholder="new pass again">
+			<form action="${pageContext.request.contextPath}/ChangePass" method="post">
+				<input type ="password" placeholder="new pass" name="newpass">
+				<input type="password" placeholder="new pass again" name="newpass2">
 				<button type="submit">Submit </button>
 				<button type="reset">Reset</button>
 			</form>

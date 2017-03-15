@@ -9,7 +9,7 @@ import modelMag.User;
 
 public class LoginService {
 
-	private  User user;
+	private   User user;
 	
 	
 	
@@ -23,13 +23,13 @@ public class LoginService {
 		 
 		 UserAndPassCheck userAndPassCheckService = new UserAndPassCheckImpl();
 		  
-		// String hashPass = userAndPassCheckService.createPass(userName, userPass);
+		 String hashPass = userAndPassCheckService.createPass(userName, userPass);
 		 
-		 user = op.checkUserAndPass(theSessionFactory, userName, userPass);
+		 this.user = op.checkUserAndPass(theSessionFactory, userName, hashPass);
 		
-	
+		
 		 
-		if(user ==null)  return false;
+		if( this.user  ==null)  return false;
 			else return true;
 	}
 
@@ -37,7 +37,7 @@ public class LoginService {
 
 
 	public User getUser() {
-		return user;
+		return this.user;
 	}
 
 

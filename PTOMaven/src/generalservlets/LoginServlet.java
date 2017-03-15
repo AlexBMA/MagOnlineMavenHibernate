@@ -56,6 +56,7 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher;
 
 			HttpSession theSession = request.getSession(true);
+			theSession.setAttribute("uId",loginService.getUser().getId());
 			theSession.setAttribute("userName", userName);
 
 			if (role.equals("a")) {
@@ -77,6 +78,8 @@ public class LoginServlet extends HttpServlet {
 
 		} else {
 			
+			String NEXT_PAGE="index.jsp";
+			response.sendRedirect(NEXT_PAGE);
 		}
 
 	}

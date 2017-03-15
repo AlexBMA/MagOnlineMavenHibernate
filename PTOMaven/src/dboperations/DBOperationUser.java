@@ -12,19 +12,37 @@ public class DBOperationUser implements DBOperations<User> {
 	@Override
 	public void insert(SessionFactory theSessionFactory, User ob) {
 		
+		Session theSession = theSessionFactory.getCurrentSession();
 		
+		theSession.beginTransaction();
+		
+		theSession.saveOrUpdate(ob);
+		
+		theSession.getTransaction().commit();
+		
+		theSession.close();
 	}
 
 	@Override
 	public User getARow(SessionFactory theSessionFactory, int id) {
 	
+		Session theSession = theSessionFactory.getCurrentSession();
 		
-		return null;
+		theSession.beginTransaction();
+		
+		User u = theSession.get(User.class, id);
+		
+		theSession.getTransaction().commit();
+		
+		theSession.close();
+		
+		return u;
 	}
 
 	@Override
 	public List<User> getAllRow(SessionFactory theSessionFactory) {
 	
+		
 		return null;
 	}
 
@@ -36,28 +54,6 @@ public class DBOperationUser implements DBOperations<User> {
 	
 	public void updateUserPass(SessionFactory theSessionFactory,String newPass,String userName,String oldPass)
 	{
-		Session theSession = theSessionFactory.getCurrentSession();
-		
-		String hql="from User where username= ? and   pass= ? ";
-		
-		theSession.beginTransaction();
-		
-		List<User> listUser =  theSession.createQuery(hql).
-				setParameter(0, userName).
-				setParameter(1, oldPass).
-				getResultList();
-		
-		if(listUser.size()==1)
-		{
-			
-			User user = listUser.get(0);
-			
-			user.setPass(newPass);
-		}
-	
-		theSession.getTransaction().commit();
-		
-		theSession.close();
 		
 		
 		
@@ -87,6 +83,10 @@ public class DBOperationUser implements DBOperations<User> {
 		{
 			
 			User user = listUser.get(0);
+			System.out.println("User info:");
+			System.out.println(user.getId());
+			System.out.println(user.getUsername());
+			System.out.println(user.getPass());
 			return user;
 			
 		}

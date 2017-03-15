@@ -27,16 +27,17 @@
 		<main>
 		<br/>
 		<h4>New user information</h4>
-		<form action="" method="post">
+		<form action="${pageContext.request.contextPath}/CreateNewUser" method="post">
 		
-			<br /> <input type="text" placeholder="username" /> <br /> <input
-				type="text" placeholder="password" /> <br /> <input type="text"
-				placeholder="password again" /> <br /> <select name="role">
-
+			<br /> <input type="text" placeholder="username" name="username"/> 
+			<br /> <input type="text" placeholder="password" name="passone" />
+			<br /> <input type="text" placeholder="password again" name="passtwo" /> 
+			<br /> 
+			<select name="role">
 				<option value="c">client</option>
 				<option value="a">administrator</option>
-
-			</select> <br />
+			</select>
+			 <br />
 			<button type="submit">Create new user</button>
 		</form>
 
