@@ -20,9 +20,7 @@
 			
 			<nav>
 				<ul>
-					<li>
-						Home
-					</li>
+					
 				
 					<li>
 						<form action="${pageContext.request.contextPath}/ViewAllProductsServlet" method="get">
@@ -35,6 +33,12 @@
 							<button type="submit">ProductType options</button>
 						</form>
 					</li>
+					<li>
+						<a href="${pageContext.request.contextPath}/ChangePass.jsp">
+							<button>Change pass</button> 
+						</a>
+					</li>
+					
 					<li>
 						<form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
 							<button type="submit">Log out</button>	

@@ -3,6 +3,8 @@ package servicies;
 import org.hibernate.SessionFactory;
 
 import dboperations.DBOperationUser;
+import generalServices.UserAndPassCheck;
+import generalServices.UserAndPassCheckImpl;
 import modelMag.User;
 
 public class LoginService {
@@ -19,9 +21,14 @@ public class LoginService {
 	
 		 System.out.println(userName +" 555   \t"+userPass);
 		 
-		user = op.checkUserAndPass(theSessionFactory, userName, userPass);
+		 UserAndPassCheck userAndPassCheckService = new UserAndPassCheckImpl();
+		  
+		// String hashPass = userAndPassCheckService.createPass(userName, userPass);
+		 
+		 user = op.checkUserAndPass(theSessionFactory, userName, userPass);
 		
 	
+		 
 		if(user ==null)  return false;
 			else return true;
 	}

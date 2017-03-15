@@ -26,7 +26,9 @@
 			<button type="reset">Reset</button>
 		</form>
 
-		</main>
+		<a href="${pageContext.request.contextPath}/CreateNewUser.jsp">
+			<button>Create user</button>
+		</a> </main>
 		<br />
 		<hr />
 
