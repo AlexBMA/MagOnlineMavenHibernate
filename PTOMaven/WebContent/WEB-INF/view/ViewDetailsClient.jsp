@@ -10,7 +10,7 @@
 	   type="text/css"
 	   rel="stylesheet" />
       
-<title>Admin Page</title>
+<title>Client Page</title>
 
 </head>
 <body>
@@ -49,7 +49,7 @@
 			<% Product temp = (Product)request.getAttribute("product"); 
 				List<Product> listReco = (List)request.getAttribute("listofrecommended");
 			%>
-			
+			<div id="productdetails">
 			<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post">
 				<input type="number" value="<%=temp.getId() %>" readonly hidden name="indexofproduct"/>
 			
@@ -61,14 +61,13 @@
 				
 				<button type="submit">Add to cart</button>
 			</form>
+			</div>
 			<br/>
 			<div id="productreco">
-			
 			<ul>
 				<%
 					for(Product temp2:listReco)
-					{ if(temp2.getId()!=temp.getId()){
-						
+					{ if(temp2.getId()!=temp.getId()){			
 				%>
 				<li>
 					<img src="<%=temp2.getLinkImg() %>"/>
@@ -78,7 +77,6 @@
 						
 					</form>
 				
-					
 				</li>
 				<%} }%>
 			</ul>
@@ -88,11 +86,14 @@
 		</main>
 		
 		
-		<br/>
-		<hr/>
-		<footer id="footer">
 		
-		<p>text</p>
+		<hr/>
+		<br/>
+		<footer id="footer">
+		<br/>
+		
+		
+		
 		</footer>
 		<br/>
 	</div>

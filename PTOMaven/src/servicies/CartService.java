@@ -45,13 +45,17 @@ public class CartService implements GeneralServiceInterface<Cart> {
 	@Override
 	public void insertItem(Cart item, SessionFactory session) {
 		
-		DBOperations<Cart> cartOperations = new DBOperationsCart();
-		cartOperations.insert(session, item);
 		
-		GeneralServiceInterface<Product> productServices = new ProductService();
+		if(item.getTotalPriceForProductFormCart()>0)
+		{
+			DBOperations<Cart> cartOperations = new DBOperationsCart();
+			cartOperations.insert(session, item);
 		
-		List<ProductFromCart> list = item.getProductsFromCart();
-		updateStoks(session, productServices, list);
+			GeneralServiceInterface<Product> productServices = new ProductService();
+		
+			List<ProductFromCart> list = item.getProductsFromCart();
+			updateStoks(session, productServices, list);
+		}
 		
 	}
 
