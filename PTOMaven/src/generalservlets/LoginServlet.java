@@ -58,6 +58,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession theSession = request.getSession(true);
 			theSession.setAttribute("uId",loginService.getUser().getId());
 			theSession.setAttribute("userName", userName);
+			theSession.setMaxInactiveInterval(600);
 
 			if (role.equals("a")) {
 
