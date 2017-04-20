@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dboperations.DB;
 import modelMag.ProductType;
-import servicies.AddPrefixAndSufix;
-import servicies.AddPrefixAndSufixImplementation;
-import servicies.GeneralServiceInterface;
-import servicies.ProductTypeService;
+import services.AddPrefixAndSufixInterface;
+import services.GeneralServiceInterface;
+import serviciesImpl.AddPrefixAndSufixImplementation;
+import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
  * Servlet implementation class EditProductTypeServlet
@@ -39,12 +39,12 @@ public class EditProductTypeServlet extends HttpServlet {
 		
 		int indexOfProductType = Integer.parseInt(request.getParameter("idproduct"));
 		
-		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeService();
+		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
 		
 		ProductType temp = productTypeService.getItem(indexOfProductType, DB.getSessionFactory());
 		
 		String nextPage="EditProductType";
-		AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 		nextPage  = addPrefixAndSufix.createPath(nextPage);
 		
 		request.setAttribute("producttype", temp);

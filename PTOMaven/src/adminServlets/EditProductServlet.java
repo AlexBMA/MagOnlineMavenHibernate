@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import dboperations.DB;
 import modelMag.Product;
 import modelMag.ProductType;
-import servicies.AddPrefixAndSufix;
-import servicies.AddPrefixAndSufixImplementation;
-import servicies.GeneralServiceInterface;
-import servicies.ProductService;
-import servicies.ProductTypeService;
+import services.AddPrefixAndSufixInterface;
+import services.GeneralServiceInterface;
+import serviciesImpl.AddPrefixAndSufixImplementation;
+import serviciesImpl.ProductServiceImplementation;
+import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
  * Servlet implementation class EditProductServlet
@@ -44,11 +44,11 @@ public class EditProductServlet extends HttpServlet {
 		
 		int indexProduct = Integer.parseInt(request.getParameter("idproduct"));
 		
-		AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 		
-		GeneralServiceInterface<Product> productService = new ProductService();
+		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
 		
-		GeneralServiceInterface<ProductType> operationProductType = new ProductTypeService();
+		GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
 		
 		List<ProductType> listProductType = operationProductType.getAllItems(DB.getSessionFactory());
 		

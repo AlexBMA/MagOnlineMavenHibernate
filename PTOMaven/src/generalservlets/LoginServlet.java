@@ -12,9 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import dboperations.DB;
 import modelMag.Cart;
-import servicies.AddPrefixAndSufix;
-import servicies.AddPrefixAndSufixImplementation;
-import servicies.LoginService;
+import services.AddPrefixAndSufixInterface;
+import serviciesImpl.AddPrefixAndSufixImplementation;
+import serviciesImpl.LoginServiceImplementation;
 
 /**
  * Servlet implementation class LoginServlet
@@ -40,9 +40,9 @@ public class LoginServlet extends HttpServlet {
 
 		DB.DBConnect();
 
-		LoginService loginService = new LoginService();
+		LoginServiceImplementation loginService = new LoginServiceImplementation();
 
-		AddPrefixAndSufix addSAndP = new AddPrefixAndSufixImplementation();
+		AddPrefixAndSufixInterface addSAndP = new AddPrefixAndSufixImplementation();
 
 		boolean check = loginService.checkLogin(userName, pass, DB.getSessionFactory());
 

@@ -1,4 +1,4 @@
-package servicies;
+package serviciesImpl;
 
 import java.util.List;
 
@@ -9,8 +9,9 @@ import dboperations.DBOperationsCart;
 import dboperations.DBOperationsProductFromCart;
 import modelMag.Cart;
 import modelMag.ProductFromCart;
+import services.GeneralServiceInterface;
 
-public class ProductFromCartService implements GeneralServiceInterface<ProductFromCart> {
+public class ProductFromCartServiceImplementation implements GeneralServiceInterface<ProductFromCart> {
 
 	@Override
 	public List<ProductFromCart> getAllItems(SessionFactory session) {

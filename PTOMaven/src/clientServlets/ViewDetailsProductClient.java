@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dboperations.DB;
 import modelMag.Product;
-import servicies.AddPrefixAndSufix;
-import servicies.AddPrefixAndSufixImplementation;
-import servicies.GeneralServiceInterface;
-import servicies.ProductService;
+import services.AddPrefixAndSufixInterface;
+import services.GeneralServiceInterface;
+import serviciesImpl.AddPrefixAndSufixImplementation;
+import serviciesImpl.ProductServiceImplementation;
 
 /**
  * Servlet implementation class ViewDetailsProductClient
@@ -47,7 +47,7 @@ public class ViewDetailsProductClient extends HttpServlet {
 		
 		int indexProduct = Integer.parseInt(request.getParameter("idproduct").trim());
 		
-		GeneralServiceInterface<Product> productService = new ProductService();
+		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
 		
 		Product temp = productService.getItem(indexProduct, DB.getSessionFactory());
 		
@@ -55,7 +55,7 @@ public class ViewDetailsProductClient extends HttpServlet {
 				
 		
 		String nextPage="ViewDetailsClient";
-		AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 		nextPage = addPrefixAndSufix.createPath(nextPage);
 		
 		request.setAttribute("product",temp);

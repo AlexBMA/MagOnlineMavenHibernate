@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dboperations.DB;
 import modelMag.ProductType;
-import servicies.GeneralServiceInterface;
-import servicies.ProductTypeService;
+import services.GeneralServiceInterface;
+import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
  * Servlet implementation class DeleteProductTypeServlet
@@ -44,7 +44,7 @@ public class DeleteProductTypeServlet extends HttpServlet {
 		
 		int indexProductType = Integer.parseInt(request.getParameter("idproduct"));
 		
-		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeService();
+		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
 		
 		productTypeService.deleteItem(indexProductType,DB.getSessionFactory());
 		

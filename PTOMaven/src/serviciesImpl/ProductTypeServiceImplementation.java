@@ -1,4 +1,4 @@
-package servicies;
+package serviciesImpl;
 
 import java.util.List;
 
@@ -7,8 +7,9 @@ import org.hibernate.SessionFactory;
 import dboperations.DBOperationProductType;
 import dboperations.DBOperations;
 import modelMag.ProductType;
+import services.GeneralServiceInterface;
 
-public class ProductTypeService implements GeneralServiceInterface<ProductType> {
+public class ProductTypeServiceImplementation implements GeneralServiceInterface<ProductType> {
 
 	@Override
 

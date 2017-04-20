@@ -1,6 +1,6 @@
-package servicies;
+package services;
 
-public interface AddInCart<E, C> {
+public interface AddInCartInterface<E, C> {
 	
 	
 	void addInCartOneItemMultipleTimes(E item, int numberOfItems, C cart);

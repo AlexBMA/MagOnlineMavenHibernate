@@ -13,10 +13,10 @@ import javax.servlet.http.HttpSession;
 import dboperations.DB;
 import modelMag.Cart;
 import modelMag.Product;
-import servicies.AddInCart;
-import servicies.AddInCartImplementationProduct;
-import servicies.GeneralServiceInterface;
-import servicies.ProductService;
+import services.AddInCartInterface;
+import services.GeneralServiceInterface;
+import serviciesImpl.AddInCartImplementation;
+import serviciesImpl.ProductServiceImplementation;
 
 /**
  * Servlet implementation class AddProductInCartServlet
@@ -56,9 +56,9 @@ public class AddProductInCartServlet extends HttpServlet {
 		int indexOfItem = Integer.parseInt(request.getParameter("indexofproduct").trim());
 	
 		
-		AddInCart<Product,Cart> addInCartProducts = new AddInCartImplementationProduct();
+		AddInCartInterface<Product,Cart> addInCartProducts = new AddInCartImplementation();
 		
-		GeneralServiceInterface<Product> productService = new ProductService();
+		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
 		Product temp = productService.getItem(indexOfItem, DB.getSessionFactory());
 		
 		HttpSession theSession = request.getSession(false);

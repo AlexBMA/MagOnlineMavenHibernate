@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dboperations.DB;
 import modelMag.ProductType;
-import servicies.AddPrefixAndSufix;
-import servicies.AddPrefixAndSufixImplementation;
-import servicies.GeneralServiceInterface;
-import servicies.ProductTypeService;
+import services.AddPrefixAndSufixInterface;
+import services.GeneralServiceInterface;
+import serviciesImpl.AddPrefixAndSufixImplementation;
+import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
  * Servlet implementation class ViewAllProductTypeServlet
@@ -46,11 +46,11 @@ public class ViewAllProductTypeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		GeneralServiceInterface<ProductType> operationProductType = new ProductTypeService();
+		GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
 		List<ProductType> listProductType = operationProductType.getAllItems(DB.getSessionFactory());
 		
 		String nextPage="AllProductType";
-		AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 		nextPage = addPrefixAndSufix.createPath(nextPage);
 		
 		request.setAttribute("listproducttype", listProductType);

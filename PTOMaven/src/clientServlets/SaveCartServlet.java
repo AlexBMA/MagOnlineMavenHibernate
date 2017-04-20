@@ -12,10 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import dboperations.DB;
 import modelMag.Cart;
-import servicies.AddPrefixAndSufix;
-import servicies.AddPrefixAndSufixImplementation;
-import servicies.CartService;
-import servicies.GeneralServiceInterface;
+import services.AddPrefixAndSufixInterface;
+import services.GeneralServiceInterface;
+import serviciesImpl.AddPrefixAndSufixImplementation;
+import serviciesImpl.CartServiceImplementation;
 
 /**
  * Servlet implementation class SaveCartServlet
@@ -48,7 +48,7 @@ public class SaveCartServlet extends HttpServlet {
 		
 		HttpSession theSession = request.getSession(false);
 		
-		GeneralServiceInterface<Cart> cartService = new CartService();
+		GeneralServiceInterface<Cart> cartService = new CartServiceImplementation();
 		
 		Cart cart = (Cart)theSession.getAttribute("cart");
 		
@@ -61,7 +61,7 @@ public class SaveCartServlet extends HttpServlet {
 		
 		
 		String nextPage="ViewCart";
-		AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 		nextPage = addPrefixAndSufix.createPath(nextPage);
 		
 		String msg = "Tranzaction complete";

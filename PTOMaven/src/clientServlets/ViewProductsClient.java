@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import dboperations.DB;
 import modelMag.Product;
 import modelMag.ProductType;
-import servicies.AddPrefixAndSufix;
-import servicies.AddPrefixAndSufixImplementation;
-import servicies.GeneralServiceInterface;
-import servicies.ProductService;
-import servicies.ProductTypeService;
+import services.AddPrefixAndSufixInterface;
+import services.GeneralServiceInterface;
+import serviciesImpl.AddPrefixAndSufixImplementation;
+import serviciesImpl.ProductServiceImplementation;
+import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
  * Servlet implementation class ViewProductsClient
@@ -42,8 +42,8 @@ public class ViewProductsClient extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		GeneralServiceInterface<Product> productService = new ProductService(); 
-		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeService();
+		GeneralServiceInterface<Product> productService = new ProductServiceImplementation(); 
+		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
 		
 		List<Product> listProduct = productService.getAllItems(DB.getSessionFactory());
 		List<ProductType> listProductType = productTypeService.getAllItems(DB.getSessionFactory());
@@ -55,7 +55,7 @@ public class ViewProductsClient extends HttpServlet {
 			mapProductTypeService.put(temp.getId(), temp);
 		}
 		
-		AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 		String nextPage="AllProductsClient";
 		nextPage = addPrefixAndSufix.createPath(nextPage);
 		

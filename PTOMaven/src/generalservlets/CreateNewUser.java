@@ -12,8 +12,8 @@ import generalServices.UserAndPassCheck;
 import generalServices.UserAndPassCheckImpl;
 import generalServices.UserService;
 import modelMag.User;
-import servicies.GeneralServiceInterface;
-import servicies.LoginService;
+import services.GeneralServiceInterface;
+import serviciesImpl.LoginServiceImplementation;
 
 /**
  * Servlet implementation class CreateNewUser

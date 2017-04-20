@@ -1,6 +1,8 @@
-package servicies;
+package serviciesImpl;
 
-public class AddPrefixAndSufixImplementation implements AddPrefixAndSufix {
+import services.AddPrefixAndSufixInterface;
+
+public class AddPrefixAndSufixImplementation implements AddPrefixAndSufixInterface {
 
 	@Override
 	public String createPath(String pageName) {

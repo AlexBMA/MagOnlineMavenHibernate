@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dboperations.DB;
 import modelMag.ProductType;
-import servicies.GeneralServiceInterface;
-import servicies.ProductTypeService;
+import services.GeneralServiceInterface;
+import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
  * Servlet implementation class AddProductTypeServlet
@@ -45,7 +45,7 @@ public class AddProductTypeServlet extends HttpServlet {
 		
 		String nameProductType = request.getParameter("nameofproducttype");
 		
-		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeService();
+		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
 		
 		ProductType temp = new ProductType(nameProductType);
 		

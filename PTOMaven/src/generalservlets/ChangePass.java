@@ -17,10 +17,10 @@ import generalServices.UserAndPassCheck;
 import generalServices.UserAndPassCheckImpl;
 import generalServices.UserService;
 import modelMag.User;
-import servicies.AddPrefixAndSufix;
-import servicies.AddPrefixAndSufixImplementation;
-import servicies.GeneralServiceInterface;
-import servicies.LoginService;
+import services.AddPrefixAndSufixInterface;
+import services.GeneralServiceInterface;
+import serviciesImpl.AddPrefixAndSufixImplementation;
+import serviciesImpl.LoginServiceImplementation;
 
 /**
  * Servlet implementation class ChangePass
@@ -80,7 +80,7 @@ public class ChangePass extends HttpServlet {
 			userOperations.insert(DB.getSessionFactory(), u);
 			
 			
-			AddPrefixAndSufix addSAndP = new AddPrefixAndSufixImplementation();
+			AddPrefixAndSufixInterface addSAndP = new AddPrefixAndSufixImplementation();
 			String NEXT_PAGE =addSAndP.createPath("AdminPage");
 			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher(NEXT_PAGE);

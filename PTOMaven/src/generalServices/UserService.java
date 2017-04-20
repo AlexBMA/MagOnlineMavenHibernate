@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import dboperations.DBOperationUser;
 import dboperations.DBOperations;
 import modelMag.User;
-import servicies.GeneralServiceInterface;
+import services.GeneralServiceInterface;
 
 public class UserService implements GeneralServiceInterface<User> {
 

@@ -1,4 +1,4 @@
-package servicies;
+package serviciesImpl;
 
 import java.util.List;
 
@@ -9,8 +9,9 @@ import dboperations.DBOperationsCart;
 import modelMag.Cart;
 import modelMag.Product;
 import modelMag.ProductFromCart;
+import services.GeneralServiceInterface;
 
-public class CartService implements GeneralServiceInterface<Cart> {
+public class CartServiceImplementation implements GeneralServiceInterface<Cart> {
 
 	@Override
 	public List<Cart> getAllItems(SessionFactory session) {
@@ -51,7 +52,7 @@ public class CartService implements GeneralServiceInterface<Cart> {
 			DBOperations<Cart> cartOperations = new DBOperationsCart();
 			cartOperations.insert(session, item);
 		
-			GeneralServiceInterface<Product> productServices = new ProductService();
+			GeneralServiceInterface<Product> productServices = new ProductServiceImplementation();
 		
 			List<ProductFromCart> list = item.getProductsFromCart();
 			updateStoks(session, productServices, list);

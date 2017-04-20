@@ -12,10 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import modelMag.Cart;
 import modelMag.Product;
-import servicies.AddInCart;
-import servicies.AddInCartImplementationProduct;
-import servicies.AddPrefixAndSufix;
-import servicies.AddPrefixAndSufixImplementation;
+import services.AddInCartInterface;
+import services.AddPrefixAndSufixInterface;
+import serviciesImpl.AddInCartImplementation;
+import serviciesImpl.AddPrefixAndSufixImplementation;
 
 /**
  * Servlet implementation class ViewCartClientServlet
@@ -43,10 +43,10 @@ public class ViewCartClientServlet extends HttpServlet {
 		HttpSession theSession = request.getSession(false);
 
 		Cart theCart = (Cart) theSession.getAttribute("cart");
-		AddInCart<Product, Cart> addInCart = new AddInCartImplementationProduct();
+		AddInCartInterface<Product, Cart> addInCart = new AddInCartImplementation();
 		addInCart.calculateTotalPriceForCart(theCart);
 
-		AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 
 		String nextPage = "ViewCart";
 		nextPage = addPrefixAndSufix.createPath(nextPage);

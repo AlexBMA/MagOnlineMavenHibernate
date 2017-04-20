@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import dboperations.DB;
 import modelMag.Product;
 import modelMag.ProductType;
-import servicies.GeneralServiceInterface;
-import servicies.ProductService;
-import servicies.ProductTypeService;
+import services.GeneralServiceInterface;
+import serviciesImpl.ProductServiceImplementation;
+import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
  * Servlet implementation class AddProductServlet
@@ -55,7 +55,7 @@ public class AddProductServlet extends HttpServlet {
 		
 		int indexProductType=0;
 		
-		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeService();
+		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
 		
 		List<ProductType>  productTypeList= productTypeService.getAllItems(DB.getSessionFactory());
 		
@@ -75,7 +75,7 @@ public class AddProductServlet extends HttpServlet {
 		tempProduct.setProductTypeId(indexProductType);
 		tempProduct.setName(productName);
 		
-		GeneralServiceInterface<Product> productService = new ProductService();
+		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
 		
 		productService.insertItem(tempProduct, DB.getSessionFactory());
 		

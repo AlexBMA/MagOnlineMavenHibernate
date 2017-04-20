@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dboperations.DB;
 import modelMag.ProductType;
-import servicies.GeneralServiceInterface;
-import servicies.ProductTypeService;
+import services.GeneralServiceInterface;
+import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
  * Servlet implementation class SaveEditProductTypeServlet
@@ -44,7 +44,7 @@ public class SaveEditProductTypeServlet extends HttpServlet {
 		int indexProductType = Integer.parseInt(request.getParameter("idproducttype").trim());
 		String productTypeName = request.getParameter("nameofproducttype").trim();
 		
-		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeService();
+		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
 		
 		ProductType temp = productTypeService.getItem(indexProductType, DB.getSessionFactory());
 		temp.setProductTypeName(productTypeName);

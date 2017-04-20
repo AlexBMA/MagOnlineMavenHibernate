@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dboperations.DB;
 import modelMag.Product;
-import servicies.AddPrefixAndSufix;
-import servicies.AddPrefixAndSufixImplementation;
-import servicies.GeneralServiceInterface;
-import servicies.ProductService;
+import services.AddPrefixAndSufixInterface;
+import services.GeneralServiceInterface;
+import serviciesImpl.AddPrefixAndSufixImplementation;
+import serviciesImpl.ProductServiceImplementation;
 
 /**
  * Servlet implementation class DeleteProductServlet
@@ -48,7 +48,7 @@ public class DeleteProductServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		int indexProduct = Integer.parseInt(request.getParameter("idproduct"));
 		
-		GeneralServiceInterface<Product> productService = new ProductService();
+		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
 		
 		//AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 		

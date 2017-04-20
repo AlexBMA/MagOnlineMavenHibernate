@@ -1,4 +1,4 @@
-package servicies;
+package serviciesImpl;
 
 import org.hibernate.SessionFactory;
 
@@ -7,7 +7,7 @@ import generalServices.UserAndPassCheck;
 import generalServices.UserAndPassCheckImpl;
 import modelMag.User;
 
-public class LoginService {
+public class LoginServiceImplementation {
 
 	private   User user;
 	

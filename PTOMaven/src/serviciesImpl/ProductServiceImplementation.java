@@ -1,4 +1,4 @@
-package servicies;
+package serviciesImpl;
 
 import java.util.List;
 
@@ -9,9 +9,10 @@ import org.hibernate.SessionFactory;
 import dboperations.DBOperations;
 import dboperations.DBOperationsProduct;
 import modelMag.Product;
+import services.GeneralServiceInterface;
 
 
-public class ProductService implements GeneralServiceInterface<Product>{
+public class ProductServiceImplementation implements GeneralServiceInterface<Product>{
 
 	@Override
 	public List<Product> getAllItems(SessionFactory sesssion) {

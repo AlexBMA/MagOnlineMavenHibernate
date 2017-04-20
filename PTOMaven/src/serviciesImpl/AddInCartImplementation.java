@@ -1,12 +1,13 @@
-package servicies;
+package serviciesImpl;
 
 import java.util.List;
 
 import modelMag.Cart;
 import modelMag.Product;
 import modelMag.ProductFromCart;
+import services.AddInCartInterface;
 
-public class AddInCartImplementationProduct implements AddInCart<Product,Cart> {
+public class AddInCartImplementation implements AddInCartInterface<Product,Cart> {
 	
 
 
