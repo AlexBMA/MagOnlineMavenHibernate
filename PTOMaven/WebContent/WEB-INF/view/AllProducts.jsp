@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link  href="${pageContext.request.contextPath}/resources/css/style.css" 
 	   type="text/css"
@@ -19,29 +21,29 @@
 			<h3>Welcome admin <%=session.getAttribute("userName")%></h3>
 			
 			<nav>
-				<ul>
+				<ul class="pure-menu-list">
 					
 				
-					<li>
-						<form action="${pageContext.request.contextPath}/ViewAllProductsServlet" method="get">
-							<button type="submit">Product options</button>
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/ViewAllProductsServlet" method="get" class="pure-form">
+							<button type="submit" class="pure-button pure-button-primary">Product options</button>
 						</form>
 						
 					</li>
-					<li>
-						<form action="${pageContext.request.contextPath}/ViewAllProductTypeServlet" method="post">
-							<button type="submit">ProductType options</button>
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/ViewAllProductTypeServlet" method="post" class="pure-form">
+							<button type="submit" class="pure-button pure-button-primary">ProductType options</button>
 						</form>
 					</li>
-					<li>
+					<li class="pure-menu-item">
 						<a href="${pageContext.request.contextPath}/ChangePass.jsp">
-							<button>Change pass</button> 
+							<button class="pure-button pure-button-primary">Change pass</button> 
 						</a>
 					</li>
 					
-					<li>
-						<form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
-							<button type="submit">Log out</button>	
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/LogoutServlet" method="get" class="pure-form">
+							<button type="submit" class="pure-button pure-button-primary">Log out</button>	
 						</form>
 						
 					</li>
@@ -49,7 +51,7 @@
 			</nav>
 			<br/>
 		</header>
-		<hr/>
+		
 		<br/>
 		<main>
 			<% 
@@ -57,7 +59,7 @@
 				Map<Integer,ProductType> productTypeMap= (Map)request.getAttribute("mapproducttype");
 			%>
 			
-			<table>
+			<table class="pure-table pure-table-horizontal">
 				<tr>
 					<th>Nume Produs</th>
                 		<th>Id Produs</th>
@@ -81,16 +83,17 @@
 							<td><%=p.getPrice() %></td>
 							<td><%=p.getNumberOfItems() %></td>
 							<td><%=p.getLinkImg() %></td>
-							<td> <form action="${pageContext.request.contextPath}/EditProductServlet" method="post">
+							<td> <form action="${pageContext.request.contextPath}/EditProductServlet" method="post" class="pure-form">
 								
 								<input type="text" value="<%=p.getId() %>" readonly name="idproduct" hidden>
-								<button type="submit">Edit</button> 
-								 </form> 
+								<button type="submit" class="pure-button pure-button-primary">Edit</button> 
+								 </form> <br/>
 								 
-								 <form action="${pageContext.request.contextPath}/DeleteProductServlet" method="post">
+								 <form action="${pageContext.request.contextPath}/DeleteProductServlet" method="post" class="pure-form">
 								 	<input type="text" value="<%=p.getId() %>" readonly name="idproduct" hidden>
-								 	<button type="submit">Delete</button>
+								 	<button type="submit" class="pure-button pure-button-primary">Delete</button>
 								 </form>
+								 <br/>
 							
 							</td>
 							</tr>
@@ -101,9 +104,9 @@
 				</tbody>
 			</table>
 			
-			<hr>
 			
-			<form action="${pageContext.request.contextPath}/AddProductServlet" method="post">
+			
+			<form action="${pageContext.request.contextPath}/AddProductServlet" method="post" class="pure-form">
 				
 				<h4>New Product</h4>
 				
@@ -126,13 +129,13 @@
 				
 				<input type="text" placeholder="link image" name="linkimage">
 				
-				<button type="submit">Add product</button>
-				<button type="reset">Rest fields</button>
+				<button type="submit" class="pure-button pure-button-primary">Add product</button>
+				<button type="reset" class="pure-button pure-button-primary">Rest fields</button>
 			</form>
 			
 		</main>
 		<br/>
-		<hr/>
+		
 		<footer id="footer">
 		</footer>
 	

@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css" rel="stylesheet">
 </head>
@@ -14,36 +17,39 @@
 			
 		
 			<nav>
-				<ul>
-					
-					
-					<li>
-						<form action="${pageContext.request.contextPath}/ViewAllProductsServlet" method="get">
-							<button type="submit">Product options</button>
+			<ul class="pure-menu-list">
+
+
+					<li class="pure-menu-item">
+						<form class="pure-form"
+							action="${pageContext.request.contextPath}/ViewAllProductsServlet"
+							method="get">
+							<button type="submit" class="pure-button pure-button-primary">Product options</button>
 						</form>
-						
+
 					</li>
-					<li>
-						<form action="${pageContext.request.contextPath}/ViewAllProductTypeServlet" method="post">
-							<button type="submit">ProductType options</button>
+					<li class="pure-menu-item">
+						<form class="pure-form"
+							action="${pageContext.request.contextPath}/ViewAllProductTypeServlet"
+							method="post">
+							<button type="submit" class="pure-button pure-button-primary">ProductType options</button>
 						</form>
 					</li>
-				
-					
-					
-					
-					<li>
-						<a href="${pageContext.request.contextPath}/ChangePass.jsp"><button
-								type="submit">Change pass</button> 
+					<li class="pure-menu-item">
+						<a href="${pageContext.request.contextPath}/ChangePass.jsp">
+							<button class="pure-button pure-button-primary">Change pass</button> 
 						</a>
 					</li>
-					
-						<li>
-						<form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
-							<button type="submit">Log out</button>	
+
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/LogoutServlet" class="pure-form"
+							method="get">
+							<button type="submit" class="pure-button pure-button-primary">Log out</button>
 						</form>
-						
+
 					</li>
+
+
 				</ul>
 			</nav>
 			<br/>
@@ -52,11 +58,11 @@
 		<main>
 			<br/>
 		
-			<form action="${pageContext.request.contextPath}/ChangePass" method="post">
+			<form action="${pageContext.request.contextPath}/ChangePass" method="post" class="pure-form">
 				<input type ="password" placeholder="new pass" name="newpass">
 				<input type="password" placeholder="new pass again" name="newpass2">
-				<button type="submit">Submit </button>
-				<button type="reset">Reset</button>
+				<button type="submit" class="pure-button pure-button-primary">Submit </button>
+				<button type="reset" class="pure-button pure-button-primary">Reset</button>
 			</form>
 		
 		</main>

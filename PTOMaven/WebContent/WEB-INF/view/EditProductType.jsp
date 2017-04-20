@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css" rel="stylesheet">
@@ -20,38 +23,39 @@
 				<%=session.getAttribute("userName")%></h3>
 
 			<nav>
-				<ul>
-					<li>Home</li>
+				<ul class="pure-menu-list">
 
-					<li>
-						<form
+
+					<li class="pure-menu-item">
+						<form class="pure-form"
 							action="${pageContext.request.contextPath}/ViewAllProductsServlet"
 							method="get">
-							<button type="submit">Product options</button>
+							<button type="submit" class="pure-button pure-button-primary">Product options</button>
 						</form>
 
 					</li>
-					<li>
-						<form
+					<li class="pure-menu-item">
+						<form class="pure-form"
 							action="${pageContext.request.contextPath}/ViewAllProductTypeServlet"
 							method="post">
-							<button type="submit">ProductType options</button>
+							<button type="submit" class="pure-button pure-button-primary">ProductType options</button>
 						</form>
 					</li>
-					
-					<li>
+					<li class="pure-menu-item">
 						<a href="${pageContext.request.contextPath}/ChangePass.jsp">
-							<button>Change pass</button> 
+							<button class="pure-button pure-button-primary">Change pass</button> 
 						</a>
 					</li>
-					
-					<li>
-						<form action="${pageContext.request.contextPath}/LogoutServlet"
+
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/LogoutServlet" class="pure-form"
 							method="get">
-							<button type="submit">Log out</button>
+							<button type="submit" class="pure-button pure-button-primary">Log out</button>
 						</form>
 
 					</li>
+
+
 				</ul>
 			</nav>
 			<br/>

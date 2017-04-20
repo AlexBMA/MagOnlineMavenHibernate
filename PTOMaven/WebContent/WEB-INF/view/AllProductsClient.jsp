@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/resources/css/style.css"
@@ -75,13 +78,15 @@
 
 		<br />
 
-		<table>
+		<table class="pure-table pure-table-horizontal">
 			<thead>
-				<th>Product name</th>
-				<th>Product price</th>
-				<th>Product image</th>
-				<th>Product type</th>
-				<th>Product options</th>
+					<tr>
+					<th>Product name</th>
+					<th>Product price</th>
+					<th>Product image</th>
+					<th>Product type</th>
+					<th>Product options</th>
+				</tr>
 			</thead>
 			<tbody>
 				<%

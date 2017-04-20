@@ -6,8 +6,7 @@
 }
 /* General Styling */
 body {
-    color: black;
-    background: #e1e100;
+   
     
 }
 
@@ -22,7 +21,6 @@ ul li {
 #container{
     margin: 10px auto 10px;
     width: 75%;
-    background: #7C8BC3;
     border-radius: 15px;
 }
 
@@ -77,7 +75,6 @@ header nav ul li button{
 main {
 	 text-align: center;
 	 
-	 font-size: 20px;
 	 margin-bottom: 30px;	
 }
 
