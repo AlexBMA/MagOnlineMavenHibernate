@@ -36,11 +36,6 @@
 							<button type="submit" class="pure-button pure-button-primary">View cart</button>
 						</form>
 					</li>
-					<li class="pure-menu-item">
-						<a href="${pageContext.request.contextPath}/ChangePass.jsp">
-							<button class="pure-button pure-button-primary">Change pass</button> 
-						</a>
-					</li>
 					
 					<li class="pure-menu-item">
 						<form action="${pageContext.request.contextPath}/LogoutServlet" method="get" class="pure-form">
