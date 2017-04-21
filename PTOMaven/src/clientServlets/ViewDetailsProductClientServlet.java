@@ -21,13 +21,13 @@ import serviciesImpl.ProductServiceImplementation;
  * Servlet implementation class ViewDetailsProductClient
  */
 @WebServlet("/ViewDetailsProductClient")
-public class ViewDetailsProductClient extends HttpServlet {
+public class ViewDetailsProductClientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewDetailsProductClient() {
+    public ViewDetailsProductClientServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -59,14 +59,17 @@
 			%>
 			
 			<%  List<ProductFromCart> list = theCart.getProductsFromCart();
-				for(ProductFromCart temp:list)
-				{%>
+				int size = list.size();
+				ProductFromCart temp;
+				for(int i=0;i<size;i++)
+				{ temp = list.get(i);
+				%>
 					<img src="<%=temp.getProdus().getLinkImg() %>" id="cosimg"/>
 					<label>Number of items <%=temp.getCantitateComandata()%></label>
 					<label>Price of items <%=temp.calculeazaPretPentruProdosuDinCos()%></label>
 					
-				<form action="${pageContext.request.contextPath}/" method="get" class="pure-form">
-					
+				<form action="${pageContext.request.contextPath}/DeleteProductFromCartServlet" method="post" class="pure-form">
+					<input type="text" readonly hidden  value="<%=i%>" name="index"/>
 					<button type="submit" class="pure-button pure-button-primary" >Delete product from cart</button>
 				</form>
 					
