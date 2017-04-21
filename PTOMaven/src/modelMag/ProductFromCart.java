@@ -60,5 +60,10 @@ public class ProductFromCart  {
 		this.id = id;
 	}
 
+	@Override
+	public String toString() {
+		return "ProductFromCart [id=" + id + ", produs=" + produs + ", cantitateComandata=" + cantitateComandata + "]";
+	}
+
 	
 }

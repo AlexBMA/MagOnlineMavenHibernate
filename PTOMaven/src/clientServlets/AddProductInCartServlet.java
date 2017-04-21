@@ -68,12 +68,14 @@ public class AddProductInCartServlet extends HttpServlet {
 		
 		
 		String nextPage="ViewProductsClient";
+		
+		theSession.setAttribute("cart", theCart);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);
 		
-		System.out.println("$$$$");
 		
-		System.out.println("All good here %$%$$$");
+		
+		
 		
 	}
 
