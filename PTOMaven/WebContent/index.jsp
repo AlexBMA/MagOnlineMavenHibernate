@@ -14,7 +14,7 @@
 	<div id="container">
 
 		<header id="header"> </header>
-		<hr />
+		
 		<br />
 		<main>
 
@@ -32,7 +32,7 @@
 			<button class="pure-button pure-button-primary">Create user</button>
 		</a> </main>
 		<br />
-		<hr />
+		
 
 		<footer id="footer"> </footer>
 

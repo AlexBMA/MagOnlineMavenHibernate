@@ -23,31 +23,31 @@
 			<h2>Welcome <%=session.getAttribute("userName")%></h2>
 		
 			<nav>
-				<ul>
+				<ul class="pure-menu-list">
 										
-					<li>
-						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get">
-							<button type="submit">View products</button>
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get" class="pure-form">
+							<button type="submit" class="pure-button pure-button-primary">View products</button>
 						</form>
 						
 					</li>
-					<li>
-						<form action="${pageContext.request.contextPath}/ViewCartClientServlet" method="get">
-							<button type="submit">View cart</button>
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/ViewCartClientServlet" method="get" class="pure-form">
+							<button type="submit" class="pure-button pure-button-primary">View cart</button>
 						</form>
 					</li>
-					<li>
+					<li class="pure-menu-item">
 						<a href="${pageContext.request.contextPath}/ChangePass.jsp">
-							<button>Change pass</button> 
+							<button class="pure-button pure-button-primary">Change pass</button> 
 						</a>
 					</li>
 					
-					<li>
-						<form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
-							<button type="submit">Log out</button>	
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/LogoutServlet" method="get" class="pure-form">
+							<button type="submit" class="pure-button pure-button-primary">Log out</button>	
 						</form>
 						
-					</li>
+					</li >
 				</ul>
 			</nav>
 			<br/>

@@ -23,23 +23,22 @@
 			<h2>Welcome <%=session.getAttribute("userName")%></h2>
 			
 			<nav>
-				<ul>
+				<ul class="pure-menu-list">
 					
-					
-					<li>
-						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get">
-							<button type="submit">View products</button>
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get" class="pure-form">
+							<button type="submit" class="pure-button pure-button-primary">View products</button>
 						</form>
 						
 					</li>
-					<li>
-						<form action="${pageContext.request.contextPath}/ViewCartClientServlet" method="get">
-							<button type="submit">View cart</button>
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/ViewCartClientServlet" method="get" class="pure-form">
+							<button type="submit" class="pure-button pure-button-primary">View cart</button>
 						</form>
 					</li>
-					<li>
-						<form action="${pageContext.request.contextPath}/LogoutServlet" method="get">
-							<button type="submit">Log out</button>	
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/LogoutServlet" method="get" class="pure-form">
+							<button type="submit" class="pure-button pure-button-primary">Log out</button>	
 						</form>
 						
 					</li>
@@ -53,7 +52,7 @@
 				List<Product> listReco = (List)request.getAttribute("listofrecommended");
 			%>
 			<div id="productdetails">
-			<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post">
+			<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post" class="pure-form">
 				<input type="number" value="<%=temp.getId() %>" readonly hidden name="indexofproduct"/>
 			
 				<img src="<%=temp.getLinkImg() %>"/>
@@ -62,7 +61,7 @@
 				<br/>
 				<input type="number" min="1" max="<%=temp.getNumberOfItems() %>" name="numberofitems" value="1">
 				
-				<button type="submit">Add to cart</button>
+				<button type="submit" class="pure-button pure-button-primary">Add to cart</button>
 			</form>
 			</div>
 			<br/>
@@ -74,9 +73,9 @@
 				%>
 				<li>
 					<img src="<%=temp2.getLinkImg() %>"/>
-					<form action="${pageContext.request.contextPath}/ViewDetailsProductClient"  method="post">
+					<form action="${pageContext.request.contextPath}/ViewDetailsProductClient"  method="post" class="pure-form">
 						<input type="number" value="<%=temp2.getId() %>" readonly  name="idproduct" hidden/>
-						<button type="submit">View Details</button>
+						<button type="submit" class="pure-button pure-button-primary">View Details</button>
 						
 					</form>
 				
@@ -87,10 +86,6 @@
 			</div>	
 		
 		</main>
-		
-		
-		
-		<hr/>
 		<br/>
 		<footer id="footer">
 		<br/>

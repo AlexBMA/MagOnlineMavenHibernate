@@ -19,24 +19,24 @@
 		<header id="header">
 			<h2>Welcome <%=session.getAttribute("userName")%></h2>
 			<nav>
-				<ul>
+				<ul class="pure-menu-list">
 					
 
-					<li>
-						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get">
-							<button type="submit">View products</button>
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get" class="pure-form">
+							<button type="submit" class="pure-button pure-button-primary">View products</button>
 						</form>
 
 					</li>
-					<li>
-						<form action="${pageContext.request.contextPath}/ViewCartClientServlet" method="get">
-							<button type="submit">View cart</button>
+					<li class="pure-menu-item">
+						<form action="${pageContext.request.contextPath}/ViewCartClientServlet" method="get" class="pure-form">
+							<button type="submit" class="pure-button pure-button-primary">View cart</button>
 						</form>
 					</li>
-					<li>
+					<li class="pure-menu-item">
 						<form action="${pageContext.request.contextPath}/LogoutServlet"
-							method="get">
-							<button type="submit">Log out</button>
+							method="get" class="pure-form">
+							<button type="submit" class="pure-button pure-button-primary">Log out</button>
 						</form>
 
 					</li>
@@ -44,7 +44,7 @@
 			</nav>
 			<br/>
 		</header>
-		<hr />
+		
 		<br />
 		<main> 
 		<%
@@ -54,15 +54,15 @@
 
 		<section>
 			<nav>
-				<ul>
-					<li>
-						<form action="" method="get">
-							<input type="text" placeholder="search box" name="searchitem">
-							<button type="submit">Search</button>
+				<ul class="pure-menu-list">
+					<li class="pure-menu-item">
+						<form action="" method="get" class="pure-form">
+							<input type="search" placeholder="search box" name="searchitem">
+							<button type="submit" class="pure-button pure-button-primary">Search</button>
 						</form>
 					</li>
-					<li>
-						<form action="" method="get">
+					<li class="pure-menu-item">
+						<form action="" method="get" class="pure-form">
 							<select name="orderofitems">
 								<option value="empty">...</option>
 								<option value="priceup">Price up</option>
@@ -70,6 +70,7 @@
 								<option value="abcaup">A-Z </option>
 								<option value="abcdown">Z-A </option>
 							</select>
+							<button type="submit" class="pure-button pure-button-primary">Sort</button>		
 						</form>
 					</li>
 				</ul>
@@ -98,17 +99,17 @@
 					<td><img src="<%=temp.getLinkImg()%>  " /></td>
 					<td><%=productTypeMap.get(temp.getProductTypeId()).getProductTypeName()%></td>
 					<td>
-						<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post">
+						<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post" class="pure-form">
 							<input type="text" readonly value="<%=temp.getId()%>"
 								name="indexofproduct" hidden>
-							<button type="submit">Add in cart</button>
-						</form>
+							<button type="submit" class="pure-button pure-button-primary">Add in cart</button>
+						</form><br/>
 						<form
 							action="${pageContext.request.contextPath}/ViewDetailsProductClient"
-							method="post">
+							method="post" class="pure-form">
 							<input type="text" readonly value="<%=temp.getId()%>"
 								name="idproduct" hidden>
-							<button type="submit">View details</button>
+							<button type="submit" class="pure-button pure-button-primary">View details</button>
 						</form>
 					</td>
 				</tr>
@@ -120,7 +121,7 @@
 
 		</main>
 		<br />
-		<hr />
+		
 		<footer id="footer"> </footer>
 
 	</div>
