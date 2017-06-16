@@ -31,17 +31,25 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		System.out.println("here in logout sevlet");
 		HttpSession theSession = request.getSession(false);
 		
-		theSession.invalidate();
+		if(theSession!=null)
+			{	
+				System.out.println("case 1");
+				theSession.invalidate();
+				String nextPage="index.jsp";
+				response.sendRedirect(nextPage);
+			}
+		else {
+			System.out.println("case 2");
+			theSession = request.getSession(true);
+			theSession.invalidate();
+			String nextPage="index.jsp";
+			response.sendRedirect(nextPage);
+		}
 		
-		
-	
-		String nextPage="index.jsp";
-		
-		response.sendRedirect(nextPage);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

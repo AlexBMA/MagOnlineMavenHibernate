@@ -58,15 +58,16 @@ public class LoginServlet extends HttpServlet {
 			HttpSession theSession = request.getSession(true);
 			theSession.setAttribute("uId",loginService.getUser().getId());
 			theSession.setAttribute("userName", userName);
-			theSession.setMaxInactiveInterval(600);
+			theSession.setMaxInactiveInterval(400);
 
 			if (role.equals("a")) {
-
+				System.out.println("admin login");
 				nextPage = addSAndP.createPath("AdminPage");
 
 			}
 
 			if (role.equals("c")) {
+				System.out.println("client login");
 				nextPage = addSAndP.createPath("ClientPage");
 
 				Cart cart = new Cart();
