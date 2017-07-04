@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import constantPack.AppJspPages;
+import constantPack.AppSessionAttributes;
 import dboperations.DB;
 import dboperations.DBOperationUser;
 import dboperations.DBOperations;
@@ -59,7 +61,7 @@ public class ChangePass extends HttpServlet {
 			HttpSession theSession = request.getSession(false);
 		
 			String username = (String) theSession.getAttribute("userName");
-			String idString =   theSession.getAttribute("uId")+"";
+			String idString =   theSession.getAttribute(AppSessionAttributes.USER_ID)+"";
 			System.out.println(idString+" %%");
 			int id = Integer.parseInt(idString);
 			
@@ -81,7 +83,7 @@ public class ChangePass extends HttpServlet {
 			
 			
 			AddPrefixAndSufixInterface addSAndP = new AddPrefixAndSufixImplementation();
-			String NEXT_PAGE =addSAndP.createPath("AdminPage");
+			String NEXT_PAGE =addSAndP.createPath(AppJspPages.ADMIN_PAGE);
 			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher(NEXT_PAGE);
 			requestDispatcher.forward(request, response);

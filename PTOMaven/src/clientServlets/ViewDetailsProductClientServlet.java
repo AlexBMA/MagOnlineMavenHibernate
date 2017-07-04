@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import constantPack.AppJspPages;
+import constantPack.AppRequestAttribute;
 import dboperations.DB;
 import modelMag.Product;
 import services.AddPrefixAndSufixInterface;
@@ -45,22 +47,22 @@ public class ViewDetailsProductClientServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int indexProduct = Integer.parseInt(request.getParameter("idproduct").trim());
+		int indexProduct = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT).trim());
 		
 		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
 		
-		Product temp = productService.getItem(indexProduct, DB.getSessionFactory());
+		Product tempProduct = productService.getItem(indexProduct, DB.getSessionFactory());
 		
-		List<Product> listRecommendation  =productService.getRecommendedItems(DB.getSessionFactory(), temp.getProductTypeId());
+		List<Product> listRecommendation  =productService.getRecommendedItems(DB.getSessionFactory(), tempProduct.getProductTypeId());
 				
 		
-		String nextPage="ViewDetailsClient";
+		//String nextPage="ViewDetailsClient";
 		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-		nextPage = addPrefixAndSufix.createPath(nextPage);
+		//nextPage = addPrefixAndSufix.createPath(AppJspPages.VIEW_DETAILS_CLIENT);
 		
-		request.setAttribute("product",temp);
-		request.setAttribute("listofrecommended", listRecommendation);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+		request.setAttribute(AppRequestAttribute.PRODUCT_TEMP,tempProduct);
+		request.setAttribute(AppRequestAttribute.LIST_OF_RECOMMENDED, listRecommendation);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(addPrefixAndSufix.createPath(AppJspPages.VIEW_DETAILS_CLIENT));
 		
 		requestDispatcher.forward(request, response);
 	}

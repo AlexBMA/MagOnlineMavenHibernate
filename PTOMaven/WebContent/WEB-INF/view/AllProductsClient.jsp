@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
 <%@ page import="modelMag.*"%>
+<%@ page import="constantPack.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,21 +49,21 @@
 		<br />
 		<main> 
 		<%
- 			List<Product> productList = (List) request.getAttribute("listproduct");
- 			Map<Integer, ProductType> productTypeMap = (Map) request.getAttribute("mapproducttype");
+ 			List<Product> productList = (List) request.getAttribute(AppRequestAttribute.LIST_PRODUCTS);
+ 			Map<Integer, ProductType> productTypeMap = (Map) request.getAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE);
  		%>
 
 		<section>
 			<nav>
 				<ul class="pure-menu-list">
 					<li class="pure-menu-item">
-						<form action="" method="get" class="pure-form">
+						<form action="${pageContext.request.contextPath}/" method="get" class="pure-form">
 							<input type="search" placeholder="search box" name="searchitem">
 							<button type="submit" class="pure-button pure-button-primary">Search</button>
 						</form>
 					</li>
 					<li class="pure-menu-item">
-						<form action="" method="get" class="pure-form">
+						<form action="${pageContext.request.contextPath}/" method="get" class="pure-form">
 							<select name="orderofitems">
 								<option value="empty">...</option>
 								<option value="priceup">Price up</option>
@@ -104,11 +105,9 @@
 								name="indexofproduct" hidden>
 							<button type="submit" class="pure-button pure-button-primary">Add in cart</button>
 						</form><br/>
-						<form
-							action="${pageContext.request.contextPath}/ViewDetailsProductClient"
-							method="post" class="pure-form">
+						<form action="${pageContext.request.contextPath}/ViewDetailsProductClient" method="post" class="pure-form">
 							<input type="text" readonly value="<%=temp.getId()%>"
-								name="idproduct" hidden>
+								name="<%=AppRequestAttribute.ID_PRODUCT%>" hidden>
 							<button type="submit" class="pure-button pure-button-primary">View details</button>
 						</form>
 					</td>

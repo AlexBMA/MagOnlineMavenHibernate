@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import constantPack.AppJspPages;
+import constantPack.AppRequestAttribute;
 import dboperations.DB;
 import modelMag.Product;
 import modelMag.ProductType;
@@ -56,11 +58,11 @@ public class ViewProductsClient extends HttpServlet {
 		}
 		
 		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-		String nextPage="AllProductsClient";
+		String nextPage=AppJspPages.ALL_PRODUCTS_CLIENT;
 		nextPage = addPrefixAndSufix.createPath(nextPage);
 		
-		request.setAttribute("listproduct", listProduct);
-		request.setAttribute("mapproducttype", mapProductTypeService);
+		request.setAttribute(AppRequestAttribute.LIST_PRODUCTS, listProduct);
+		request.setAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE, mapProductTypeService);
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);
