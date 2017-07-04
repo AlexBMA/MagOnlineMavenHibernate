@@ -1,2 +1,9 @@
 # MagOnlineMavenHibernate
-Online shop made with hibernate maven jsp and servlets
+
+
+ ##Technology used
+   * java
+   * maven
+   * jsp
+   * servlets
+   * hibernate
