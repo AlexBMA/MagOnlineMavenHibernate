@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import constantPack.AppConstants;
+import constantPack.AppJspPages;
+import constantPack.AppRequestAttribute;
+import constantPack.AppSessionAttributes;
 import dboperations.DB;
 import modelMag.Cart;
 import services.AddPrefixAndSufixInterface;
@@ -34,8 +38,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String userName = request.getParameter("user");
-		String pass = request.getParameter("pass");
+		String userName = request.getParameter(AppRequestAttribute.USER);
+		String pass = request.getParameter(AppRequestAttribute.PASSWORD);
 		String role;
 
 		DB.DBConnect();
@@ -56,23 +60,24 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher;
 
 			HttpSession theSession = request.getSession(true);
-			theSession.setAttribute("uId",loginService.getUser().getId());
-			theSession.setAttribute("userName", userName);
-			theSession.setMaxInactiveInterval(400);
+			theSession.setAttribute(AppSessionAttributes.USER_ID,loginService.getUser().getId());
+			theSession.setAttribute(AppSessionAttributes.USERNAME, userName);
+			theSession.setMaxInactiveInterval(AppConstants.MAX_INACTIVE_INTERVAL);
+			
 
-			if (role.equals("a")) {
+			if (role.equals(AppConstants.ROLE_ADMIN)) {
 				System.out.println("admin login");
-				nextPage = addSAndP.createPath("AdminPage");
+				nextPage = addSAndP.createPath(AppJspPages.ADMIN_PAGE);
 
 			}
 
-			if (role.equals("c")) {
+			if (role.equals(AppConstants.ROLE_CLIENT)) {
 				System.out.println("client login");
-				nextPage = addSAndP.createPath("ClientPage");
+				nextPage = addSAndP.createPath(AppJspPages.CLIENT_PAGE);
 
 				Cart cart = new Cart();
 				
-				theSession.setAttribute("cart",cart);
+				theSession.setAttribute(AppSessionAttributes.CART,cart);
 			}
 
 			requestDispatcher = request.getRequestDispatcher(nextPage);

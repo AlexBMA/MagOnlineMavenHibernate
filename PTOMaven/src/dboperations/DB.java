@@ -3,6 +3,7 @@ package dboperations;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import constantPack.AppConstants;
 import modelMag.Cart;
 import modelMag.Product;
 import modelMag.ProductFromCart;
@@ -20,7 +21,7 @@ public class DB {
 	{
 		// create session factory
 				factory = new Configuration()
-											.configure("hibernate.cfg.xml")
+											.configure(AppConstants.HIBERNATE_CONFIG_FILE)
 											.addAnnotatedClass(User.class)
 											.addAnnotatedClass(Product.class)
 											.addAnnotatedClass(Cart.class)

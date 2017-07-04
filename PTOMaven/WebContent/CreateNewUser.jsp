@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="constantPack.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,13 +34,13 @@
 		<h4>New user information</h4>
 		<form action="${pageContext.request.contextPath}/CreateNewUser" method="post"class="pure-form">
 		
-			<br /> <input type="text" placeholder="username" name="username"/> 
-			<br /> <input type="text" placeholder="password" name="passone" />
-			<br /> <input type="text" placeholder="password again" name="passtwo" /> 
+			<br /> <input type="text" placeholder="username" name="<%=AppRequestAttribute.USER%>"/> 
+			<br /> <input type="password" placeholder="password" name="<%=AppRequestAttribute.PASS_ONE %>" />
+			<br /> <input type="password" placeholder="password again" name="<%=AppRequestAttribute.PASS_TWO %>" /> 
 			<br /> 
-			<select name="role">
-				<option value="c">client</option>
-				<option value="a">administrator</option>
+			<select name="<%=AppRequestAttribute.ROLE%>">
+				<option value="<%=AppConstants.ROLE_CLIENT%>">client</option>
+				<option value="<%=AppConstants.ROLE_ADMIN%>">administrator</option>
 			</select>
 			 <br />
 			<button type="submit" class="pure-button pure-button-primary">Create new user</button>

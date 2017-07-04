@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="constantPack.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,8 +23,8 @@
 		<form action="${pageContext.request.contextPath}/LoginServlet"
 			method="post" class="pure-form">
 
-			<input type="text" placeholder="username" name="user" /> <input
-				type="password" placeholder="pass" name="pass" />
+			<input type="text" placeholder="username" name="<%=AppRequestAttribute.USER %>" /> 
+			<input type="password" placeholder="pass" name="<%=AppRequestAttribute.PASSWORD %>" />
 			<button type="submit" class="pure-button pure-button-primary" >Log in</button>
 			<button type="reset" class="pure-button pure-button-primary">Reset</button>
 		</form>
