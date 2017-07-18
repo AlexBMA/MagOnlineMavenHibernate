@@ -9,6 +9,9 @@ public final class AppRequestAttribute {
 	public static final String PASS_TWO = "passtwo";
 	public static final String ROLE = "role";
 	
+	public static final String NEW_PASS="newpass";
+	public static final String NEW_PASS2="newpass2";
+	
 	public static final String LIST_PRODUCTS ="listproduct";
 	public static final String MAP_PRODUCT_TYPE="mapproducttype";
 	

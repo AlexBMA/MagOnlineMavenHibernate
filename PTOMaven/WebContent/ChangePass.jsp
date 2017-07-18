@@ -1,3 +1,5 @@
+<%@page import="constantPack.AppSessionAttributes"%>
+<%@page import="constantPack.AppRequestAttribute"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -13,7 +15,7 @@
 <body>
 	<div id="container">
 		<header id="header">
-		<h3>Welcome admin <%=session.getAttribute("userName")%></h3>
+		<h3>Welcome admin <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h3>
 			
 		
 			<nav>
@@ -59,8 +61,8 @@
 			<br/>
 		
 			<form action="${pageContext.request.contextPath}/ChangePass" method="post" class="pure-form">
-				<input type ="password" placeholder="new pass" name="newpass">
-				<input type="password" placeholder="new pass again" name="newpass2">
+				<input type ="password" placeholder="new pass" name="<%=AppRequestAttribute.NEW_PASS%>">
+				<input type="password" placeholder="new pass again" name="<%=AppRequestAttribute.NEW_PASS2%>">
 				<button type="submit" class="pure-button pure-button-primary">Submit </button>
 				<button type="reset" class="pure-button pure-button-primary">Reset</button>
 			</form>

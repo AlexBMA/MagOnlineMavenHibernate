@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import constantPack.AppJspPages;
+import constantPack.AppRequestAttribute;
 import constantPack.AppSessionAttributes;
 import dboperations.DB;
 import dboperations.DBOperationUser;
@@ -52,15 +53,15 @@ public class ChangePass extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String newPass = request.getParameter("newpass");
-		String newPassAgain = request.getParameter("newpass2");
+		String newPass = request.getParameter(AppRequestAttribute.NEW_PASS);
+		String newPassAgain = request.getParameter(AppRequestAttribute.NEW_PASS2);
 		
 		if(newPass.contentEquals(newPassAgain))
 		{
 		
 			HttpSession theSession = request.getSession(false);
 		
-			String username = (String) theSession.getAttribute("userName");
+			String username = (String) theSession.getAttribute(AppSessionAttributes.USERNAME);
 			String idString =   theSession.getAttribute(AppSessionAttributes.USER_ID)+"";
 			System.out.println(idString+" %%");
 			int id = Integer.parseInt(idString);
