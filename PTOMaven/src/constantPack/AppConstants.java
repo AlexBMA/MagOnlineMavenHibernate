@@ -8,4 +8,6 @@ public final class AppConstants {
 	
 	public static String ROLE_CLIENT ="c";
     public static String ROLE_ADMIN ="a";
+    
+    public static String SESSION_HAS_EXPIRED="SESSION HAS EXPIRED";
 }

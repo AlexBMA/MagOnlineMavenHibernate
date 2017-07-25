@@ -21,6 +21,9 @@ public final class AppRequestAttribute {
 	//listofrecommended
 	
 	
+	public static final String NUMBER_OF_ITEMS ="numberofitems";
+	public static final String INDEX_OF_PRODUCT ="indexofproduct";
 	
+	public static final String MSG ="msg";
 	
 }

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import constantPack.AppRequestAttribute;
+import constantPack.AppServletsName;
+import constantPack.AppSessionAttributes;
 import modelMag.Cart;
 import modelMag.Product;
 import services.AddInCartInterface;
@@ -41,18 +44,18 @@ public class DeleteProductFromCartServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("IN DELETE SERVLET");
-		String indexText = request.getParameter("index");
+	//	System.out.println("IN DELETE SERVLET");
+		String indexText = request.getParameter(AppRequestAttribute.INDEX_OF_PRODUCT);
 		int index =Integer.parseInt(indexText);
 		
-		Cart theCart = (Cart) request.getSession(false).getAttribute("cart");
+		Cart theCart = (Cart) request.getSession(false).getAttribute(AppSessionAttributes.CART);
 				theCart.getProductsFromCart().remove(index);
 				
 		AddInCartInterface<Product, Cart> addInCartProduct = new AddInCartImplementation();
 		addInCartProduct.calculateTotalPriceForCart(theCart);
 		
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("ViewCartClientServlet");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(AppServletsName.VIEW_CART_CLIENT_SERVLET);
 		requestDispatcher.forward(request, response);
 		
 	}

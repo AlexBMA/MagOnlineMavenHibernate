@@ -1,3 +1,5 @@
+<%@page import="constantPack.AppRequestAttribute"%>
+<%@page import="constantPack.AppSessionAttributes"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
@@ -20,7 +22,7 @@
 	<div id="container">
 	
 		<header id="header">
-			<h2>Welcome <%=session.getAttribute("userName")%></h2>
+			<h2>Welcome <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h2>
 		
 			<nav>
 				<ul class="pure-menu-list">
@@ -49,8 +51,8 @@
 		<br/>
 		<main id="cart">
 			<%
-				Cart theCart = (Cart)session.getAttribute("cart");
-				String msg = (String)request.getAttribute("msg");
+				Cart theCart = (Cart)session.getAttribute(AppSessionAttributes.CART);
+				String msg = (String)request.getAttribute(AppRequestAttribute.MSG);
 			%>
 			<% if(msg!=null){    %>
 				<h4><%=msg %></h4>
@@ -69,7 +71,7 @@
 					<label>Price of items <%=temp.calculeazaPretPentruProdosuDinCos()%></label>
 					
 				<form action="${pageContext.request.contextPath}/DeleteProductFromCartServlet" method="post" class="pure-form">
-					<input type="text" readonly hidden  value="<%=i%>" name="index"/>
+					<input type="text" readonly hidden  value="<%=i%>" name="<%=AppRequestAttribute.INDEX_OF_PRODUCT%>"/>
 					<button type="submit" class="pure-button pure-button-primary" >Delete product from cart</button>
 				</form>
 					

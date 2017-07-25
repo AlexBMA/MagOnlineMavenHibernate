@@ -1,3 +1,4 @@
+<%@page import="constantPack.AppRequestAttribute"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
@@ -48,18 +49,19 @@
 		</header>
 		<br/>
 		<main>
-			<% Product temp = (Product)request.getAttribute("product"); 
-				List<Product> listReco = (List)request.getAttribute("listofrecommended");
+			<% Product temp = (Product)request.getAttribute(AppRequestAttribute.PRODUCT_TEMP); 
+				List<Product> listReco = (List)request.getAttribute(AppRequestAttribute.LIST_OF_RECOMMENDED);
 			%>
 			<div id="productdetails">
 			<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post" class="pure-form">
-				<input type="number" value="<%=temp.getId() %>" readonly hidden name="indexofproduct"/>
+				<input type="number" value="<%=temp.getId() %>" readonly hidden name="<%=AppRequestAttribute.INDEX_OF_PRODUCT%>"/>
 			
 				<img src="<%=temp.getLinkImg() %>"/>
 				<br/>
 				<label id="priceinrealtime">Price per unit: <%=temp.getPrice() %></label>
 				<br/>
-				<input type="number" min="1" max="<%=temp.getNumberOfItems() %>" name="numberofitems" value="1">
+				
+				<input type="number" min="1" max="<%=temp.getNumberOfItems() %>" name="<%=AppRequestAttribute.NUMBER_OF_ITEMS %>" value="1">
 				
 				<button type="submit" class="pure-button pure-button-primary">Add to cart</button>
 			</form>
@@ -74,7 +76,7 @@
 				<li>
 					<img src="<%=temp2.getLinkImg() %>"/>
 					<form action="${pageContext.request.contextPath}/ViewDetailsProductClient"  method="post" class="pure-form">
-						<input type="number" value="<%=temp2.getId() %>" readonly  name="idproduct" hidden/>
+						<input type="number" value="<%=temp2.getId() %>" readonly  name="<%=AppRequestAttribute.ID_PRODUCT%>" hidden/>
 						<button type="submit" class="pure-button pure-button-primary">View Details</button>
 						
 					</form>

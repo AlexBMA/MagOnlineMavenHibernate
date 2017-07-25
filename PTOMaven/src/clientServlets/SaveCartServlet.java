@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import constantPack.AppConstants;
+import constantPack.AppJspPages;
+import constantPack.AppRequestAttribute;
+import constantPack.AppServletsName;
+import constantPack.AppSessionAttributes;
 import dboperations.DB;
 import modelMag.Cart;
 import services.AddPrefixAndSufixInterface;
@@ -48,29 +53,35 @@ public class SaveCartServlet extends HttpServlet {
 		
 		HttpSession theSession = request.getSession(false);
 		
-		GeneralServiceInterface<Cart> cartService = new CartServiceImplementation();
+		if(theSession !=null)
+		{
+			GeneralServiceInterface<Cart> cartService = new CartServiceImplementation();
+			
+			Cart cart = (Cart)theSession.getAttribute(AppSessionAttributes.CART);
+			
+			cartService.insertItem(cart, DB.getSessionFactory());
+			
+			cart = new Cart();
+			
+			theSession.setAttribute(AppSessionAttributes.CART, cart);
+			
+			
+			AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+			String nextPage = addPrefixAndSufix.createPath(AppJspPages.VIEW_CART);
+			
+			String msg = "Tranzaction complete";
+			
+			request.setAttribute(AppRequestAttribute.MSG, msg);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+			requestDispatcher.forward(request, response);
+			
+			System.out.println("done");
+		}
+		else {
+			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
+		}
 		
-		Cart cart = (Cart)theSession.getAttribute("cart");
 		
-		cartService.insertItem(cart, DB.getSessionFactory());
-		
-		cart = new Cart();
-		
-		theSession.setAttribute("cart", cart);
-		
-		
-		
-		String nextPage="ViewCart";
-		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-		nextPage = addPrefixAndSufix.createPath(nextPage);
-		
-		String msg = "Tranzaction complete";
-		
-		request.setAttribute("msg", msg);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
-		requestDispatcher.forward(request, response);
-		
-		System.out.println("done");
 		
 	}
 

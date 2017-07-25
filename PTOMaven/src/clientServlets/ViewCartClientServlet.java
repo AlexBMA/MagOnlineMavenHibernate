@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import constantPack.AppJspPages;
+import constantPack.AppSessionAttributes;
 import modelMag.Cart;
 import modelMag.Product;
 import services.AddInCartInterface;
@@ -42,14 +44,14 @@ public class ViewCartClientServlet extends HttpServlet {
 
 		HttpSession theSession = request.getSession(false);
 
-		Cart theCart = (Cart) theSession.getAttribute("cart");
+		Cart theCart = (Cart) theSession.getAttribute(AppSessionAttributes.CART);
 		AddInCartInterface<Product, Cart> addInCart = new AddInCartImplementation();
 		addInCart.calculateTotalPriceForCart(theCart);
 
 		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 
-		String nextPage = "ViewCart";
-		nextPage = addPrefixAndSufix.createPath(nextPage);
+		//String nextPage = "ViewCart";
+		String  nextPage = addPrefixAndSufix.createPath(AppJspPages.VIEW_CART);
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);

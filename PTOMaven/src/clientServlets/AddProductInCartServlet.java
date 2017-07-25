@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import constantPack.AppRequestAttribute;
+import constantPack.AppServletsName;
+import constantPack.AppSessionAttributes;
 import dboperations.DB;
 import modelMag.Cart;
 import modelMag.Product;
@@ -50,10 +53,11 @@ public class AddProductInCartServlet extends HttpServlet {
 		
 		int numberOfItems =1;
 		
-		if(request.getParameter("numberofitems")!=null)
-			numberOfItems = Integer.parseInt(request.getParameter("numberofitems").trim());
+		if(request.getParameter(AppRequestAttribute.NUMBER_OF_ITEMS)!=null){
+			numberOfItems = Integer.parseInt(request.getParameter(AppRequestAttribute.NUMBER_OF_ITEMS).trim());
+		}
 		
-		int indexOfItem = Integer.parseInt(request.getParameter("indexofproduct").trim());
+		int indexOfItem = Integer.parseInt(request.getParameter(AppRequestAttribute.INDEX_OF_PRODUCT).trim());
 	
 		
 		AddInCartInterface<Product,Cart> addInCartProducts = new AddInCartImplementation();
@@ -63,14 +67,14 @@ public class AddProductInCartServlet extends HttpServlet {
 		
 		HttpSession theSession = request.getSession(false);
 		
-		Cart theCart = (Cart) theSession.getAttribute("cart");
+		Cart theCart = (Cart) theSession.getAttribute(AppSessionAttributes.CART);
 		addInCartProducts.addInCartOneItemMultipleTimes(temp, numberOfItems, theCart);
 		
 		
-		String nextPage="ViewProductsClient";
+		//String nextPage="ViewProductsClient";
 		
-		theSession.setAttribute("cart", theCart);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+		theSession.setAttribute(AppSessionAttributes.CART, theCart);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(AppServletsName.VIEW_PRODUCTS_CLIENT);
 		requestDispatcher.forward(request, response);
 		
 		
