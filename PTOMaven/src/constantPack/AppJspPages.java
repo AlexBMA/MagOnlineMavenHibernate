@@ -8,6 +8,7 @@ public final class AppJspPages {
 		public final static String ALL_PRODUCTS_CLIENT = "AllProductsClient";
 		public final static String VIEW_DETAILS_CLIENT = "ViewDetailsClient";
 		
+		
 		public final static String VIEW_CART ="ViewCart";
 
 }

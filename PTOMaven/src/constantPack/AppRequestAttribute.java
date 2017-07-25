@@ -11,6 +11,8 @@ public final class AppRequestAttribute {
 	
 	
 	
+	
+	
 	public static final String NEW_PASS="newpass";
 	public static final String NEW_PASS2="newpass2";
 	
