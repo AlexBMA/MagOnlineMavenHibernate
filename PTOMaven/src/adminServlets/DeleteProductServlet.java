@@ -36,29 +36,21 @@ public class DeleteProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	//	response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		int indexProduct = Integer.parseInt(request.getParameter("idproduct"));
 		
 		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
 		
-		//AddPrefixAndSufix addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-		
-		
-		
 		productService.deleteItem(indexProduct,DB.getSessionFactory());
 		
 		String nextPage="ViewAllProductsServlet";
-		
-		//nextPage = addPrefixAndSufix.createPath(nextPage);
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		
