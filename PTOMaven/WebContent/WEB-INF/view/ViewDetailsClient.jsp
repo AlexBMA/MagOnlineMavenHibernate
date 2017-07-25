@@ -22,7 +22,6 @@
 	
 		<header id="header">
 			<h2>Welcome <%=session.getAttribute("userName")%></h2>
-			
 			<nav>
 				<ul class="pure-menu-list">
 					
