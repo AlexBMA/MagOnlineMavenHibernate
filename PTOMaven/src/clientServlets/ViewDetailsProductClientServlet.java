@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import constantPack.AppConstants;
 import constantPack.AppJspPages;
 import constantPack.AppRequestAttribute;
 import dboperations.DB;
@@ -47,24 +49,26 @@ public class ViewDetailsProductClientServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int indexProduct = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT).trim());
+		HttpSession theSession = request.getSession(false);
+		if(theSession!=null)
+		{
+			int indexProduct = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT).trim());
+			GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
+			
+			Product tempProduct = productService.getItem(indexProduct, DB.getSessionFactory());
+			List<Product> listRecommendation  =productService.getRecommendedItems(DB.getSessionFactory(), tempProduct.getProductTypeId());
+
+			AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 		
-		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
+			request.setAttribute(AppRequestAttribute.PRODUCT_TEMP,tempProduct);
+			request.setAttribute(AppRequestAttribute.LIST_OF_RECOMMENDED, listRecommendation);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher(addPrefixAndSufix.createPath(AppJspPages.VIEW_DETAILS_CLIENT));
+			requestDispatcher.forward(request, response);
+		}else {
+			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
+		}
 		
-		Product tempProduct = productService.getItem(indexProduct, DB.getSessionFactory());
-		
-		List<Product> listRecommendation  =productService.getRecommendedItems(DB.getSessionFactory(), tempProduct.getProductTypeId());
-				
-		
-		//String nextPage="ViewDetailsClient";
-		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-		//nextPage = addPrefixAndSufix.createPath(AppJspPages.VIEW_DETAILS_CLIENT);
-		
-		request.setAttribute(AppRequestAttribute.PRODUCT_TEMP,tempProduct);
-		request.setAttribute(AppRequestAttribute.LIST_OF_RECOMMENDED, listRecommendation);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(addPrefixAndSufix.createPath(AppJspPages.VIEW_DETAILS_CLIENT));
-		
-		requestDispatcher.forward(request, response);
+	
 	}
 
 }

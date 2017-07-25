@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import constantPack.AppConstants;
 import constantPack.AppJspPages;
 import constantPack.AppSessionAttributes;
 import modelMag.Cart;
@@ -44,18 +45,22 @@ public class ViewCartClientServlet extends HttpServlet {
 
 		HttpSession theSession = request.getSession(false);
 
-		Cart theCart = (Cart) theSession.getAttribute(AppSessionAttributes.CART);
-		AddInCartInterface<Product, Cart> addInCart = new AddInCartImplementation();
-		addInCart.calculateTotalPriceForCart(theCart);
+		if(theSession!=null)
+		{
+			Cart theCart = (Cart) theSession.getAttribute(AppSessionAttributes.CART);
+			AddInCartInterface<Product, Cart> addInCart = new AddInCartImplementation();
+			addInCart.calculateTotalPriceForCart(theCart);
 
-		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+			AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
 
-		//String nextPage = "ViewCart";
-		String  nextPage = addPrefixAndSufix.createPath(AppJspPages.VIEW_CART);
+			//String nextPage = "ViewCart";
+			String  nextPage = addPrefixAndSufix.createPath(AppJspPages.VIEW_CART);
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
-		requestDispatcher.forward(request, response);
-
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+			requestDispatcher.forward(request, response);
+		}else {
+			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
+		}
 	}
 
 	/**

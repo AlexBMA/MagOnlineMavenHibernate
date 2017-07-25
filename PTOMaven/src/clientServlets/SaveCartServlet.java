@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import constantPack.AppConstants;
 import constantPack.AppJspPages;
 import constantPack.AppRequestAttribute;
-import constantPack.AppServletsName;
 import constantPack.AppSessionAttributes;
 import dboperations.DB;
 import modelMag.Cart;
@@ -75,7 +74,7 @@ public class SaveCartServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 			requestDispatcher.forward(request, response);
 			
-			System.out.println("done");
+			//System.out.println("done");
 		}
 		else {
 			System.out.println(AppConstants.SESSION_HAS_EXPIRED);

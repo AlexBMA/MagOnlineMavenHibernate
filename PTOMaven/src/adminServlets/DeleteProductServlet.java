@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dboperations.DB;
 import modelMag.Product;
-import services.AddPrefixAndSufixInterface;
 import services.GeneralServiceInterface;
-import serviciesImpl.AddPrefixAndSufixImplementation;
 import serviciesImpl.ProductServiceImplementation;
 
 /**

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import constantPack.AppConstants;
 import constantPack.AppRequestAttribute;
 import constantPack.AppServletsName;
 import constantPack.AppSessionAttributes;
@@ -49,37 +50,33 @@ public class AddProductInCartServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		
-		int numberOfItems =1;
-		
-		if(request.getParameter(AppRequestAttribute.NUMBER_OF_ITEMS)!=null){
-			numberOfItems = Integer.parseInt(request.getParameter(AppRequestAttribute.NUMBER_OF_ITEMS).trim());
-		}
-		
-		int indexOfItem = Integer.parseInt(request.getParameter(AppRequestAttribute.INDEX_OF_PRODUCT).trim());
-	
-		
-		AddInCartInterface<Product,Cart> addInCartProducts = new AddInCartImplementation();
-		
-		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
-		Product temp = productService.getItem(indexOfItem, DB.getSessionFactory());
-		
 		HttpSession theSession = request.getSession(false);
 		
-		Cart theCart = (Cart) theSession.getAttribute(AppSessionAttributes.CART);
-		addInCartProducts.addInCartOneItemMultipleTimes(temp, numberOfItems, theCart);
+		if(theSession!=null)
+		{
+			int numberOfItems =1;
+			
+			if(request.getParameter(AppRequestAttribute.NUMBER_OF_ITEMS)!=null){
+				numberOfItems = Integer.parseInt(request.getParameter(AppRequestAttribute.NUMBER_OF_ITEMS).trim());
+			}
+			
+			int indexOfItem = Integer.parseInt(request.getParameter(AppRequestAttribute.INDEX_OF_PRODUCT).trim());
 		
-		
-		//String nextPage="ViewProductsClient";
-		
-		theSession.setAttribute(AppSessionAttributes.CART, theCart);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(AppServletsName.VIEW_PRODUCTS_CLIENT);
-		requestDispatcher.forward(request, response);
-		
-		
-		
-		
+			AddInCartInterface<Product,Cart> addInCartProducts = new AddInCartImplementation();
+			
+			GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
+			Product temp = productService.getItem(indexOfItem, DB.getSessionFactory());
+			
+			Cart theCart = (Cart) theSession.getAttribute(AppSessionAttributes.CART);
+			addInCartProducts.addInCartOneItemMultipleTimes(temp, numberOfItems, theCart);
+			
+			theSession.setAttribute(AppSessionAttributes.CART, theCart);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher(AppServletsName.VIEW_PRODUCTS_CLIENT);
+			requestDispatcher.forward(request, response);
+		}
+		else{
+				System.out.println(AppConstants.SESSION_HAS_EXPIRED);
+		}		
 		
 	}
 
