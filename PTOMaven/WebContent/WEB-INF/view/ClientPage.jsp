@@ -1,3 +1,4 @@
+<%@page import="constantPack.AppSessionAttributes"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
@@ -20,7 +21,7 @@
 	<div id="container">
 	
 		<header id="header">
-			<h2>Welcome <%=session.getAttribute("userName")%></h2>
+			<h2>Welcome <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h2>
 		
 			<nav>
 				<ul class="pure-menu-list">

@@ -48,10 +48,10 @@ public class DeleteProductTypeServlet extends HttpServlet {
 		
 		HttpSession theSession = request.getSession(false);
 		if(theSession!=null){
-			int indexProductType = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT));
+			int idProductType = Integer.parseInt(request.getParameter(AppRequestAttribute.PRODUCT_TYPE_ID));
 			
 			GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
-			productTypeService.deleteItem(indexProductType,DB.getSessionFactory());
+			productTypeService.deleteItem(idProductType,DB.getSessionFactory());
 			
 			PageHelper.nextPageServlet(request, response,AppServletsName.VIEW_ALL_PRODUCT_TYPE_SERVLET);
 		}

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import constantPack.AppTables;
 import modelMag.Product;
 import modelMag.ProductType;
 
@@ -30,7 +31,7 @@ public class DBOperationsProduct implements DBOperations<Product> {
 				theSession.getTransaction().commit();
 				
 				//close the session
-				theSession.close();
+				//theSession.close();
 				
 		
 	}
@@ -51,7 +52,7 @@ public class DBOperationsProduct implements DBOperations<Product> {
 		theSession.getTransaction().commit();
 		
 		//close the session
-		theSession.close();
+		//theSession.close();
 		
 		
 	}
@@ -73,7 +74,7 @@ public class DBOperationsProduct implements DBOperations<Product> {
 		theSession.getTransaction().commit();
 		
 		//close the session
-		theSession.close();
+		//heSession.close();
 		
 		
 		
@@ -89,7 +90,7 @@ public class DBOperationsProduct implements DBOperations<Product> {
 		//begin transaction
 		theSession.beginTransaction();
 		
-		String hql="from Product";
+		String hql="from "+AppTables.ProductEntry.TABLE_NAME;
 		
 		List<Product> theList = theSession.createQuery(hql).getResultList();
 		
@@ -97,7 +98,7 @@ public class DBOperationsProduct implements DBOperations<Product> {
 		theSession.getTransaction().commit();
 		
 		//close the session
-		theSession.close();
+		//theSession.close();
 		
 		
 		return	theList;
@@ -111,7 +112,7 @@ public class DBOperationsProduct implements DBOperations<Product> {
 		// begin transaction
 		theSession.beginTransaction();
 
-		String hql = "from Product where productTypeId = ? ";
+		String hql = "from "+AppTables.ProductEntry.TABLE_NAME+" where productTypeId = ? ";
 
 		List<Product> theList = theSession.createQuery(hql).setParameter(0, idType).getResultList();
 
@@ -119,7 +120,7 @@ public class DBOperationsProduct implements DBOperations<Product> {
 		theSession.getTransaction().commit();
 
 		// close the session
-		theSession.close();
+		//theSession.close();
 
 		return theList;
 	}

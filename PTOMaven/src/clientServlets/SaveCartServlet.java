@@ -15,6 +15,7 @@ import constantPack.AppJspPages;
 import constantPack.AppRequestAttribute;
 import constantPack.AppSessionAttributes;
 import dboperations.DB;
+import helperpack.PageHelper;
 import modelMag.Cart;
 import services.AddPrefixAndSufixInterface;
 import services.GeneralServiceInterface;
@@ -41,7 +42,7 @@ public class SaveCartServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -49,31 +50,19 @@ public class SaveCartServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		HttpSession theSession = request.getSession(false);
-		
-		if(theSession !=null)
-		{
+		if(theSession !=null){
 			GeneralServiceInterface<Cart> cartService = new CartServiceImplementation();
-			
 			Cart cart = (Cart)theSession.getAttribute(AppSessionAttributes.CART);
-			
 			cartService.insertItem(cart, DB.getSessionFactory());
-			
 			cart = new Cart();
 			
 			theSession.setAttribute(AppSessionAttributes.CART, cart);
-			
-			
-			AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-			String nextPage = addPrefixAndSufix.createPath(AppJspPages.VIEW_CART);
-			
+		
 			String msg = "Tranzaction complete";
-			
 			request.setAttribute(AppRequestAttribute.MSG, msg);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
-			requestDispatcher.forward(request, response);
 			
+			PageHelper.nextPageJsp(request, response, AppJspPages.VIEW_CART);
 			//System.out.println("done");
 		}
 		else {

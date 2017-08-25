@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import constantPack.AppConstants;
+import constantPack.AppJspPages;
 import constantPack.AppServletsName;
 import helperpack.PageHelper;
 import helperpack.ProductHelper;
@@ -49,8 +50,8 @@ public class DeleteProductServlet extends HttpServlet {
 		HttpSession theSession = request.getSession(false);
 		if (theSession != null) {
 			ProductHelper.deleteProduct(request);
-			PageHelper.nextPageServlet(request, response, AppServletsName.VIEW_ALL_PRODUCT_SERVLET);
-			System.out.println("##$$ delete product");
+			ProductHelper.getAndPutDataInRequest(request);
+			PageHelper.nextPageJsp(request, response, AppJspPages.ALL_PRODUCT_ADMIN);
 
 		} else {
 			System.out.println(AppConstants.SESSION_HAS_EXPIRED);

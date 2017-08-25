@@ -1,3 +1,5 @@
+<%@page import="constantPack.AppSessionAttributes"%>
+<%@page import="constantPack.AppServletsName"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -16,9 +18,7 @@
 
 		<header id="header">
 
-			<h3>
-				Welcome admin
-				<%=session.getAttribute("userName")%></h3>
+			<h3>Welcome admin <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h3>
 
 			<nav>
 			

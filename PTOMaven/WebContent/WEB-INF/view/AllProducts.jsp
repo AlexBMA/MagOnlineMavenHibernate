@@ -1,3 +1,6 @@
+<%@page import="constantPack.AppRequestAttribute"%>
+<%@page import="constantPack.AppRedirectPages"%>
+<%@page import="constantPack.AppSessionAttributes"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
@@ -15,10 +18,8 @@
 </head>
 <body>
 	<div id="container">
-	
 		<header id="header">
-			
-			<h3>Welcome admin <%=session.getAttribute("userName")%></h3>
+			<h3>Welcome admin <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h3>
 			
 			<nav>
 				<ul class="pure-menu-list">
@@ -54,9 +55,9 @@
 		
 		<br/>
 		<main>
-			<% 
-				List<Product> productList= (List)request.getAttribute("listproduct"); 
-				Map<Integer,ProductType> productTypeMap= (Map)request.getAttribute("mapproducttype");
+			<%  
+				List<Product> productList= (List)request.getAttribute(AppRequestAttribute.LIST_PRODUCTS); 
+				Map<Integer,ProductType> productTypeMap= (Map)request.getAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE);
 			%>
 			
 			<table class="pure-table pure-table-horizontal">
@@ -83,14 +84,14 @@
 							<td><%=p.getPrice() %></td>
 							<td><%=p.getNumberOfItems() %></td>
 							<td><%=p.getLinkImg() %></td>
-							<td> <form action="${pageContext.request.contextPath}/EditProductServlet" method="post" class="pure-form">
+							<td> <form action="${pageContext.request.contextPath}/EditProductServlet" method="get" class="pure-form">
 								
-								<input type="text" value="<%=p.getId() %>" readonly name="idproduct" hidden>
+								<input type="text" value="<%=p.getId() %>" readonly name="<%=AppRequestAttribute.ID_PRODUCT %>" hidden>
 								<button type="submit" class="pure-button pure-button-primary">Edit</button> 
 								 </form> <br/>
 								 
 								 <form action="${pageContext.request.contextPath}/DeleteProductServlet" method="post" class="pure-form">
-								 	<input type="text" value="<%=p.getId() %>" readonly name="idproduct" hidden>
+								 	<input type="text" value="<%=p.getId() %>" readonly name="<%=AppRequestAttribute.ID_PRODUCT %>" hidden>
 								 	<button type="submit" class="pure-button pure-button-primary">Delete</button>
 								 </form>
 								 <br/>
@@ -110,11 +111,11 @@
 				
 				<h4>New Product</h4>
 				
-				<input type="text" placeholder="name of product" name="productname">
-				<input type="number"  min="1" placeholder="number of items" name="numberofitems">
-				<input type="number"  min="1" step="0.01" placeholder="price" name="priceofproduct">
+				<input type="text" placeholder="name of product" name="<%=AppRequestAttribute.PRODUCT_NAME%>">
+				<input type="number"  min="1" placeholder="number of items" name="<%=AppRequestAttribute.PRODUCT_NUMBER_OF_ITEMS%>">
+				<input type="number"  min="1" step="0.01" placeholder="price" name="<%=AppRequestAttribute.PRODUCT_PRICE%>">
 				
-				<select name="productType">
+				<select name="<%=AppRequestAttribute.PRODUCT_TYPE_NAME%>">
                     <% 	
   						if( productTypeMap!=null)
   						{
@@ -127,7 +128,7 @@
   					<%} }%>
                     </select>
 				
-				<input type="text" placeholder="link image" name="linkimage">
+				<input type="text" placeholder="link image" name="<%=AppRequestAttribute.PRODUCT_LINK_IMG%>">
 				
 				<button type="submit" class="pure-button pure-button-primary">Add product</button>
 				<button type="reset" class="pure-button pure-button-primary">Rest fields</button>

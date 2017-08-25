@@ -13,10 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.SessionFactory;
+
 import constantPack.AppConstants;
 import constantPack.AppJspPages;
 import constantPack.AppRequestAttribute;
 import dboperations.DB;
+import helperpack.PageHelper;
 import modelMag.Product;
 import modelMag.ProductType;
 import services.AddPrefixAndSufixInterface;
@@ -49,27 +52,23 @@ public class ViewProductsClient extends HttpServlet {
 
 		HttpSession theSession = request.getSession(false);
 		if (theSession != null) {
-			GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
+			
+			SessionFactory sessionFactory = DB.getSessionFactory();
+			GeneralServiceInterface<Product> productService = new ProductServiceImplementation();			
+			List<Product> listProduct = productService.getAllItems(sessionFactory);
+			
 			GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
-
-			List<Product> listProduct = productService.getAllItems(DB.getSessionFactory());
-			List<ProductType> listProductType = productTypeService.getAllItems(DB.getSessionFactory());
+			List<ProductType> listProductType = productTypeService.getAllItems(sessionFactory);
 
 			Map<Integer, ProductType> mapProductTypeService = new HashMap<>();
 
 			for (ProductType temp : listProductType) {
 				mapProductTypeService.put(temp.getId(), temp);
 			}
-
-			AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-			String nextPage = AppJspPages.ALL_PRODUCTS_CLIENT;
-			nextPage = addPrefixAndSufix.createPath(nextPage);
-
 			request.setAttribute(AppRequestAttribute.LIST_PRODUCTS, listProduct);
 			request.setAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE, mapProductTypeService);
 
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
-			requestDispatcher.forward(request, response);
+			PageHelper.nextPageJsp(request, response, AppJspPages.ALL_PRODUCTS_CLIENT);
 		} else {
 				System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}

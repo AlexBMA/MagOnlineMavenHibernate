@@ -7,4 +7,5 @@ public class AppServletsName {
 	
 	public final static String VIEW_ALL_PRODUCT_TYPE_SERVLET ="ViewAllProductTypeServlet";
 	public final static String VIEW_ALL_PRODUCT_SERVLET="ViewAllProductsServlet";
+																											
 }

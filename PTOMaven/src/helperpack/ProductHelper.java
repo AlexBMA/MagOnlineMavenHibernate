@@ -1,6 +1,8 @@
 package helperpack;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -104,5 +106,25 @@ public class ProductHelper {
 			}
 		}
 		return idProductType;
+	}
+	
+	public static void getAndPutDataInRequest(HttpServletRequest request) {
+		SessionFactory sessionFactory = DB.getSessionFactory();
+		
+		GeneralServiceInterface<Product> operationProduct = new ProductServiceImplementation();
+		List<Product> listProduct = operationProduct.getAllItems(sessionFactory);
+		
+		GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
+		List<ProductType> listProductType = operationProductType.getAllItems(sessionFactory);
+		
+		Map<Integer,ProductType> mapOfProductType = new HashMap<>();
+		
+		for( ProductType p :listProductType)
+		{
+			mapOfProductType.put(p.getId(), p);
+		}
+		
+		request.setAttribute(AppRequestAttribute.LIST_PRODUCTS, listProduct);
+		request.setAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE,mapOfProductType);
 	}
 }

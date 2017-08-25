@@ -1,3 +1,5 @@
+<%@page import="constantPack.AppRequestAttribute"%>
+<%@page import="constantPack.AppSessionAttributes"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
@@ -20,7 +22,7 @@
 
 			<h3>
 				Welcome admin
-				<%=session.getAttribute("userName")%></h3>
+				<%=session.getAttribute(AppSessionAttributes.USERNAME)%></h3>
 
 			<nav>
 				<ul class="pure-menu-list">
@@ -64,12 +66,12 @@
 		<br/>
 		<main> 
 		<%
-			ProductType temp = (ProductType)request.getAttribute("producttype");
+			ProductType temp = (ProductType)request.getAttribute(AppRequestAttribute.PRODUCT_TYPE_TEMP);
 		%>
 			<form action="${pageContext.request.contextPath}/SaveEditProductTypeServlet" method="post">
-				<input type="number" readonly value="<%=temp.getId() %>" name="idproducttype" hidden>
+				<input type="number" readonly value="<%=temp.getId() %>" name="<%=AppRequestAttribute.PRODUCT_TYPE_ID %>" hidden>
 				<br/>
-				<input type="text" value="<%=temp.getProductTypeName() %>" name="nameofproducttype" size="20">
+				<input type="text" value="<%=temp.getProductTypeName() %>" name="<%=AppRequestAttribute.PRODUCT_TYPE_NAME %>" size="20">
 				<button type="submit">Save edit</button>
 			</form>
 

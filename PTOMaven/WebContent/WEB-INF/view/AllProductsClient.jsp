@@ -18,11 +18,10 @@
 	<div id="container">
 
 		<header id="header">
-			<h2>Welcome <%=session.getAttribute("userName")%></h2>
+			<h2>Welcome <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h2>
 			<nav>
 				<ul class="pure-menu-list">
 					
-
 					<li class="pure-menu-item">
 						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get" class="pure-form">
 							<button type="submit" class="pure-button pure-button-primary">View products</button>
@@ -102,7 +101,7 @@
 					<td>
 						<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post" class="pure-form">
 							<input type="text" readonly value="<%=temp.getId()%>"
-								name="indexofproduct" hidden>
+								name="<%=AppRequestAttribute.ID_PRODUCT %>" hidden>
 							<button type="submit" class="pure-button pure-button-primary">Add in cart</button>
 						</form><br/>
 						<form action="${pageContext.request.contextPath}/ViewDetailsProductClient" method="post" class="pure-form">

@@ -3,6 +3,7 @@ package servlets.product;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,9 +60,10 @@ public class SaveEditProductServlet extends HttpServlet {
 		HttpSession theSession = request.getSession(false);
 		if (theSession != null) {
 			ProductHelper.updateProduct(request);
-
-			PageHelper.nextPageServlet(request, response, AppServletsName.VIEW_ALL_PRODUCT_SERVLET);
-			System.out.println("done with edit");
+			
+			ProductHelper.getAndPutDataInRequest(request);
+			PageHelper.nextPageJsp(request, response, AppJspPages.ALL_PRODUCT_ADMIN);
+			
 		}else {
 			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}

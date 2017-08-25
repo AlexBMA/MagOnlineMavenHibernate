@@ -14,6 +14,7 @@ import constantPack.AppConstants;
 import constantPack.AppRequestAttribute;
 import constantPack.AppServletsName;
 import constantPack.AppSessionAttributes;
+import helperpack.PageHelper;
 import modelMag.Cart;
 import modelMag.Product;
 import services.AddInCartInterface;
@@ -61,9 +62,7 @@ public class DeleteProductFromCartServlet extends HttpServlet {
 			AddInCartInterface<Product, Cart> addInCartProduct = new AddInCartImplementation();
 			addInCartProduct.calculateTotalPriceForCart(theCart);
 
-			RequestDispatcher requestDispatcher = request
-					.getRequestDispatcher(AppServletsName.VIEW_CART_CLIENT_SERVLET);
-			requestDispatcher.forward(request, response);
+			PageHelper.nextPageServlet(request, response, AppServletsName.VIEW_CART_CLIENT_SERVLET);
 		}else {
 			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}

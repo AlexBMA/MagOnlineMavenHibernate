@@ -1,3 +1,5 @@
+<%@page import="constantPack.AppRequestAttribute"%>
+<%@page import="constantPack.AppSessionAttributes"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -18,7 +20,7 @@
 	
 		<header id="header">
 			
-			<h3>Welcome admin <%=session.getAttribute("userName")%></h3>
+			<h3>Welcome admin <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h3>
 			
 			<nav>
 				<ul class="pure-menu-list">
@@ -63,7 +65,7 @@
 		<main>
 			
 			<%
-				List<ProductType> listProductType = (List)request.getAttribute("listproducttype");
+				List<ProductType> listProductType = (List)request.getAttribute(AppRequestAttribute.LIST_PRODUCT_TYPE);
 			%>
 			<table  class="pure-table pure-table-horizontal">
 			
@@ -82,15 +84,15 @@
 						<td><%=temp.getProductTypeName() %> </td>
 						<td>
 							<form action="${pageContext.request.contextPath}/EditProductTypeServlet" method="post" class="pure-form">
-								<input type="number" value="<%=temp.getId() %>" name="idproduct" hidden>
+								<input type="number" value="<%=temp.getId() %>" name="<%=AppRequestAttribute.PRODUCT_TYPE_ID%>" hidden>
 								<button type="submit" class="pure-button pure-button-primary">Edit</button>
 							</form>
-							<!-- 
+							
 							<form action="${pageContext.request.contextPath}/DeleteProductTypeServlet" method="post">
-								<input type="number" value="<%=temp.getId() %>" name="idproduct">
+								<input type="number" value="<%=temp.getId() %>" name="<%=AppRequestAttribute.PRODUCT_TYPE_ID%>">
 								<button type="submit">Delete</button>
 							</form>
-							 -->
+							 
 						</td>
 					</tr>
 					<%} %>
@@ -103,7 +105,7 @@
 			
 			<form action="${pageContext.request.contextPath}/AddProductTypeServlet" method="post" class="pure-form">
 				<h4>Add new product type</h4>
-				<input type="text" placeholder="name of product type" name="nameofproducttype">
+				<input type="text" placeholder="name of product type" name="<%=AppRequestAttribute.PRODUCT_TYPE_NAME%>">
 				
 				<button type="submit" class="pure-button pure-button-primary">Add product type</button>
 				<button type="reset" class="pure-button pure-button-primary">Reset field</button>

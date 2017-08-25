@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.SessionFactory;
 
 import constantPack.AppConstants;
+import constantPack.AppJspPages;
 import constantPack.AppRequestAttribute;
 import constantPack.AppServletsName;
 import dboperations.DB;
@@ -56,8 +57,8 @@ public class AddProductServlet extends HttpServlet {
 		HttpSession theSession = request.getSession(false);
 		if(theSession!=null){
 			ProductHelper.insertProduct(request);
-			PageHelper.nextPageServlet(request, response, AppServletsName.VIEW_ALL_PRODUCT_SERVLET);
-			System.out.println("##$$ add product");
+			ProductHelper.getAndPutDataInRequest(request);
+			PageHelper.nextPageJsp(request, response, AppJspPages.ALL_PRODUCT_ADMIN);
 		}else {
 			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}

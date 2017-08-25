@@ -32,6 +32,7 @@ public final class AppRequestAttribute {
 	public static final String TEMP_PRODUCT_TYPE ="tempproducttype";
 	public static final String PRODUCT_TYPE_ID ="producttypeid";
 	public static final String PRODUCT_TYPE_NAME = "producttypename";
+	public static final String PRODUCT_TYPE_TEMP="producttypetemp";
 	
 	public static final String MSG ="msg";
 	

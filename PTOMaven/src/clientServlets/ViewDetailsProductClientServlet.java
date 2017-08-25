@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.SessionFactory;
+
 import constantPack.AppConstants;
 import constantPack.AppJspPages;
 import constantPack.AppRequestAttribute;
 import dboperations.DB;
+import helperpack.PageHelper;
 import modelMag.Product;
 import services.AddPrefixAndSufixInterface;
 import services.GeneralServiceInterface;
@@ -41,7 +44,7 @@ public class ViewDetailsProductClientServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -50,20 +53,20 @@ public class ViewDetailsProductClientServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession theSession = request.getSession(false);
-		if(theSession!=null)
-		{
-			int indexProduct = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT).trim());
-			GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
+		if(theSession!=null){
 			
-			Product tempProduct = productService.getItem(indexProduct, DB.getSessionFactory());
-			List<Product> listRecommendation  =productService.getRecommendedItems(DB.getSessionFactory(), tempProduct.getProductTypeId());
-
-			AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+			int idProduct = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT).trim());
 		
+			SessionFactory sessionFactory = DB.getSessionFactory();
+			GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
+			Product tempProduct = productService.getItem(idProduct, sessionFactory);
+			List<Product> listRecommendation  =productService.getRecommendedItems(sessionFactory, tempProduct.getProductTypeId());
+			
 			request.setAttribute(AppRequestAttribute.PRODUCT_TEMP,tempProduct);
 			request.setAttribute(AppRequestAttribute.LIST_OF_RECOMMENDED, listRecommendation);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher(addPrefixAndSufix.createPath(AppJspPages.VIEW_DETAILS_CLIENT));
-			requestDispatcher.forward(request, response);
+		
+			PageHelper.nextPageJsp(request, response, AppJspPages.VIEW_DETAILS_CLIENT);
+			
 		}else {
 			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}

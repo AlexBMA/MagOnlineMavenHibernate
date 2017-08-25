@@ -36,10 +36,7 @@ public class ProductServiceImplementation implements GeneralServiceInterface<Pro
 	@Override
 	public void deleteItem(int id,SessionFactory session) {
 		
-		
 		DBOperations<Product> opProduct = new DBOperationsProduct();
-		
-	
 		opProduct.deleteRow(session, id);
 	}
 

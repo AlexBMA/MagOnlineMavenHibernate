@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import constantPack.AppConstants;
 import constantPack.AppJspPages;
 import constantPack.AppSessionAttributes;
+import helperpack.PageHelper;
 import modelMag.Cart;
 import modelMag.Product;
 import services.AddInCartInterface;
@@ -44,20 +45,12 @@ public class ViewCartClientServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		HttpSession theSession = request.getSession(false);
-
-		if(theSession!=null)
-		{
+		if(theSession!=null){
 			Cart theCart = (Cart) theSession.getAttribute(AppSessionAttributes.CART);
 			AddInCartInterface<Product, Cart> addInCart = new AddInCartImplementation();
 			addInCart.calculateTotalPriceForCart(theCart);
 
-			AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-
-			//String nextPage = "ViewCart";
-			String  nextPage = addPrefixAndSufix.createPath(AppJspPages.VIEW_CART);
-
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
-			requestDispatcher.forward(request, response);
+			PageHelper.nextPageJsp(request, response, AppJspPages.VIEW_CART);
 		}else {
 			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}

@@ -2,7 +2,6 @@ package servlets.login;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,13 +11,12 @@ import javax.servlet.http.HttpSession;
 
 import constantPack.AppConstants;
 import constantPack.AppJspPages;
+import constantPack.AppRedirectPages;
 import constantPack.AppRequestAttribute;
 import constantPack.AppSessionAttributes;
 import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.Cart;
-import services.AddPrefixAndSufixInterface;
-import serviciesImpl.AddPrefixAndSufixImplementation;
 import serviciesImpl.LoginServiceImplementation;
 
 /**
@@ -80,9 +78,7 @@ public class LoginServlet extends HttpServlet {
 			//requestDispatcher.forward(request, response);
 
 		} else {
-			
-			String NEXT_PAGE="index.jsp";
-			response.sendRedirect(NEXT_PAGE);
+			PageHelper.nextRedirect(response, AppRedirectPages.INDEX);
 		}
 
 	}

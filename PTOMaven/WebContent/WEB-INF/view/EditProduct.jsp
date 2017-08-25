@@ -1,3 +1,5 @@
+<%@page import="constantPack.AppSessionAttributes"%>
+<%@page import="constantPack.AppRequestAttribute"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
@@ -19,7 +21,7 @@
 	
 		<header id="header">
 			
-			<h3>Welcome admin <%=session.getAttribute("userName")%></h3>
+			<h3>Welcome admin <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h3>
 			
 			<nav>
 				<ul class="pure-menu-list">
@@ -64,8 +66,8 @@
 		<br/>
 		<main>
 			<% 
-				Product productLocal = (Product)request.getAttribute("productlocal"); 
-				Map<Integer,ProductType> productTypeMap= (Map)request.getAttribute("mapproducttype");
+				Product productLocal = (Product)request.getAttribute(AppRequestAttribute.PRODUCT_TEMP); 
+				Map<Integer,ProductType> productTypeMap= (Map)request.getAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE);
 			%>
 			
 			<form action="${pageContext.request.contextPath}/SaveEditServlet" method="post" class="pure-form pure-form-aligned">
@@ -73,30 +75,28 @@
 				<h4>Edit Product</h4>
 				 <fieldset>
 				
-				<input type="number" name="indexproduct" value="<%=productLocal.getId() %>" readonly hidden>
+				<input type="number" required="required" name="<%=AppRequestAttribute.ID_PRODUCT %>" value="<%=productLocal.getId() %>" readonly hidden>
 				<br/>
 				<div class="pure-control-group">
 				<label>Product name: </label>
-				<input type="text"  name="productname" value="<%=productLocal.getName() %>" >
+				<input type="text" required="required"name="<%=AppRequestAttribute.PRODUCT_NAME %>" value="<%=productLocal.getName() %>" >
 				</div>
 				<br/>
 				<div class="pure-control-group">
 				<label>Number of items: </label>
-				<input type="number"  min="1"  name="numberofitems" value="<%=productLocal.getNumberOfItems() %>" size="4">
+				<input type="number"  required="required" min="1"  name="<%=AppRequestAttribute.PRODUCT_NUMBER_OF_ITEMS %>" value="<%=productLocal.getNumberOfItems() %>" size="4">
 				</div>
 				<br/>
 				<div class="pure-control-group">
 				<label>Price: </label>
-				<input type="number"  min="1"  step="0.01" name="priceofproduct" value="<%=productLocal.getPrice() %>" size="7">
+				<input type="number" required="required" min="1"  step="0.01" name="<%=AppRequestAttribute.PRODUCT_PRICE %>" value="<%=productLocal.getPrice() %>" size="7">
 				</div>
 				<br/>
 				<div class="pure-control-group">
 				<label>Product type: </label>
-				<select name="producttype" required>
+				<select name="<%=AppRequestAttribute.PRODUCT_TYPE_NAME %>" required>
                     <% 	
-  						if( productTypeMap!=null)
-  						{
-  							
+  						if( productTypeMap!=null){
   							Set<Integer> keySet = productTypeMap.keySet();
   							for(Integer key: keySet){
   					%>
@@ -113,12 +113,11 @@
 				<br/>
 				<div class="pure-control-group">
 				<label>Image link</label>
-				<input type="text" name="linkimage" value="<%=productLocal.getLinkImg() %>" size="35">
+				<input type="text" name="<%=AppRequestAttribute.PRODUCT_LINK_IMG%>" value="<%=productLocal.getLinkImg() %>" size="35">
 				<br/>
 				<button type="submit" class="pure-button pure-button-primary">Save edit </button>
 				<button type="reset" class="pure-button pure-button-primary">Reset fields</button>
 				</div>
-				
 				
 				
 				 </fieldset>
