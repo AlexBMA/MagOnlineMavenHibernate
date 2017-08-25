@@ -3,18 +3,20 @@ package servlets.productType;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import constantPack.AppConstants;
+import constantPack.AppJspPages;
+import constantPack.AppRequestAttribute;
 import dboperations.DB;
+import helperpack.PageHelper;
 import modelMag.ProductType;
-import services.AddPrefixAndSufixInterface;
 import services.GeneralServiceInterface;
-import serviciesImpl.AddPrefixAndSufixImplementation;
 import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
@@ -46,17 +48,19 @@ public class ViewAllProductTypeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
-		List<ProductType> listProductType = operationProductType.getAllItems(DB.getSessionFactory());
-		
-		String nextPage="AllProductType";
-		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-		nextPage = addPrefixAndSufix.createPath(nextPage);
-		
-		request.setAttribute("listproducttype", listProductType);
-		RequestDispatcher requestDispacher = request.getRequestDispatcher(nextPage);
-		requestDispacher.forward(request, response);
-		
+		HttpSession theSession = request.getSession(false);
+		if(theSession!=null){
+			
+			GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
+			List<ProductType> listProductType = operationProductType.getAllItems(DB.getSessionFactory());
+			
+			request.setAttribute(AppRequestAttribute.LIST_PRODUCT_TYPE, listProductType);
+			PageHelper.nextPageJsp(request, response, AppJspPages.ALL_PRODUCT_TYPE);
+			
+		}else {
+			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
+		}
+	
 	}
 
 }

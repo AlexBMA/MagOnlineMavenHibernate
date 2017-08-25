@@ -2,14 +2,20 @@ package servlets.productType;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.hibernate.SessionFactory;
+
+import constantPack.AppConstants;
+import constantPack.AppJspPages;
+import constantPack.AppRequestAttribute;
 import dboperations.DB;
+import helperpack.PageHelper;
 import modelMag.ProductType;
 import services.GeneralServiceInterface;
 import serviciesImpl.ProductTypeServiceImplementation;
@@ -40,22 +46,25 @@ public class SaveEditProductTypeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		HttpSession theSession = request.getSession(false);
 		
-		int indexProductType = Integer.parseInt(request.getParameter("idproducttype").trim());
-		String productTypeName = request.getParameter("nameofproducttype").trim();
-		
-		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
-		
-		ProductType temp = productTypeService.getItem(indexProductType, DB.getSessionFactory());
-		temp.setProductTypeName(productTypeName);
-		productTypeService.insertItem(temp, DB.getSessionFactory());
-		
-		
-		String nextPage = "ViewAllProductTypeServlet";
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
-		requestDispatcher.forward(request, response);
-		
+		if(theSession!=null){
+			int indexProductType = Integer.parseInt(request.getParameter(AppRequestAttribute.PRODUCT_TYPE_ID).trim());
+			String productTypeName = request.getParameter(AppRequestAttribute.PRODUCT_TYPE_NAME).trim();
+			
+			SessionFactory sessionFactory = DB.getSessionFactory();
+			GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
+			
+			ProductType temp = productTypeService.getItem(indexProductType, sessionFactory);
+			temp.setProductTypeName(productTypeName);
+			productTypeService.insertItem(temp, sessionFactory);
+			
+			PageHelper.nextPageServlet(request, response,AppJspPages.VIEW_ALL_PRODUCT_TYPE_SERVLET);
+			
+		}else {
+			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
+		}
 		
 	}
 

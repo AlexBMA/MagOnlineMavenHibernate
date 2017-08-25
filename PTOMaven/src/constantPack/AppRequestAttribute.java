@@ -23,6 +23,11 @@ public final class AppRequestAttribute {
 	public static final String NUMBER_OF_ITEMS ="numberofitems";
 	public static final String INDEX_OF_PRODUCT ="indexofproduct";
 	
+	public static final String LIST_PRODUCT_TYPE="listproducttype";
+	public static final String TEMP_PRODUCT_TYPE ="tempproducttype";
+	public static final String PRODUCT_TYPE_ID ="producttypeid";
+	public static final String PRODUCT_TYPE_NAME = "producttypename";
+	
 	public static final String MSG ="msg";
 	
 }

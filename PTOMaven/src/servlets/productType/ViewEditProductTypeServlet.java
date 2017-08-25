@@ -2,7 +2,6 @@ package servlets.productType;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,12 +11,13 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.SessionFactory;
 
+import constantPack.AppConstants;
+import constantPack.AppJspPages;
+import constantPack.AppRequestAttribute;
 import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.ProductType;
-import services.AddPrefixAndSufixInterface;
 import services.GeneralServiceInterface;
-import serviciesImpl.AddPrefixAndSufixImplementation;
 import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
@@ -39,23 +39,20 @@ public class ViewEditProductTypeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 		HttpSession theSession = request.getSession(false);
-		if(theSession!=null)
-		{
-			int indexOfProductType = Integer.parseInt(request.getParameter("idproduct"));
+		if(theSession!=null){
+			int indexOfProductType = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT));
 			SessionFactory sessionFactory =  DB.getSessionFactory();
 			
 			GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
 			ProductType temp = productTypeService.getItem(indexOfProductType, sessionFactory);
 			
-			String nextPage="EditProductType";
-			request.setAttribute("producttype", temp);
-			PageHelper.nextPage(request, response, nextPage);
+			request.setAttribute(AppRequestAttribute.TEMP_PRODUCT_TYPE, temp);
+			PageHelper.nextPageJsp(request, response, AppJspPages.EDIT_PRODUCT_TYPE);
 			
 		} else {
 			
-			System.out.println("");
+			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}
 		
 	}
