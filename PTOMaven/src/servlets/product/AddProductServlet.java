@@ -9,8 +9,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.hibernate.SessionFactory;
+
+import constantPack.AppConstants;
+import constantPack.AppRequestAttribute;
+import constantPack.AppServletsName;
 import dboperations.DB;
+import helperpack.PageHelper;
+import helperpack.ProductHelper;
 import modelMag.Product;
 import modelMag.ProductType;
 import services.GeneralServiceInterface;
@@ -45,47 +53,16 @@ public class AddProductServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		int numberOfItems = Integer.parseInt(request.getParameter("numberofitems").trim());
-		double priceOfItem = Double.parseDouble(request.getParameter("priceofproduct").trim());
-		
-		String productName = request.getParameter("productname").trim();
-		String productTypeName = request.getParameter("productType").trim();
-		String linkImage = request.getParameter("linkimage").trim();
-		
-		int indexProductType=0;
-		
-		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
-		
-		List<ProductType>  productTypeList= productTypeService.getAllItems(DB.getSessionFactory());
-		
-		for(ProductType temp: productTypeList)
-		{
-			if(temp.getProductTypeName().equals(productTypeName))
-			{
-				indexProductType = temp.getId();
-				break;
-			}
+		HttpSession theSession = request.getSession(false);
+		if(theSession!=null){
+			ProductHelper.insertProduct(request);
+			PageHelper.nextPageServlet(request, response, AppServletsName.VIEW_ALL_PRODUCT_SERVLET);
+			System.out.println("##$$ add product");
+		}else {
+			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}
-		
-		Product tempProduct = new Product();
-		tempProduct.setLinkImg(linkImage);
-		tempProduct.setPrice(priceOfItem);
-		tempProduct.setNumberOfItmes(numberOfItems);
-		tempProduct.setProductTypeId(indexProductType);
-		tempProduct.setName(productName);
-		
-		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
-		
-		productService.insertItem(tempProduct, DB.getSessionFactory());
-		
-		String nextPage="ViewAllProductsServlet";
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
-		requestDispatcher.forward(request, response);
-		
-		System.out.println("##$$ add product");
-		
+				
 	}
 
+	
 }

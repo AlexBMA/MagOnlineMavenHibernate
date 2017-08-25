@@ -11,8 +11,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.hibernate.SessionFactory;
+
+import constantPack.AppJspPages;
+import constantPack.AppRequestAttribute;
 import dboperations.DB;
+import helperpack.PageHelper;
 import modelMag.Product;
 import modelMag.ProductType;
 import services.AddPrefixAndSufixInterface;
@@ -41,42 +47,32 @@ public class ViewEditProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		int indexProduct = Integer.parseInt(request.getParameter("idproduct"));
-		
-		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-		
-		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
-		
-		GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
-		
-		List<ProductType> listProductType = operationProductType.getAllItems(DB.getSessionFactory());
-		
-		Map<Integer,ProductType> mapOfProductType = new HashMap<>();
-		
-		for( ProductType p :listProductType)
-		{
-			mapOfProductType.put(p.getId(), p);
-		}
-		
-		System.out.println(indexProduct);
+		HttpSession theSession = request.getSession(false);
+		if(theSession!=null){
+			int indexProduct = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT));
 			
-		Product productLocal = productService.getItem(indexProduct, DB.getSessionFactory());
-		
-		
-		System.out.println(productLocal.getName() +"%%%%%%%%%%%%%%%%%%");
-		
-		
-		String nextPage="EditProduct";
-		nextPage = addPrefixAndSufix.createPath(nextPage);
-		
-		RequestDispatcher requestDispacher = request.getRequestDispatcher(nextPage);
-		
-		request.setAttribute("productlocal", productLocal);
-		request.setAttribute("mapproducttype", mapOfProductType);
-		
-		requestDispacher.forward(request, response);
-		
+			SessionFactory sessionFactory = DB.getSessionFactory();
+			GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
+			List<ProductType> listProductType = operationProductType.getAllItems(sessionFactory);
+			
+			Map<Integer,ProductType> mapOfProductType = new HashMap<>();
+			for( ProductType p :listProductType){
+				mapOfProductType.put(p.getId(), p);
+			}
+
+			System.out.println(indexProduct);
+			
+			GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
+			Product productTemp = productService.getItem(indexProduct, sessionFactory);
+			
+			System.out.println(productTemp.getName() +"%%%%%%%%%%%%%%%%%%");
+			
+			request.setAttribute(AppRequestAttribute.PRODUCT_TEMP, productTemp);
+			request.setAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE, mapOfProductType);
+			//request.setAttribute("mapproducttype", mapOfProductType);
+			
+			PageHelper.nextPageJsp(request, response, AppJspPages.EDIT_PRODUCT);
+		}
 	}
 
 	/**
@@ -84,7 +80,7 @@ public class ViewEditProductServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }

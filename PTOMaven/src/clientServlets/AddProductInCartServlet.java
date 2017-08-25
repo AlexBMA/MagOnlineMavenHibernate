@@ -56,8 +56,8 @@ public class AddProductInCartServlet extends HttpServlet {
 		{
 			int numberOfItems =1;
 			
-			if(request.getParameter(AppRequestAttribute.NUMBER_OF_ITEMS)!=null){
-				numberOfItems = Integer.parseInt(request.getParameter(AppRequestAttribute.NUMBER_OF_ITEMS).trim());
+			if(request.getParameter(AppRequestAttribute.PRODUCT_NUMBER_OF_ITEMS)!=null){
+				numberOfItems = Integer.parseInt(request.getParameter(AppRequestAttribute.PRODUCT_NUMBER_OF_ITEMS).trim());
 			}
 			
 			int indexOfItem = Integer.parseInt(request.getParameter(AppRequestAttribute.INDEX_OF_PRODUCT).trim());

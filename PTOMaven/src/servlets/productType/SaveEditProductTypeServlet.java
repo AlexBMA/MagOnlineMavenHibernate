@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.SessionFactory;
 
 import constantPack.AppConstants;
-import constantPack.AppJspPages;
 import constantPack.AppRequestAttribute;
+import constantPack.AppServletsName;
 import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.ProductType;
@@ -48,8 +48,8 @@ public class SaveEditProductTypeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		HttpSession theSession = request.getSession(false);
-		
 		if(theSession!=null){
+			
 			int indexProductType = Integer.parseInt(request.getParameter(AppRequestAttribute.PRODUCT_TYPE_ID).trim());
 			String productTypeName = request.getParameter(AppRequestAttribute.PRODUCT_TYPE_NAME).trim();
 			
@@ -60,7 +60,7 @@ public class SaveEditProductTypeServlet extends HttpServlet {
 			temp.setProductTypeName(productTypeName);
 			productTypeService.insertItem(temp, sessionFactory);
 			
-			PageHelper.nextPageServlet(request, response,AppJspPages.VIEW_ALL_PRODUCT_TYPE_SERVLET);
+			PageHelper.nextPageServlet(request, response,AppServletsName.VIEW_ALL_PRODUCT_TYPE_SERVLET);
 			
 		}else {
 			System.out.println(AppConstants.SESSION_HAS_EXPIRED);

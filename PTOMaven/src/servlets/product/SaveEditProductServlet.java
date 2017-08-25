@@ -3,14 +3,22 @@ package servlets.product;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.hibernate.SessionFactory;
+
+import constantPack.AppConstants;
+import constantPack.AppJspPages;
+import constantPack.AppRequestAttribute;
+import constantPack.AppServletsName;
 import dboperations.DB;
+import helperpack.PageHelper;
+import helperpack.ProductHelper;
 import modelMag.Product;
 import modelMag.ProductType;
 import services.GeneralServiceInterface;
@@ -48,52 +56,17 @@ public class SaveEditProductServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println(request.getParameter("indexproduct"));
-		int productIndex = Integer.parseInt(request.getParameter("indexproduct").toString().trim());
-		
+		HttpSession theSession = request.getSession(false);
+		if (theSession != null) {
+			ProductHelper.updateProduct(request);
 
-		String productName = request.getParameter("productname").trim();
-		String productTypeName = request.getParameter("producttype").trim();
-		String linkImage = request.getParameter("linkimage").trim();
-		
-		int numberOfItems = Integer.parseInt(request.getParameter("numberofitems").trim());
-		double priceOfItem = Double.parseDouble(request.getParameter("priceofproduct").trim());
-		
-		System.out.println("## "+request.getParameter("numberofitems").trim());
-		System.out.println("### "+request.getParameter("priceofproduct").trim());
-
-		int indexProductType = 0;
-
-		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
-
-		List<ProductType> productTypeList = productTypeService.getAllItems(DB.getSessionFactory());
-
-		for (ProductType temp : productTypeList) {
-			if (temp.getProductTypeName().equals(productTypeName)) {
-				indexProductType = temp.getId();
-				break;
-			}
+			PageHelper.nextPageServlet(request, response, AppServletsName.VIEW_ALL_PRODUCT_SERVLET);
+			System.out.println("done with edit");
+		}else {
+			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}
-		
-		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
-		
-		Product tempProduct = productService.getItem(productIndex, DB.getSessionFactory());
-		tempProduct.setLinkImg(linkImage);
-		tempProduct.setPrice(priceOfItem);
-		tempProduct.setNumberOfItmes(numberOfItems);
-		tempProduct.setProductTypeId(indexProductType);
-		tempProduct.setName(productName);
-		
-		
-		
-		productService.insertItem(tempProduct, DB.getSessionFactory());
-		
-		String nextPage="ViewAllProductsServlet";
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
-		requestDispatcher.forward(request, response);
-		
-		System.out.println("done with edit");
 	}
+
+
 
 }

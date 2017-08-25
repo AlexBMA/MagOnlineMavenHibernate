@@ -5,10 +5,30 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import constantPack.AppTables;
 import modelMag.ProductType;
 
 public class DBOperationProductType implements DBOperations<ProductType> {
 
+	public void getA(SessionFactory theSessionFactory, String name){
+		
+		// get the session
+		Session theSession = theSessionFactory.getCurrentSession();
+
+		// begin transaction
+		theSession.beginTransaction();
+		
+		String hql = "from ProductType";
+		//List<ProductType> theList = theSession.createQuery(hql).getResultList();
+		
+		// commit the operation
+		theSession.getTransaction().commit();
+
+		// close the session
+		theSession.close();
+
+	}
+	
 	@Override
 	public void insert(SessionFactory theSessionFactory, ProductType ob) {
 
@@ -58,7 +78,7 @@ public class DBOperationProductType implements DBOperations<ProductType> {
 		// begin transaction
 		theSession.beginTransaction();
 
-		String hql = "from ProductType";
+		String hql = "from ProductType"+AppTables.ProductTypeEntry.TABLE_NAME;
 
 		List<ProductType> theList = theSession.createQuery(hql).getResultList();
 

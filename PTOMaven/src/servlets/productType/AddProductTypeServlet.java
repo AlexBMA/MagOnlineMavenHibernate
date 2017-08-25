@@ -2,7 +2,6 @@ package servlets.productType;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import constantPack.AppConstants;
-import constantPack.AppJspPages;
 import constantPack.AppRequestAttribute;
+import constantPack.AppServletsName;
 import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.ProductType;
@@ -55,7 +54,7 @@ public class AddProductTypeServlet extends HttpServlet {
 			ProductType temp = new ProductType(nameProductType);
 			productTypeService.insertItem(temp, DB.getSessionFactory());
 			
-			PageHelper.nextPageServlet(request, response, AppJspPages.VIEW_ALL_PRODUCT_TYPE_SERVLET);
+			PageHelper.nextPageServlet(request, response, AppServletsName.VIEW_ALL_PRODUCT_TYPE_SERVLET);
 		}else {
 			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}

@@ -50,52 +50,36 @@ public class Product  {
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public int getNumberOfItems() {
 		return numberOfItems;
 	}
-
 	public void setNumberOfItmes(int quantity) {
 		this.numberOfItems = quantity;
 	}
-
 	public double getPrice() {
 		return price;
 	}
-
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
-	
-
 	public int getProductTypeId() {
 		return productTypeId;
 	}
-
 	public void setProductTypeId(int productTypeId) {
 		this.productTypeId = productTypeId;
 	}
-
-
-
-
 	public String getLinkImg() {
 		return linkImg;
 	}
-
 	public void setLinkImg(String linkImg) {
 		this.linkImg = linkImg;
 	}
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}

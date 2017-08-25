@@ -5,19 +5,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.hibernate.SessionFactory;
+
+import constantPack.AppConstants;
+import constantPack.AppJspPages;
+import constantPack.AppRequestAttribute;
 import dboperations.DB;
+import helperpack.PageHelper;
 import modelMag.Product;
 import modelMag.ProductType;
-import services.AddPrefixAndSufixInterface;
 import services.GeneralServiceInterface;
-import serviciesImpl.AddPrefixAndSufixImplementation;
 import serviciesImpl.ProductServiceImplementation;
 import serviciesImpl.ProductTypeServiceImplementation;
 
@@ -43,32 +47,31 @@ public class ViewAllProductsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: $$ ").append(request.getContextPath());
 		
-		GeneralServiceInterface<Product> operationProduct = new ProductServiceImplementation();
-		
-		GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
-		
-		List<Product> listProduct = operationProduct.getAllItems(DB.getSessionFactory());
-		
-		List<ProductType> listProductType = operationProductType.getAllItems(DB.getSessionFactory());
-		
-		Map<Integer,ProductType> mapOfProductType = new HashMap<>();
-		
-		for( ProductType p :listProductType)
-		{
-			mapOfProductType.put(p.getId(), p);
+		HttpSession theSession = request.getSession(false);
+		if(theSession!=null){
+			SessionFactory sessionFactory = DB.getSessionFactory();
+			
+			GeneralServiceInterface<Product> operationProduct = new ProductServiceImplementation();
+			List<Product> listProduct = operationProduct.getAllItems(sessionFactory);
+			
+			GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
+			List<ProductType> listProductType = operationProductType.getAllItems(sessionFactory);
+			
+			Map<Integer,ProductType> mapOfProductType = new HashMap<>();
+			
+			for( ProductType p :listProductType)
+			{
+				mapOfProductType.put(p.getId(), p);
+			}
+			
+			request.setAttribute(AppRequestAttribute.LIST_PRODUCTS, listProduct);
+			request.setAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE,mapOfProductType);
+			
+			PageHelper.nextPageJsp(request, response, AppJspPages.ALL_PRODUCT_ADMIN);
+			
+		}else {
+			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}
-		
-		
-		
-		String nextPage="AllProducts";
-		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-		nextPage = addPrefixAndSufix.createPath(nextPage);
-		
-		request.setAttribute("listproduct", listProduct);
-		request.setAttribute("mapproducttype", mapOfProductType);
-		
-		RequestDispatcher requestDispacher = request.getRequestDispatcher(nextPage);
-		requestDispacher.forward(request, response);
 		
 	}
 

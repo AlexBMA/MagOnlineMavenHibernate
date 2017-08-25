@@ -16,11 +16,16 @@ public final class AppRequestAttribute {
 	public static final String MAP_PRODUCT_TYPE="mapproducttype";
 	
 	public static final String ID_PRODUCT = "idproduct";
+	public static final String PRODUCT_NAME= "productname";
+	public static final String PRODUCT_LINK_IMG= "productlinkimg";
+	public static final String PRODUCT_NUMBER_OF_ITEMS ="numberofitems";
+	public static final String PRODUCT_PRICE ="productprice";
+	
 	public static final String PRODUCT_TEMP = "product";
-	public static final String LIST_OF_RECOMMENDED="listofrecommended";
+	public static final String LIST_OF_RECOMMENDED= "listofrecommended";
 
 	
-	public static final String NUMBER_OF_ITEMS ="numberofitems";
+	
 	public static final String INDEX_OF_PRODUCT ="indexofproduct";
 	
 	public static final String LIST_PRODUCT_TYPE="listproducttype";
