@@ -1,4 +1,4 @@
-package generalservlets;
+package servlets.login;
 
 import java.io.IOException;
 

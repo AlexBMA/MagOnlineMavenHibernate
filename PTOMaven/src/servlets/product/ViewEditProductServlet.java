@@ -1,4 +1,4 @@
-package adminServlets;
+package servlets.product;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,16 +22,16 @@ import serviciesImpl.ProductServiceImplementation;
 import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
- * Servlet implementation class ViewAllProductsServlet
+ * Servlet implementation class EditProductServlet
  */
-@WebServlet("/ViewAllProductsServlet")
-public class ViewAllProductsServlet extends HttpServlet {
+@WebServlet("/EditProductServlet")
+public class ViewEditProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewAllProductsServlet() {
+    public ViewEditProductServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,13 +41,14 @@ public class ViewAllProductsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: $$ ").append(request.getContextPath());
 		
-		GeneralServiceInterface<Product> operationProduct = new ProductServiceImplementation();
+		int indexProduct = Integer.parseInt(request.getParameter("idproduct"));
+		
+		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+		
+		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
 		
 		GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
-		
-		List<Product> listProduct = operationProduct.getAllItems(DB.getSessionFactory());
 		
 		List<ProductType> listProductType = operationProductType.getAllItems(DB.getSessionFactory());
 		
@@ -58,21 +59,26 @@ public class ViewAllProductsServlet extends HttpServlet {
 			mapOfProductType.put(p.getId(), p);
 		}
 		
+		System.out.println(indexProduct);
+			
+		Product productLocal = productService.getItem(indexProduct, DB.getSessionFactory());
 		
 		
-		String nextPage="AllProducts";
-		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+		System.out.println(productLocal.getName() +"%%%%%%%%%%%%%%%%%%");
+		
+		
+		String nextPage="EditProduct";
 		nextPage = addPrefixAndSufix.createPath(nextPage);
 		
-		request.setAttribute("listproduct", listProduct);
+		RequestDispatcher requestDispacher = request.getRequestDispatcher(nextPage);
+		
+		request.setAttribute("productlocal", productLocal);
 		request.setAttribute("mapproducttype", mapOfProductType);
 		
-		RequestDispatcher requestDispacher = request.getRequestDispatcher(nextPage);
 		requestDispacher.forward(request, response);
 		
 	}
 
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

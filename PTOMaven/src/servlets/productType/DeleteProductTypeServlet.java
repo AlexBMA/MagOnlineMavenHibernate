@@ -1,4 +1,4 @@
-package adminServlets;
+package servlets.productType;
 
 import java.io.IOException;
 
@@ -15,16 +15,16 @@ import services.GeneralServiceInterface;
 import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
- * Servlet implementation class AddProductTypeServlet
+ * Servlet implementation class DeleteProductTypeServlet
  */
-@WebServlet("/AddProductTypeServlet")
-public class AddProductTypeServlet extends HttpServlet {
+@WebServlet("/DeleteProductTypeServlet")
+public class DeleteProductTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddProductTypeServlet() {
+    public DeleteProductTypeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,22 +41,17 @@ public class AddProductTypeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		String nameProductType = request.getParameter("nameofproducttype");
+		int indexProductType = Integer.parseInt(request.getParameter("idproduct"));
 		
 		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
 		
-		ProductType temp = new ProductType(nameProductType);
-		
-		productTypeService.insertItem(temp, DB.getSessionFactory());
+		productTypeService.deleteItem(indexProductType,DB.getSessionFactory());
 		
 		String nextPage="ViewAllProductTypeServlet";
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher( nextPage);
 		
 		requestDispatcher.forward(request, response);
-		
 	}
 
 }

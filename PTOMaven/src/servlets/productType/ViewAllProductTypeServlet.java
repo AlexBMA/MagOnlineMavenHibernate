@@ -1,6 +1,7 @@
-package adminServlets;
+package servlets.productType;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,16 +18,16 @@ import serviciesImpl.AddPrefixAndSufixImplementation;
 import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
- * Servlet implementation class EditProductTypeServlet
+ * Servlet implementation class ViewAllProductTypeServlet
  */
-@WebServlet("/EditProductTypeServlet")
-public class EditProductTypeServlet extends HttpServlet {
+@WebServlet("/ViewAllProductTypeServlet")
+public class ViewAllProductTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditProductTypeServlet() {
+    public ViewAllProductTypeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,21 +36,7 @@ public class EditProductTypeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		int indexOfProductType = Integer.parseInt(request.getParameter("idproduct"));
-		
-		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
-		
-		ProductType temp = productTypeService.getItem(indexOfProductType, DB.getSessionFactory());
-		
-		String nextPage="EditProductType";
-		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-		nextPage  = addPrefixAndSufix.createPath(nextPage);
-		
-		request.setAttribute("producttype", temp);
-		RequestDispatcher requestDispatcher= request.getRequestDispatcher(nextPage);
-		requestDispatcher.forward(request, response);
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -58,7 +45,18 @@ public class EditProductTypeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
+		List<ProductType> listProductType = operationProductType.getAllItems(DB.getSessionFactory());
+		
+		String nextPage="AllProductType";
+		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
+		nextPage = addPrefixAndSufix.createPath(nextPage);
+		
+		request.setAttribute("listproducttype", listProductType);
+		RequestDispatcher requestDispacher = request.getRequestDispatcher(nextPage);
+		requestDispacher.forward(request, response);
+		
 	}
 
 }

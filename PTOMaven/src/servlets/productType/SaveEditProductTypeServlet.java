@@ -1,7 +1,6 @@
-package adminServlets;
+package servlets.productType;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,22 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import dboperations.DB;
 import modelMag.ProductType;
-import services.AddPrefixAndSufixInterface;
 import services.GeneralServiceInterface;
-import serviciesImpl.AddPrefixAndSufixImplementation;
 import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
- * Servlet implementation class ViewAllProductTypeServlet
+ * Servlet implementation class SaveEditProductTypeServlet
  */
-@WebServlet("/ViewAllProductTypeServlet")
-public class ViewAllProductTypeServlet extends HttpServlet {
+@WebServlet("/SaveEditProductTypeServlet")
+public class SaveEditProductTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewAllProductTypeServlet() {
+    public SaveEditProductTypeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +33,6 @@ public class ViewAllProductTypeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -44,18 +40,22 @@ public class ViewAllProductTypeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
-		List<ProductType> listProductType = operationProductType.getAllItems(DB.getSessionFactory());
+		int indexProductType = Integer.parseInt(request.getParameter("idproducttype").trim());
+		String productTypeName = request.getParameter("nameofproducttype").trim();
 		
-		String nextPage="AllProductType";
-		AddPrefixAndSufixInterface addPrefixAndSufix = new AddPrefixAndSufixImplementation();
-		nextPage = addPrefixAndSufix.createPath(nextPage);
+		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
 		
-		request.setAttribute("listproducttype", listProductType);
-		RequestDispatcher requestDispacher = request.getRequestDispatcher(nextPage);
-		requestDispacher.forward(request, response);
+		ProductType temp = productTypeService.getItem(indexProductType, DB.getSessionFactory());
+		temp.setProductTypeName(productTypeName);
+		productTypeService.insertItem(temp, DB.getSessionFactory());
+		
+		
+		String nextPage = "ViewAllProductTypeServlet";
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+		requestDispatcher.forward(request, response);
+		
 		
 	}
 

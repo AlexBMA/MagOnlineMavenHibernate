@@ -1,4 +1,4 @@
-package adminServlets;
+package servlets.product;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,13 +21,13 @@ import serviciesImpl.ProductTypeServiceImplementation;
  * Servlet implementation class SaveEditServlet
  */
 @WebServlet("/SaveEditServlet")
-public class SaveEditServlet extends HttpServlet {
+public class SaveEditProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public SaveEditServlet() {
+	public SaveEditProductServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
