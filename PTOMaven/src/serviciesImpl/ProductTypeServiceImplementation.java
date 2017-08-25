@@ -44,7 +44,6 @@ public class ProductTypeServiceImplementation implements GeneralServiceInterface
 	public void insertItem(ProductType item, SessionFactory session) {
 
 		DBOperations<ProductType> dbOperations = new DBOperationProductType();
-
 		dbOperations.insert(session, item);
 
 	}

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import constantPack.AppRedirectPages;
+import helperpack.PageHelper;
+
 
 
 /**
@@ -34,19 +37,17 @@ public class LogoutServlet extends HttpServlet {
 		System.out.println("here in logout sevlet");
 		HttpSession theSession = request.getSession(false);
 		
-		if(theSession!=null)
-			{	
+		if(theSession!=null){	
 				System.out.println("case 1");
 				theSession.invalidate();
-				String nextPage="index.jsp";
-				response.sendRedirect(nextPage);
+				PageHelper.nextRedirect(response, AppRedirectPages.INDEX);
 			}
 		else {
 			System.out.println("case 2");
 			theSession = request.getSession(true);
 			theSession.invalidate();
-			String nextPage="index.jsp";
-			response.sendRedirect(nextPage);
+			PageHelper.nextRedirect(response, AppRedirectPages.INDEX);
+			
 		}
 		
 	}

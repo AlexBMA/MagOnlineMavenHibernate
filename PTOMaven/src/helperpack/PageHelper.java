@@ -11,6 +11,10 @@ import services.AddPrefixAndSufixInterface;
 import serviciesImpl.AddPrefixAndSufixImplementation;
 
 public class PageHelper {
+	
+	public static void nextRedirect(HttpServletResponse response,String nextPage) throws IOException{
+		response.sendRedirect(nextPage);
+	}
 
 	public static void nextPageJsp(HttpServletRequest request, HttpServletResponse response, String nextPage)
 			throws ServletException, IOException {

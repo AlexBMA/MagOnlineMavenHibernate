@@ -86,6 +86,13 @@ public class ProductHelper {
 	}
 
 
+	public static void deleteProduct(HttpServletRequest request) {
+		int idProduct = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT));
+		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
+		productService.deleteItem(idProduct, DB.getSessionFactory());
+	}
+	
+	
 	public static int getProductTypeName(String productTypeName, int idProductType, SessionFactory sessionFactory) {
 		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
 		List<ProductType> productTypeList = productTypeService.getAllItems(sessionFactory);

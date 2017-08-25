@@ -1,11 +1,14 @@
 package servlets.login;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.SessionFactory;
 
 import constantPack.AppRequestAttribute;
 import dboperations.DB;
@@ -14,7 +17,6 @@ import generalServices.UserAndPassCheckImpl;
 import generalServices.UserService;
 import modelMag.User;
 import services.GeneralServiceInterface;
-import serviciesImpl.LoginServiceImplementation;
 
 /**
  * Servlet implementation class CreateNewUser
@@ -36,16 +38,13 @@ public class CreateNewUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(DB.getSessionFactory()== null) DB.DBConnect();
-		
 		
 		String  username=request.getParameter(AppRequestAttribute.USER);
 		String pass=request.getParameter(AppRequestAttribute.PASS_ONE);
@@ -55,9 +54,7 @@ public class CreateNewUser extends HttpServlet {
 		if(pass.contentEquals(passAgain))
 		{
 				User tempUser= new User();
-				
 				UserAndPassCheck userAndPassCheck = new UserAndPassCheckImpl();
-				
 				String passForDb = userAndPassCheck.createPass(username, pass);
 				
 				tempUser.setUsername(username);
@@ -65,22 +62,16 @@ public class CreateNewUser extends HttpServlet {
 				tempUser.setPass(passForDb);
 				
 				GeneralServiceInterface<User> userService = new UserService();
-				
-				userService.updateItem(tempUser, DB.getSessionFactory());
+				SessionFactory sessionFactory = DB.getSessionFactory();
+				userService.updateItem(tempUser, sessionFactory);
 				
 				String NEXT_PAGE="index.jsp";
-				
-				response.sendRedirect(NEXT_PAGE);
-				
+				response.sendRedirect(NEXT_PAGE);	
+		}else {
+			
+			System.out.println("");
 		}
-	
 		
-		
-		
-		
-		
-		
-	
 	}
 
 }

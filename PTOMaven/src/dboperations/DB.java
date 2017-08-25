@@ -32,6 +32,8 @@ public class DB {
 	
 	public static  SessionFactory getSessionFactory()
 	{
+		if(factory== null) DBConnect();
+		
 		return factory;
 	}
 	

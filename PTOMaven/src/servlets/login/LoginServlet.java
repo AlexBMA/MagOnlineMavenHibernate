@@ -15,6 +15,7 @@ import constantPack.AppJspPages;
 import constantPack.AppRequestAttribute;
 import constantPack.AppSessionAttributes;
 import dboperations.DB;
+import helperpack.PageHelper;
 import modelMag.Cart;
 import services.AddPrefixAndSufixInterface;
 import serviciesImpl.AddPrefixAndSufixImplementation;
@@ -46,8 +47,7 @@ public class LoginServlet extends HttpServlet {
 
 		LoginServiceImplementation loginService = new LoginServiceImplementation();
 
-		AddPrefixAndSufixInterface addSAndP = new AddPrefixAndSufixImplementation();
-
+		
 		boolean check = loginService.checkLogin(userName, pass, DB.getSessionFactory());
 
 		if (check == true) {
@@ -56,32 +56,28 @@ public class LoginServlet extends HttpServlet {
 			userName = loginService.getUser().getUsername();
 			role = loginService.getUser().getRole();
 
-			String nextPage = "";
-			RequestDispatcher requestDispatcher;
 
 			HttpSession theSession = request.getSession(true);
 			theSession.setAttribute(AppSessionAttributes.USER_ID,loginService.getUser().getId());
 			theSession.setAttribute(AppSessionAttributes.USERNAME, userName);
 			theSession.setMaxInactiveInterval(AppConstants.MAX_INACTIVE_INTERVAL);
 			
-
 			if (role.equals(AppConstants.ROLE_ADMIN)) {
 				System.out.println("admin login");
-				nextPage = addSAndP.createPath(AppJspPages.ADMIN_PAGE);
-
+				PageHelper.nextPageJsp(request, response, AppJspPages.ADMIN_PAGE);
+				return;
 			}
 
 			if (role.equals(AppConstants.ROLE_CLIENT)) {
 				System.out.println("client login");
-				nextPage = addSAndP.createPath(AppJspPages.CLIENT_PAGE);
-
 				Cart cart = new Cart();
-				
 				theSession.setAttribute(AppSessionAttributes.CART,cart);
+				PageHelper.nextPageJsp(request, response, AppJspPages.CLIENT_PAGE);
+				return;
 			}
-
-			requestDispatcher = request.getRequestDispatcher(nextPage);
-			requestDispatcher.forward(request, response);
+			
+			//requestDispatcher = request.getRequestDispatcher(nextPage);
+			//requestDispatcher.forward(request, response);
 
 		} else {
 			
@@ -95,7 +91,7 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
 	}
 

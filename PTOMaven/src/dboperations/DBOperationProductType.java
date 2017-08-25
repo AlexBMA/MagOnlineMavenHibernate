@@ -78,7 +78,7 @@ public class DBOperationProductType implements DBOperations<ProductType> {
 		// begin transaction
 		theSession.beginTransaction();
 
-		String hql = "from ProductType"+AppTables.ProductTypeEntry.TABLE_NAME;
+		String hql = "from "+AppTables.ProductTypeEntry.TABLE_NAME;
 
 		List<ProductType> theList = theSession.createQuery(hql).getResultList();
 
