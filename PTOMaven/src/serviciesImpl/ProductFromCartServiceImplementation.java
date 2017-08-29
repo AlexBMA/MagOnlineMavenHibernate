@@ -5,9 +5,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 
 import dboperations.DBOperations;
-import dboperations.DBOperationsCart;
 import dboperations.DBOperationsProductFromCart;
-import modelMag.Cart;
 import modelMag.ProductFromCart;
 import services.GeneralServiceInterface;
 

@@ -5,6 +5,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
 <%@ page import="modelMag.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,6 @@
 	<div id="container">
 		<header id="header">
 			<h3>Welcome admin <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h3>
-			
 			<nav>
 				<ul class="pure-menu-list">
 					
@@ -55,14 +55,13 @@
 		
 		<br/>
 		<main>
-			<%  
-				List<Product> productList= (List)request.getAttribute(AppRequestAttribute.LIST_PRODUCTS); 
-				Map<Integer,ProductType> productTypeMap= (Map)request.getAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE);
-			%>
+		
+			
+			
 			
 			<table class="pure-table pure-table-horizontal">
 				<tr>
-					<th>Nume Produs</th>
+						<th>Nume Produs</th>
                 		<th>Id Produs</th>
                 		<th>Nume Categorie</th>
                 		<th>Id Categorie</th>
@@ -72,39 +71,44 @@
                 		<th>Options</th>
 				</tr>
 				<tbody>
-					<%
-						for(Product p:productList)
-						{
-					%>
-							<tr>
-							<td><%=p.getName() %></td>
-							<td><%=p.getId() %></td>
-							<td><%=productTypeMap.get(p.getProductTypeId()).getProductTypeName() %></td>
-							<td><%=p.getProductTypeId()%></td>
-							<td><%=p.getPrice() %></td>
-							<td><%=p.getNumberOfItems() %></td>
-							<td><%=p.getLinkImg() %></td>
-							<td> <form action="${pageContext.request.contextPath}/EditProductServlet" method="get" class="pure-form">
-								
-								<input type="text" value="<%=p.getId() %>" readonly name="<%=AppRequestAttribute.ID_PRODUCT %>" hidden>
-								<button type="submit" class="pure-button pure-button-primary">Edit</button> 
+					
+					
+				
+					
+					<!-- =productTypeMap.get(p.getProductTypeId()).getProductTypeName()
+						<c:out value="${map['key']}"/>
+					-->
+					
+					<c:set var="map" value="${requestScope[AppRequestAttribute.MAP_PRODUCT_TYPE]}"/>
+					<c:forEach items="${requestScope[AppRequestAttribute.LIST_PRODUCTS]}" var="tempProduct">
+						<tr>
+							<td>${tempProduct.name}</td>
+							<td>${tempProduct.id}</td>
+							
+							<c:set var="keyDim" value="${tempProduct.productTypeId}"/>
+							<td>
+								 ${map[keyDim].productTypeName}	
+							</td>
+							
+							<td>${tempProduct.productTypeId}</td>
+							<td>${tempProduct.price}</td>
+							<td>${tempProduct.numberOfItems}</td>
+							<td>${tempProduct.linkImg}</td>
+							<td>
+								 <form action="${pageContext.request.contextPath}/EditProductServlet" method="get" class="pure-form">	
+									<input type="text" value="${tempProduct.id}" readonly name="<%=AppRequestAttribute.ID_PRODUCT %>" hidden>
+									<button type="submit" class="pure-button pure-button-primary">Edit</button> 
 								 </form> <br/>
 								 
 								 <form action="${pageContext.request.contextPath}/DeleteProductServlet" method="post" class="pure-form">
-								 	<input type="text" value="<%=p.getId() %>" readonly name="<%=AppRequestAttribute.ID_PRODUCT %>" hidden>
+								 	<input type="text" value="${tempProduct.id}" readonly name="<%=AppRequestAttribute.ID_PRODUCT %>" hidden>
 								 	<button type="submit" class="pure-button pure-button-primary">Delete</button>
 								 </form>
-								 <br/>
-							
 							</td>
-							</tr>
-					<%	
-						}	
-					%>
-					
+						</tr>
+					</c:forEach>		
 				</tbody>
 			</table>
-			
 			
 			
 			<form action="${pageContext.request.contextPath}/AddProductServlet" method="post" class="pure-form">
@@ -116,17 +120,13 @@
 				<input type="number"  min="1" step="0.01" placeholder="price" name="<%=AppRequestAttribute.PRODUCT_PRICE%>">
 				
 				<select name="<%=AppRequestAttribute.PRODUCT_TYPE_NAME%>">
-                    <% 	
-  						if( productTypeMap!=null)
-  						{
-  							Set<Integer> keySet = productTypeMap.keySet();
-  							for(Integer key: keySet){
-  					%>
-  						<option >
-  						<%=productTypeMap.get(key).getProductTypeName() %>
+					<c:forEach items="${map}" var="temp">
+						 <option >
+						 	${temp.value.productTypeName}
   						</option>
-  					<%} }%>
-                    </select>
+					</c:forEach>
+                   
+                 </select>
 				
 				<input type="text" placeholder="link image" name="<%=AppRequestAttribute.PRODUCT_LINK_IMG%>">
 				

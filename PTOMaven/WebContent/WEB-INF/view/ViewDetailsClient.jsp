@@ -60,7 +60,7 @@
 				<label id="priceinrealtime">Price per unit: <%=temp.getPrice() %></label>
 				<br/>
 				
-				<input type="number" min="1" max="<%=temp.getNumberOfItems() %>" name="<%=AppRequestAttribute.NUMBER_OF_ITEMS %>" value="1">
+				<input type="number" min="1" max="<%=temp.getNumberOfItems() %>" name="<%=AppRequestAttribute.PRODUCT_NUMBER_OF_ITEMS %>" value="1">
 				
 				<button type="submit" class="pure-button pure-button-primary">Add to cart</button>
 			</form>

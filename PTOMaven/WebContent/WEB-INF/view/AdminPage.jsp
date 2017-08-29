@@ -2,6 +2,7 @@
 <%@page import="constantPack.AppServletsName"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,13 +19,9 @@
 
 		<header id="header">
 
-			<h3>Welcome admin <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h3>
-
+			<h3>Welcome admin ${sessionScope[AppSessionAttributes.USERNAME]}</h3>
 			<nav>
-			
 				<ul class="pure-menu-list">
-
-
 					<li class="pure-menu-item">
 						<form class="pure-form"
 							action="${pageContext.request.contextPath}/ViewAllProductsServlet"
@@ -53,12 +50,7 @@
 						</form>
 
 					</li>
-
-
 				</ul>
-				
-			
-			
 			</nav>
 			<br />
 		</header>
