@@ -2,7 +2,6 @@ package clientServlets;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +16,7 @@ import constantPack.AppSessionAttributes;
 import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.Cart;
-import services.AddPrefixAndSufixInterface;
 import services.GeneralServiceInterface;
-import serviciesImpl.AddPrefixAndSufixImplementation;
 import serviciesImpl.CartServiceImplementation;
 
 /**

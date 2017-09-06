@@ -3,7 +3,6 @@ package clientServlets;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,9 +18,7 @@ import constantPack.AppRequestAttribute;
 import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.Product;
-import services.AddPrefixAndSufixInterface;
 import services.GeneralServiceInterface;
-import serviciesImpl.AddPrefixAndSufixImplementation;
 import serviciesImpl.ProductServiceImplementation;
 
 /**

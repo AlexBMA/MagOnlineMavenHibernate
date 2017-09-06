@@ -3,6 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="modelMag.*"%>
 <%@ page import="constantPack.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,15 +19,13 @@
 	<div id="container">
 
 		<header id="header">
-			<h2>Welcome <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h2>
+			<h2>Welcome ${sessionScope[AppSessionAttributes.USERNAME]}</h2>
 			<nav>
 				<ul class="pure-menu-list">
-					
 					<li class="pure-menu-item">
 						<form action="${pageContext.request.contextPath}/ViewProductsClient" method="get" class="pure-form">
 							<button type="submit" class="pure-button pure-button-primary">View products</button>
 						</form>
-
 					</li>
 					<li class="pure-menu-item">
 						<form action="${pageContext.request.contextPath}/ViewCartClientServlet" method="get" class="pure-form">
@@ -38,7 +37,6 @@
 							method="get" class="pure-form">
 							<button type="submit" class="pure-button pure-button-primary">Log out</button>
 						</form>
-
 					</li>
 				</ul>
 			</nav>
@@ -47,11 +45,7 @@
 		
 		<br />
 		<main> 
-		<%
- 			List<Product> productList = (List) request.getAttribute(AppRequestAttribute.LIST_PRODUCTS);
- 			Map<Integer, ProductType> productTypeMap = (Map) request.getAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE);
- 		%>
-
+	
 		<section>
 			<nav>
 				<ul class="pure-menu-list">
@@ -90,30 +84,28 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%
-					for (Product temp : productList) {
-				%>
-				<tr>
-					<td><%=temp.getName()%></td>
-					<td><%=temp.getPrice()%></td>
-					<td><img src="<%=temp.getLinkImg()%>  " /></td>
-					<td><%=productTypeMap.get(temp.getProductTypeId()).getProductTypeName()%></td>
-					<td>
-						<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post" class="pure-form">
-							<input type="text" readonly value="<%=temp.getId()%>"
+				
+				<c:set var="map" value="${requestScope[AppRequestAttribute.MAP_PRODUCT_TYPE]}"></c:set>
+				<c:forEach items="${requestScope[AppRequestAttribute.LIST_PRODUCTS]}" var="tempproduct">
+					<tr>
+						<td>${tempproduct.name}</td>
+						<td>${tempproduct.price}</td>
+						<td><img src="${tempproduct.linkImg}"/></td>
+						<td>${map[tempproduct.id].productTypeName}</td>
+						<td>
+							<form action="${pageContext.request.contextPath}/AddProductInCartServlet" method="post" class="pure-form">
+								<input type="text" readonly value="${tempproduct.id}"
 								name="<%=AppRequestAttribute.ID_PRODUCT %>" hidden>
-							<button type="submit" class="pure-button pure-button-primary">Add in cart</button>
-						</form><br/>
-						<form action="${pageContext.request.contextPath}/ViewDetailsProductClient" method="post" class="pure-form">
-							<input type="text" readonly value="<%=temp.getId()%>"
+								<button type="submit" class="pure-button pure-button-primary">Add in cart</button>
+							</form><br/>
+							<form action="${pageContext.request.contextPath}/ViewDetailsProductClient" method="post" class="pure-form">
+								<input type="text" readonly value="${tempproduct.id}"
 								name="<%=AppRequestAttribute.ID_PRODUCT%>" hidden>
-							<button type="submit" class="pure-button pure-button-primary">View details</button>
-						</form>
-					</td>
-				</tr>
-				<%
-					}
-				%>
+								<button type="submit" class="pure-button pure-button-primary">View details</button>
+							</form>
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 

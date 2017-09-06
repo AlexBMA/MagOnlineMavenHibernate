@@ -29,10 +29,9 @@ public class AddInCartImplementation implements AddInCartInterface<Integer, Cart
 
 			int oldNumber = theCart.getProductsFromCart().get(rez).getCantitateComandata();
 			int newNumber = oldNumber + numberOfItems;
-			System.out.println("OLD NUMBER: "+oldNumber);
-			System.out.println("NEW NUMBER: "+newNumber);
-			System.out.println();
-			
+			//System.out.println("OLD NUMBER: "+oldNumber);
+			//System.out.println("NEW NUMBER: "+newNumber);
+			//System.out.println();
 		
 			theCart.getProductsFromCart().get(rez).setCantitateComandata(newNumber);
 
@@ -45,22 +44,17 @@ public class AddInCartImplementation implements AddInCartInterface<Integer, Cart
 
 		List<ProductFromCart> list = cart.getProductsFromCart();
 
-		
 		int size = list.size();
 		ProductFromCart temp;
-		for(int i=0;i<size;i++)
-		{
+		for(int i=0;i<size;i++){
 			temp = list.get(i);
-			
+	
 				if (temp.getIdProdus()== idProduct) {
-			
-				System.out.println(idProduct);
-				System.out.println(temp.getIdProdus());
-				
+				//System.out.println(idProduct);
+				//System.out.println(temp.getIdProdus());
 				return i;
 			}
 		}
-		
 
 		return -1;
 	}
@@ -75,13 +69,10 @@ public class AddInCartImplementation implements AddInCartInterface<Integer, Cart
 
 		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
 		Product tempProduct = productService.getItem(temp.getIdProdus(),sessionFactory);
-			
 			total = total + (tempProduct.getPrice() * temp.getCantitateComandata());
-
 		}
 
 		cart.setTotalPriceForProductFromCart(total);
-
 		return total;
 	}
 

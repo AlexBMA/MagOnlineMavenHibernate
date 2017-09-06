@@ -4,7 +4,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*" %>
 <%@ page import="modelMag.*" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,7 @@
 	
 		<header id="header">
 			
-			<h3>Welcome admin <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h3>
+			<h3>Welcome admin ${sessionScope[AppSessionAttributes.USERNAME]}</h3>
 			
 			<nav>
 				<ul class="pure-menu-list">
