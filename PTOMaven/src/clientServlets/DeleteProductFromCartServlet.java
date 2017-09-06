@@ -2,7 +2,6 @@ package clientServlets;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,12 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import constantPack.AppConstants;
+import constantPack.AppJspPages;
 import constantPack.AppRequestAttribute;
 import constantPack.AppServletsName;
 import constantPack.AppSessionAttributes;
+import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.Cart;
-import modelMag.Product;
 import services.AddInCartInterface;
 import serviciesImpl.AddInCartImplementation;
 
@@ -59,10 +59,11 @@ public class DeleteProductFromCartServlet extends HttpServlet {
 			Cart theCart = (Cart) request.getSession(false).getAttribute(AppSessionAttributes.CART);
 			theCart.getProductsFromCart().remove(index);
 
-			AddInCartInterface<Product, Cart> addInCartProduct = new AddInCartImplementation();
-			addInCartProduct.calculateTotalPriceForCart(theCart);
+			AddInCartInterface<Integer, Cart> addInCartProduct = new AddInCartImplementation();
+			addInCartProduct.calculateTotalPriceForCart(theCart,DB.getSessionFactory());
+			
 
-			PageHelper.nextPageServlet(request, response, AppServletsName.VIEW_CART_CLIENT_SERVLET);
+			PageHelper.nextPageJsp(request, response, AppJspPages.VIEW_CART);;
 		}else {
 			System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}

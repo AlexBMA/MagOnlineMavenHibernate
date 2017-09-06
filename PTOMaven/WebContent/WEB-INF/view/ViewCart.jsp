@@ -66,9 +66,9 @@
 				for(int i=0;i<size;i++)
 				{ temp = list.get(i);
 				%>
-					<img src="<%=temp.getProdus().getLinkImg() %>" id="cosimg"/>
+					<img src="" id="cosimg"/>
 					<label>Number of items <%=temp.getCantitateComandata()%></label>
-					<label>Price of items <%=temp.calculeazaPretPentruProdosuDinCos()%></label>
+					<label>Price of items </label>
 					
 				<form action="${pageContext.request.contextPath}/DeleteProductFromCartServlet" method="post" class="pure-form">
 					<input type="text" readonly hidden  value="<%=i%>" name="<%=AppRequestAttribute.INDEX_OF_PRODUCT%>"/>

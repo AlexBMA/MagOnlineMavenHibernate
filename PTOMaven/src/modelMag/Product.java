@@ -36,7 +36,40 @@ public class Product  {
 		linkImg="";
 
 	}
-
+	
+	public static class ProductBuilder{
+		private int id;
+		private int numberOfItems;
+		private int price;
+		private int priceTypeId;
+		private String linkImg;
+		private String name;
+		
+		
+		public ProductBuilder id(int val){id = val; return this; }
+		public ProductBuilder numberOfItems(int val){numberOfItems = val; return this;}
+		public ProductBuilder price(int val){price = val; return this;}
+		public ProductBuilder name(String val){name=val;return this;}
+		public ProductBuilder priceTypeId(int val){priceTypeId = val; return this;}
+		public ProductBuilder linkImg(String val){linkImg = val; return this;} 
+		
+		public Product build()
+		{
+			return new Product(this);
+		}
+		
+	}
+	
+	private Product(ProductBuilder builder){
+		this.id = builder.id;
+		this.numberOfItems = builder.numberOfItems;
+		this.price = builder.price;
+		this.name = builder.name;
+		this.linkImg = builder.linkImg;
+		this.productTypeId = builder.priceTypeId;
+	}
+	
+/*
 	public Product( String name, int numberOfItems, double price,int produtcTypeId,String linkImg) {
 		this.name = name;
 		this.numberOfItems = numberOfItems;
@@ -45,7 +78,7 @@ public class Product  {
 	    this.linkImg = linkImg;
 
 	}
-	
+	*/
 
 	public String getName() {
 		return name;

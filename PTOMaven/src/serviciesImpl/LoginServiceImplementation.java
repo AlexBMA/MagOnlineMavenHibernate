@@ -23,7 +23,9 @@ public class LoginServiceImplementation {
 		 
 		 UserAndPassCheck userAndPassCheckService = new UserAndPassCheckImpl();
 		  
-		 String hashPass = userAndPassCheckService.createPass(userName, userPass);
+		 String hashPass = userPass;
+		 //= userAndPassCheckService.createPass(userName, userPass);
+		 
 		 
 		 this.user = op.checkUserAndPass(theSessionFactory, userName, hashPass);
 		

@@ -2,24 +2,28 @@ package serviciesImpl;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+
 import modelMag.Cart;
 import modelMag.Product;
 import modelMag.ProductFromCart;
 import services.AddInCartInterface;
+import services.GeneralServiceInterface;
 
-public class AddInCartImplementation implements AddInCartInterface<Product, Cart> {
+public class AddInCartImplementation implements AddInCartInterface<Integer, Cart> {
 
 	@Override
-	public void addInCartOneItemMultipleTimes(Product item, int numberOfItems, Cart theCart) {
+	public void addInCartOneItemMultipleTimes(Integer idProduct, int numberOfItems, Cart theCart) {
 
 		System.out.println("HERE IN ADD IN CART");
-		//System.out.println(item.getName());
-		//System.out.println(numberOfItems);
+		System.out.println(idProduct);
+		System.out.println(numberOfItems);
 		
-		int rez = checkIfItemAlreadyInCart(item, numberOfItems, theCart);
-
+		int rez = checkIfItemAlreadyInCart(idProduct, numberOfItems, theCart);
+		System.out.println(rez);
 		if (rez == -1) {
-			ProductFromCart temp = new ProductFromCart(item, numberOfItems);
+			
+			ProductFromCart temp = new ProductFromCart(idProduct, numberOfItems);
 			theCart.getProductsFromCart().add(temp);
 		} else {
 
@@ -37,7 +41,7 @@ public class AddInCartImplementation implements AddInCartInterface<Product, Cart
 	}
 
 	@Override
-	public int checkIfItemAlreadyInCart(Product item, int numberOfItems, Cart cart) {
+	public int checkIfItemAlreadyInCart(Integer idProduct, int numberOfItems, Cart cart) {
 
 		List<ProductFromCart> list = cart.getProductsFromCart();
 
@@ -48,10 +52,10 @@ public class AddInCartImplementation implements AddInCartInterface<Product, Cart
 		{
 			temp = list.get(i);
 			
-				if (temp.getProdus().getId() == item.getId()) {
+				if (temp.getIdProdus()== idProduct) {
 			
-				System.out.println(item.getId());
-				System.out.println(temp.getProdus().getId());
+				System.out.println(idProduct);
+				System.out.println(temp.getIdProdus());
 				
 				return i;
 			}
@@ -62,14 +66,17 @@ public class AddInCartImplementation implements AddInCartInterface<Product, Cart
 	}
 
 	@Override
-	public double calculateTotalPriceForCart(Cart cart) {
+	public double calculateTotalPriceForCart(Cart cart,SessionFactory sessionFactory) {
 
 		double total = 0;
 		List<ProductFromCart> list = cart.getProductsFromCart();
 
 		for (ProductFromCart temp : list) {
 
-			total = total + (temp.getProdus().getPrice() * temp.getCantitateComandata());
+		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
+		Product tempProduct = productService.getItem(temp.getIdProdus(),sessionFactory);
+			
+			total = total + (tempProduct.getPrice() * temp.getCantitateComandata());
 
 		}
 

@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,8 +16,9 @@ public class ProductFromCart  {
 	@Column(name = "id", updatable = false, nullable = false)
 	private int id;
 	
-	@OneToOne
-	private Product produs;
+	
+	@Column(name="idProduct")
+	private int idProdus;
 	@Column(name="quantity")
 	private int cantitateComandata;
 	
@@ -26,24 +26,37 @@ public class ProductFromCart  {
 	{
 		
 	}
+	
+	
+	/*
+	public ProductFromCart(int id, int idProdus) {
+		super();
+		this.id = id;
+		this.idProdus = idProdus;
+	}
+	*/
 
-	public ProductFromCart(Product p, int cantitate) {
-		this.produs=p;
-		this.cantitateComandata=cantitate;
+
+	public ProductFromCart(int idProdus, int cantitateComandata) {
+		super();
+		this.idProdus = idProdus;
+		this.cantitateComandata = cantitateComandata;
 	}
 
-	public Product getProdus() {
-		return produs;
+
+	public ProductFromCart(int id, int idProdus, int cantitateComandata) {
+		super();
+		this.id = id;
+		this.idProdus = idProdus;
+		this.cantitateComandata = cantitateComandata;
 	}
 
-	public void setProdus(Product produs) {
-		this.produs = produs;
-	}
 
+	/*
 	public double calculeazaPretPentruProdosuDinCos() {
 		return produs.getPrice() * cantitateComandata;
 	}
-
+	*/
 	public int getCantitateComandata() {
 		return cantitateComandata;
 	}
@@ -60,10 +73,16 @@ public class ProductFromCart  {
 		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "ProductFromCart [id=" + id + ", produs=" + produs + ", cantitateComandata=" + cantitateComandata + "]";
+
+	public int getIdProdus() {
+		return idProdus;
 	}
 
+
+	public void setIdProdus(int idProdus) {
+		this.idProdus = idProdus;
+	}
+
+	
 	
 }

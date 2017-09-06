@@ -55,11 +55,11 @@ public class CreateNewUser extends HttpServlet {
 		{
 				User tempUser= new User();
 				UserAndPassCheck userAndPassCheck = new UserAndPassCheckImpl();
-				String passForDb = userAndPassCheck.createPass(username, pass);
+				//String passForDb = userAndPassCheck.createPass(username, pass);
 				
 				tempUser.setUsername(username);
 				tempUser.setRole(role);
-				tempUser.setPass(passForDb);
+				tempUser.setPass(pass);
 				
 				GeneralServiceInterface<User> userService = new UserService();
 				SessionFactory sessionFactory = DB.getSessionFactory();

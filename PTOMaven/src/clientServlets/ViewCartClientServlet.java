@@ -2,7 +2,6 @@ package clientServlets;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,13 +12,11 @@ import javax.servlet.http.HttpSession;
 import constantPack.AppConstants;
 import constantPack.AppJspPages;
 import constantPack.AppSessionAttributes;
+import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.Cart;
-import modelMag.Product;
 import services.AddInCartInterface;
-import services.AddPrefixAndSufixInterface;
 import serviciesImpl.AddInCartImplementation;
-import serviciesImpl.AddPrefixAndSufixImplementation;
 
 /**
  * Servlet implementation class ViewCartClientServlet
@@ -47,8 +44,8 @@ public class ViewCartClientServlet extends HttpServlet {
 		HttpSession theSession = request.getSession(false);
 		if(theSession!=null){
 			Cart theCart = (Cart) theSession.getAttribute(AppSessionAttributes.CART);
-			AddInCartInterface<Product, Cart> addInCart = new AddInCartImplementation();
-			addInCart.calculateTotalPriceForCart(theCart);
+			AddInCartInterface<Integer, Cart> addInCart = new AddInCartImplementation();
+			addInCart.calculateTotalPriceForCart(theCart,DB.getSessionFactory());
 
 			PageHelper.nextPageJsp(request, response, AppJspPages.VIEW_CART);
 		}else {
@@ -63,7 +60,7 @@ public class ViewCartClientServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }

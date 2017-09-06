@@ -65,14 +65,14 @@ public class CartServiceImplementation implements GeneralServiceInterface<Cart> 
 		List<ProductFromCart> list) {
 		int size = list.size();
 		ProductFromCart temp;
-		Product tempProduct;
 		int tempCantitateComadata;
 		
-		for( int  i=0;i<size;i++)
-		{ 	
+		for( int  i=0;i<size;i++){ 	
 			temp = list.get(i);
 			tempCantitateComadata = temp.getCantitateComandata();
-			tempProduct = temp.getProdus();
+			int idProduct = temp.getIdProdus();
+			GeneralServiceInterface<Product> generalServiceInterface = new ProductServiceImplementation();
+			Product tempProduct = generalServiceInterface.getItem(idProduct, session);
 			tempProduct.setNumberOfItmes((tempProduct.getNumberOfItems()-tempCantitateComadata));
 			
 			productServices.updateItem(tempProduct, session);
