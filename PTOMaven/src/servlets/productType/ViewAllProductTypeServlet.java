@@ -51,9 +51,8 @@ public class ViewAllProductTypeServlet extends HttpServlet {
 		HttpSession theSession = request.getSession(false);
 		if(theSession!=null){
 			
-			GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
-			List<ProductType> listProductType = operationProductType.getAllItems(DB.getSessionFactory());
 			
+			List<ProductType> listProductType =ProductTypeServiceImplementation.getInstance().getAllRow(DB.getSessionFactory());
 			request.setAttribute(AppRequestAttribute.LIST_PRODUCT_TYPE, listProductType);
 			PageHelper.nextPageJsp(request, response, AppJspPages.ALL_PRODUCT_TYPE);
 			

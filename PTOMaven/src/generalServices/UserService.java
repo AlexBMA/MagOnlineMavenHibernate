@@ -39,14 +39,14 @@ public class UserService implements GeneralServiceInterface<User> {
 	public void updateItem(User item, SessionFactory session) {
 		DBOperations<User> userOperations = new DBOperationUser();
 
-		userOperations.insert(session, item);
+		userOperations.insertOrUpdate(session, item);
 	}
 
 	@Override
 	public void insertItem(User item, SessionFactory session) {
 		DBOperations<User> userOperations = new DBOperationUser();
 
-		userOperations.insert(session, item);
+		userOperations.insertOrUpdate(session, item);
 	}
 
 }

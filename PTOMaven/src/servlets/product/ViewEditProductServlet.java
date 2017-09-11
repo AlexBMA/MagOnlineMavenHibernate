@@ -52,8 +52,8 @@ public class ViewEditProductServlet extends HttpServlet {
 			int indexProduct = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT));
 			
 			SessionFactory sessionFactory = DB.getSessionFactory();
-			GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
-			List<ProductType> listProductType = operationProductType.getAllItems(sessionFactory);
+			
+			List<ProductType> listProductType = ProductTypeServiceImplementation.getInstance().getAllRow(sessionFactory);
 			
 			Map<Integer,ProductType> mapOfProductType = new HashMap<>();
 			for( ProductType p :listProductType){
@@ -62,8 +62,7 @@ public class ViewEditProductServlet extends HttpServlet {
 
 			System.out.println(indexProduct);
 			
-			GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
-			Product productTemp = productService.getItem(indexProduct, sessionFactory);
+			Product productTemp = ProductServiceImplementation.getInstance().getARow(sessionFactory, indexProduct);
 			
 			System.out.println(productTemp.getName() +"%%%%%%%%%%%%%%%%%%");
 			

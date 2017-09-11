@@ -17,7 +17,6 @@ import constantPack.AppRequestAttribute;
 import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.ProductType;
-import services.GeneralServiceInterface;
 import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
@@ -44,9 +43,7 @@ public class ViewEditProductTypeServlet extends HttpServlet {
 			int indexOfProductType = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT));
 			SessionFactory sessionFactory =  DB.getSessionFactory();
 			
-			GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
-			ProductType temp = productTypeService.getItem(indexOfProductType, sessionFactory);
-			
+			ProductType temp = ProductTypeServiceImplementation.getInstance().getARow(sessionFactory, indexOfProductType);	
 			request.setAttribute(AppRequestAttribute.TEMP_PRODUCT_TYPE, temp);
 			PageHelper.nextPageJsp(request, response, AppJspPages.EDIT_PRODUCT_TYPE);
 			

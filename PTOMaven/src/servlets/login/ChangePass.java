@@ -81,7 +81,7 @@ public class ChangePass extends HttpServlet {
 				userService.insertItem(u, sessionFactory);
 				
 				DBOperations<User> userOperations = new DBOperationUser();
-				userOperations.insert(sessionFactory, u);
+				userOperations.insertOrUpdate(sessionFactory, u);
 				
 				PageHelper.nextPageJsp(request, response, AppJspPages.ADMIN_PAGE);
 			}

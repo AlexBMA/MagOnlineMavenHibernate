@@ -12,7 +12,6 @@ import constantPack.AppRequestAttribute;
 import dboperations.DB;
 import modelMag.Product;
 import modelMag.ProductType;
-import services.GeneralServiceInterface;
 import serviciesImpl.ProductServiceImplementation;
 import serviciesImpl.ProductTypeServiceImplementation;
 
@@ -28,10 +27,9 @@ public class ProductHelper {
 		
 		int idProductType=0;
 		
-		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
-		
+				
 		SessionFactory sessionFactory = DB.getSessionFactory();
-		List<ProductType>  productTypeList= productTypeService.getAllItems(sessionFactory);
+		List<ProductType>  productTypeList= ProductTypeServiceImplementation.getInstance().getAllRow(sessionFactory);
 		
 		for(ProductType temp: productTypeList){
 			if(temp.getProductTypeName().equals(productTypeName)){
@@ -39,17 +37,14 @@ public class ProductHelper {
 				break;
 			}
 		}
-		
-		Product tempProduct = new Product();
-		tempProduct.setLinkImg(linkImage);
-		tempProduct.setPrice(priceOfItem);
-		tempProduct.setNumberOfItmes(numberOfItems);
-		tempProduct.setProductTypeId(idProductType);
-		tempProduct.setName(productName);
-		
-		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
-		
-		productService.insertItem(tempProduct, sessionFactory);
+		Product tempProduct = new Product.Builder()
+																			.name(productName)
+																			.price(priceOfItem)
+																			.numberOfItems(numberOfItems)
+																			.priceTypeId(idProductType)
+																			.linkImg(linkImage).build();
+			
+		ProductServiceImplementation.getInstance().insertOrUpdate(sessionFactory, tempProduct);
 	}
 
 
@@ -75,29 +70,26 @@ public class ProductHelper {
 		SessionFactory sessionFactory = DB.getSessionFactory();
 		idProductType = getProductTypeName(productTypeName, idProductType, sessionFactory);
 
-		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
-
-		Product tempProduct = productService.getItem(idProduct, sessionFactory);
+		
+		Product tempProduct = ProductServiceImplementation.getInstance().getARow(sessionFactory, idProduct);
 		tempProduct.setLinkImg(linkImage);
 		tempProduct.setPrice(priceOfItem);
 		tempProduct.setNumberOfItmes(numberOfItems);
 		tempProduct.setProductTypeId(idProductType);
 		tempProduct.setName(productName);
 
-		productService.insertItem(tempProduct, sessionFactory);
+		ProductServiceImplementation.getInstance().insertOrUpdate(sessionFactory, tempProduct);
 	}
 
 
-	public static void deleteProduct(HttpServletRequest request) {
+	public static void deleteProduct(HttpServletRequest request,SessionFactory sessionFactory) {
 		int idProduct = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT));
-		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
-		productService.deleteItem(idProduct, DB.getSessionFactory());
+		ProductTypeServiceImplementation.getInstance().deleteRow(sessionFactory, idProduct);
 	}
 	
 	
 	public static int getProductTypeName(String productTypeName, int idProductType, SessionFactory sessionFactory) {
-		GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
-		List<ProductType> productTypeList = productTypeService.getAllItems(sessionFactory);
+		List<ProductType> productTypeList = ProductTypeServiceImplementation.getInstance().getAllRow(sessionFactory);
 	
 		for (ProductType temp : productTypeList) {
 			if (temp.getProductTypeName().equals(productTypeName)) {
@@ -109,18 +101,14 @@ public class ProductHelper {
 	}
 	
 	public static void getAndPutDataInRequest(HttpServletRequest request) {
+		
 		SessionFactory sessionFactory = DB.getSessionFactory();
 		
-		GeneralServiceInterface<Product> operationProduct = new ProductServiceImplementation();
-		List<Product> listProduct = operationProduct.getAllItems(sessionFactory);
-		
-		GeneralServiceInterface<ProductType> operationProductType = new ProductTypeServiceImplementation();
-		List<ProductType> listProductType = operationProductType.getAllItems(sessionFactory);
-		
+		List<Product> listProduct = ProductServiceImplementation.getInstance().getAllRow(sessionFactory);
+		List<ProductType> listProductType = ProductTypeServiceImplementation.getInstance().getAllRow(sessionFactory);
 		Map<Integer,ProductType> mapOfProductType = new HashMap<>();
 		
-		for( ProductType p :listProductType)
-		{
+		for( ProductType p :listProductType){
 			mapOfProductType.put(p.getId(), p);
 		}
 		

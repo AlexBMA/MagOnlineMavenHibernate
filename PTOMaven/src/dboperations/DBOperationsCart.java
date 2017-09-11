@@ -10,7 +10,7 @@ import modelMag.Cart;
 public class DBOperationsCart implements DBOperations<Cart> {
 
 	@Override
-	public void insert(SessionFactory theSessionFactory, Cart ob) {
+	public void insertOrUpdate(SessionFactory theSessionFactory, Cart ob) {
 		
 		 //get the session
 		Session theSession = theSessionFactory.getCurrentSession();

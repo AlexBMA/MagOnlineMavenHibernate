@@ -10,7 +10,7 @@ import modelMag.User;
 public class DBOperationUser implements DBOperations<User> {
 
 	@Override
-	public void insert(SessionFactory theSessionFactory, User ob) {
+	public void insertOrUpdate(SessionFactory theSessionFactory, User ob) {
 		
 		Session theSession = theSessionFactory.getCurrentSession();
 		

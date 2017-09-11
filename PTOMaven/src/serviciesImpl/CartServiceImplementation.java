@@ -49,20 +49,19 @@ public class CartServiceImplementation implements GeneralServiceInterface<Cart> 
 		
 		if(item.getTotalPriceForProductFormCart()>0)
 		{
+			
 			DBOperations<Cart> cartOperations = new DBOperationsCart();
-			cartOperations.insert(session, item);
+			cartOperations.insertOrUpdate(session, item);
 		
-			GeneralServiceInterface<Product> productServices = new ProductServiceImplementation();
-		
+			
 			List<ProductFromCart> list = item.getProductsFromCart();
-			updateStoks(session, productServices, list);
+			updateStoks(session,  list);
 		}
 		
 	}
 
-	public void updateStoks(SessionFactory session, GeneralServiceInterface<Product> productServices,
+	public void updateStoks(SessionFactory session, List<ProductFromCart> list) {
 		
-		List<ProductFromCart> list) {
 		int size = list.size();
 		ProductFromCart temp;
 		int tempCantitateComadata;
@@ -71,11 +70,11 @@ public class CartServiceImplementation implements GeneralServiceInterface<Cart> 
 			temp = list.get(i);
 			tempCantitateComadata = temp.getCantitateComandata();
 			int idProduct = temp.getIdProdus();
-			GeneralServiceInterface<Product> generalServiceInterface = new ProductServiceImplementation();
-			Product tempProduct = generalServiceInterface.getItem(idProduct, session);
-			tempProduct.setNumberOfItmes((tempProduct.getNumberOfItems()-tempCantitateComadata));
 			
-			productServices.updateItem(tempProduct, session);
+			Product tempProduct = ProductServiceImplementation.getInstance().getARow(session, idProduct);
+			tempProduct.setNumberOfItmes((tempProduct.getNumberOfItems()-tempCantitateComadata));
+
+			 ProductServiceImplementation.getInstance().insertOrUpdate(session, tempProduct);
 		}
 	}
 	

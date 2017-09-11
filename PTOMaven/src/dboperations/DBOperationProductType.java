@@ -30,7 +30,7 @@ public class DBOperationProductType implements DBOperations<ProductType> {
 	}
 	
 	@Override
-	public void insert(SessionFactory theSessionFactory, ProductType ob) {
+	public void insertOrUpdate(SessionFactory theSessionFactory, ProductType ob) {
 
 		// get the session
 		Session theSession = theSessionFactory.getCurrentSession();

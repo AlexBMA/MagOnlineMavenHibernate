@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,9 +21,6 @@ import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.Product;
 import modelMag.ProductType;
-import services.AddPrefixAndSufixInterface;
-import services.GeneralServiceInterface;
-import serviciesImpl.AddPrefixAndSufixImplementation;
 import serviciesImpl.ProductServiceImplementation;
 import serviciesImpl.ProductTypeServiceImplementation;
 
@@ -54,11 +50,9 @@ public class ViewProductsClient extends HttpServlet {
 		if (theSession != null) {
 			
 			SessionFactory sessionFactory = DB.getSessionFactory();
-			GeneralServiceInterface<Product> productService = new ProductServiceImplementation();			
-			List<Product> listProduct = productService.getAllItems(sessionFactory);
 			
-			GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
-			List<ProductType> listProductType = productTypeService.getAllItems(sessionFactory);
+			List<Product> listProduct = ProductServiceImplementation.getInstance().getAllRow(sessionFactory);	
+			List<ProductType> listProductType = ProductTypeServiceImplementation.getInstance().getAllRow(sessionFactory);
 
 			Map<Integer, ProductType> mapProductTypeService = new HashMap<>();
 
@@ -82,7 +76,7 @@ public class ViewProductsClient extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }

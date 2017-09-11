@@ -15,7 +15,6 @@ import constantPack.AppServletsName;
 import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.ProductType;
-import services.GeneralServiceInterface;
 import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
@@ -50,10 +49,10 @@ public class AddProductTypeServlet extends HttpServlet {
 		if(theSession!=null){
 			
 			String nameProductType = request.getParameter(AppRequestAttribute.PRODUCT_TYPE_NAME);
-			GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
-			ProductType temp = new ProductType(nameProductType);
-			productTypeService.insertItem(temp, DB.getSessionFactory());
 			
+			ProductType temp = new ProductType(nameProductType);
+			ProductTypeServiceImplementation.getInstance().insertOrUpdate(DB.getSessionFactory(), temp);
+	
 			PageHelper.nextPageServlet(request, response, AppServletsName.VIEW_ALL_PRODUCT_TYPE_SERVLET);
 		}else {
 			System.out.println(AppConstants.SESSION_HAS_EXPIRED);

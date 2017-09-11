@@ -18,7 +18,6 @@ import constantPack.AppRequestAttribute;
 import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.Product;
-import services.GeneralServiceInterface;
 import serviciesImpl.ProductServiceImplementation;
 
 /**
@@ -51,17 +50,16 @@ public class ViewDetailsProductClientServlet extends HttpServlet {
 		
 		HttpSession theSession = request.getSession(false);
 		if(theSession!=null){
-			
 			int idProduct = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT).trim());
-		
 			SessionFactory sessionFactory = DB.getSessionFactory();
-			GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
-			Product tempProduct = productService.getItem(idProduct, sessionFactory);
-			List<Product> listRecommendation  =productService.getRecommendedItems(sessionFactory, tempProduct.getProductTypeId());
+		
+			Product tempProduct = ProductServiceImplementation.getInstance().getARow(sessionFactory, idProduct);
+			
+			ProductServiceImplementation.getInstance().getAllSimilarRows(sessionFactory, idProduct);
+			List<Product> listRecommendation  = ProductServiceImplementation.getInstance().getAllSimilarRows(sessionFactory, idProduct);
 			
 			request.setAttribute(AppRequestAttribute.PRODUCT_TEMP,tempProduct);
 			request.setAttribute(AppRequestAttribute.LIST_OF_RECOMMENDED, listRecommendation);
-		
 			PageHelper.nextPageJsp(request, response, AppJspPages.VIEW_DETAILS_CLIENT);
 			
 		}else {

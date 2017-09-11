@@ -8,7 +8,6 @@ import modelMag.Cart;
 import modelMag.Product;
 import modelMag.ProductFromCart;
 import services.AddInCartInterface;
-import services.GeneralServiceInterface;
 
 public class AddInCartImplementation implements AddInCartInterface<Integer, Cart> {
 
@@ -67,8 +66,7 @@ public class AddInCartImplementation implements AddInCartInterface<Integer, Cart
 
 		for (ProductFromCart temp : list) {
 
-		GeneralServiceInterface<Product> productService = new ProductServiceImplementation();
-		Product tempProduct = productService.getItem(temp.getIdProdus(),sessionFactory);
+		Product tempProduct = ProductServiceImplementation.getInstance().getARow(sessionFactory, temp.getIdProdus());
 			total = total + (tempProduct.getPrice() * temp.getCantitateComandata());
 		}
 

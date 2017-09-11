@@ -12,7 +12,7 @@ public class DBOperationsProductFromCart implements DBOperations<ProductFromCart
 
 	
 	@Override
-	public void insert(SessionFactory theSessionFactory, ProductFromCart ob) {
+	public void insertOrUpdate(SessionFactory theSessionFactory, ProductFromCart ob) {
 		
 		 //get the session
 		Session theSession = theSessionFactory.getCurrentSession();

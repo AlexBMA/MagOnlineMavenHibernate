@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import constantPack.AppConstants;
 import constantPack.AppJspPages;
-import constantPack.AppServletsName;
+import dboperations.DB;
 import helperpack.PageHelper;
 import helperpack.ProductHelper;
 
@@ -49,7 +49,7 @@ public class DeleteProductServlet extends HttpServlet {
 
 		HttpSession theSession = request.getSession(false);
 		if (theSession != null) {
-			ProductHelper.deleteProduct(request);
+			ProductHelper.deleteProduct(request,DB.getSessionFactory());
 			ProductHelper.getAndPutDataInRequest(request);
 			PageHelper.nextPageJsp(request, response, AppJspPages.ALL_PRODUCT_ADMIN);
 

@@ -3,7 +3,6 @@ package modelMag;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +17,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="cart")
 public class Cart  {
-	
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -38,13 +36,20 @@ public class Cart  {
 	
 	// totalPriceOfCart
 	
-	
-	public double getTotalPriceForProductFormCart() {
-		return totalPriceOfCart;
-	}
-
-	public void setTotalPriceForProductFromCart(double totalPriceOfCart) {
-		this.totalPriceOfCart = totalPriceOfCart;
+	public  static class Builder{
+		private int id =0;
+		private double totalPriceOfCart =0;
+		private List<ProductFromCart> productsFromCart = new ArrayList<>();
+		
+		
+		public Builder id(int val) { id= val; return this;}
+		public Builder totalPriceOfCart(double val) {totalPriceOfCart = val; return this;}
+		public Builder productsFromCart(List<ProductFromCart> val){ productsFromCart = val; return this;}
+		
+		public Cart  build(){
+			return new Cart(this);
+		}
+		
 	}
 
 	public Cart() {
@@ -52,6 +57,20 @@ public class Cart  {
 		productsFromCart = new ArrayList<>();
 	}
 
+	public Cart(Builder builder) {
+		this.id = builder.id;
+		this.totalPriceOfCart = builder.totalPriceOfCart;
+		this.productsFromCart = builder.productsFromCart;
+	}
+
+	public double getTotalPriceForProductFormCart() {
+		return totalPriceOfCart;
+	}
+
+	public void setTotalPriceForProductFromCart(double totalPriceOfCart) {
+		this.totalPriceOfCart = totalPriceOfCart;
+	}
+	
 	public List<ProductFromCart> getProductsFromCart() {
 		return productsFromCart;
 	}

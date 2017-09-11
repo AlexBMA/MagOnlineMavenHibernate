@@ -17,7 +17,6 @@ import constantPack.AppServletsName;
 import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.ProductType;
-import services.GeneralServiceInterface;
 import serviciesImpl.ProductTypeServiceImplementation;
 
 /**
@@ -54,11 +53,10 @@ public class SaveEditProductTypeServlet extends HttpServlet {
 			String productTypeName = request.getParameter(AppRequestAttribute.PRODUCT_TYPE_NAME).trim();
 			
 			SessionFactory sessionFactory = DB.getSessionFactory();
-			GeneralServiceInterface<ProductType> productTypeService = new ProductTypeServiceImplementation();
 			
-			ProductType temp = productTypeService.getItem(indexProductType, sessionFactory);
+			ProductType temp = ProductTypeServiceImplementation.getInstance().getARow(sessionFactory, indexProductType);
 			temp.setProductTypeName(productTypeName);
-			productTypeService.insertItem(temp, sessionFactory);
+			ProductTypeServiceImplementation.getInstance().insertOrUpdate(sessionFactory, temp);
 			
 			PageHelper.nextPageServlet(request, response,AppServletsName.VIEW_ALL_PRODUCT_TYPE_SERVLET);
 			

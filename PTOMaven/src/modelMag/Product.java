@@ -37,21 +37,21 @@ public class Product  {
 
 	}
 	
-	public static class ProductBuilder{
+	public static class Builder{
 		private int id;
 		private int numberOfItems;
-		private int price;
+		private double price;
 		private int priceTypeId;
 		private String linkImg;
 		private String name;
 		
 		
-		public ProductBuilder id(int val){id = val; return this; }
-		public ProductBuilder numberOfItems(int val){numberOfItems = val; return this;}
-		public ProductBuilder price(int val){price = val; return this;}
-		public ProductBuilder name(String val){name=val;return this;}
-		public ProductBuilder priceTypeId(int val){priceTypeId = val; return this;}
-		public ProductBuilder linkImg(String val){linkImg = val; return this;} 
+		public Builder id(int val){id = val; return this; }
+		public Builder numberOfItems(int val){numberOfItems = val; return this;}
+		public Builder price(double val){price = val; return this;}
+		public Builder name(String val){name=val;return this;}
+		public Builder priceTypeId(int val){priceTypeId = val; return this;}
+		public Builder linkImg(String val){linkImg = val; return this;} 
 		
 		public Product build()
 		{
@@ -60,7 +60,7 @@ public class Product  {
 		
 	}
 	
-	private Product(ProductBuilder builder){
+	private Product(Builder builder){
 		this.id = builder.id;
 		this.numberOfItems = builder.numberOfItems;
 		this.price = builder.price;

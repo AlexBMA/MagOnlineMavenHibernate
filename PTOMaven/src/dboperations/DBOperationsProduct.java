@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 
 import constantPack.AppTables;
 import modelMag.Product;
-import modelMag.ProductType;
 
 public class DBOperationsProduct implements DBOperations<Product> {
 
@@ -37,7 +36,7 @@ public class DBOperationsProduct implements DBOperations<Product> {
 	}
 
 	@Override
-	public void insert(SessionFactory theSessionFactory, Product ob) {
+	public void insertOrUpdate(SessionFactory theSessionFactory, Product ob) {
 		
 		//get the session
 		Session theSession = theSessionFactory.getCurrentSession();
