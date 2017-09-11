@@ -46,6 +46,7 @@
 		<br />
 		<main> 
 	
+		<!-- 
 		<section>
 			<nav>
 				<ul class="pure-menu-list">
@@ -70,7 +71,7 @@
 				</ul>
 			</nav>
 		</section>
-
+ 		-->
 		<br />
 
 		<table class="pure-table pure-table-horizontal">

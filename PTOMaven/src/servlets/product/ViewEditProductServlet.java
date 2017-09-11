@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +20,6 @@ import dboperations.DB;
 import helperpack.PageHelper;
 import modelMag.Product;
 import modelMag.ProductType;
-import services.AddPrefixAndSufixInterface;
-import services.GeneralServiceInterface;
-import serviciesImpl.AddPrefixAndSufixImplementation;
 import serviciesImpl.ProductServiceImplementation;
 import serviciesImpl.ProductTypeServiceImplementation;
 
@@ -60,11 +56,11 @@ public class ViewEditProductServlet extends HttpServlet {
 				mapOfProductType.put(p.getId(), p);
 			}
 
-			System.out.println(indexProduct);
+			//System.out.println(indexProduct);
 			
 			Product productTemp = ProductServiceImplementation.getInstance().getARow(sessionFactory, indexProduct);
 			
-			System.out.println(productTemp.getName() +"%%%%%%%%%%%%%%%%%%");
+			//System.out.println(productTemp.getName() +"%%%%%%%%%%%%%%%%%%");
 			
 			request.setAttribute(AppRequestAttribute.PRODUCT_TEMP, productTemp);
 			request.setAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE, mapOfProductType);

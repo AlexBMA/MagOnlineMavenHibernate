@@ -40,10 +40,12 @@ public class ViewEditProductTypeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession theSession = request.getSession(false);
 		if(theSession!=null){
-			int indexOfProductType = Integer.parseInt(request.getParameter(AppRequestAttribute.ID_PRODUCT));
+			int indexOfProductType = Integer.parseInt(request.getParameter(AppRequestAttribute.PRODUCT_TYPE_ID));
 			SessionFactory sessionFactory =  DB.getSessionFactory();
-			
+			//System.out.println(indexOfProductType);
 			ProductType temp = ProductTypeServiceImplementation.getInstance().getARow(sessionFactory, indexOfProductType);	
+			//System.out.println(temp.toString());
+			
 			request.setAttribute(AppRequestAttribute.TEMP_PRODUCT_TYPE, temp);
 			PageHelper.nextPageJsp(request, response, AppJspPages.EDIT_PRODUCT_TYPE);
 			

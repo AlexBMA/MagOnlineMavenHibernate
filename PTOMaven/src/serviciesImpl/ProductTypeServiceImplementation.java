@@ -11,7 +11,7 @@ public class ProductTypeServiceImplementation {
 	public static DBOperations<ProductType> getInstance(){
 		
 		if(dbOperations == null) dbOperations = new DBOperationProductType();
-		return null;
+		return dbOperations;
 	}
 	
 	

@@ -24,8 +24,7 @@ public class DBOperationProductType implements DBOperations<ProductType> {
 		// commit the operation
 		theSession.getTransaction().commit();
 
-		// close the session
-		theSession.close();
+		
 
 	}
 	
@@ -44,8 +43,7 @@ public class DBOperationProductType implements DBOperations<ProductType> {
 		// commit the operation
 		theSession.getTransaction().commit();
 
-		// close the session
-		theSession.close();
+		
 
 	}
 
@@ -63,8 +61,7 @@ public class DBOperationProductType implements DBOperations<ProductType> {
 		// commit the operation
 		theSession.getTransaction().commit();
 
-		// close the session
-		theSession.close();
+		
 
 		return temp;
 	}
@@ -85,8 +82,7 @@ public class DBOperationProductType implements DBOperations<ProductType> {
 		// commit the operation
 		theSession.getTransaction().commit();
 
-		// close the session
-		theSession.close();
+		
 
 		return theList;
 	}
@@ -107,8 +103,7 @@ public class DBOperationProductType implements DBOperations<ProductType> {
 		// commit the operation
 		theSession.getTransaction().commit();
 
-		// close the session
-		theSession.close();
+		
 
 	}
 

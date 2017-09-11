@@ -65,13 +65,13 @@
 		<br/>
 		<main> 
 		<%
-			ProductType temp = (ProductType)request.getAttribute(AppRequestAttribute.PRODUCT_TYPE_TEMP);
+			ProductType temp = (ProductType)request.getAttribute(AppRequestAttribute.TEMP_PRODUCT_TYPE);
 		%>
-			<form action="${pageContext.request.contextPath}/SaveEditProductTypeServlet" method="post">
-				<input type="number" readonly value="<%=temp.getId() %>" name="<%=AppRequestAttribute.PRODUCT_TYPE_ID %>" hidden>
+			<form action="${pageContext.request.contextPath}/SaveEditProductTypeServlet" method="post"  class="pure-form" >
+				<input type="number" readonly value="<%=temp.getId()%>" name="<%=AppRequestAttribute.PRODUCT_TYPE_ID%>" hidden>
 				<br/>
 				<input type="text" value="<%=temp.getProductTypeName() %>" name="<%=AppRequestAttribute.PRODUCT_TYPE_NAME %>" size="20">
-				<button type="submit">Save edit</button>
+				<button class="pure-button pure-button-primary" type="submit">Save edit</button>
 			</form>
 
 

@@ -50,6 +50,34 @@ public class ProductType {
 	public String toString() {
 		return "ProductType [id=" + id + ", productTypeName=" + productTypeName + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((productTypeName == null) ? 0 : productTypeName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductType other = (ProductType) obj;
+		if (id != other.id)
+			return false;
+		if (productTypeName == null) {
+			if (other.productTypeName != null)
+				return false;
+		} else if (!productTypeName.equals(other.productTypeName))
+			return false;
+		return true;
+	}
 	
 
 	

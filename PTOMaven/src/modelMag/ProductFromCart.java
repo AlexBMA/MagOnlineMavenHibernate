@@ -83,6 +83,36 @@ public class ProductFromCart  {
 		this.idProdus = idProdus;
 	}
 
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + cantitateComandata;
+		result = prime * result + id;
+		result = prime * result + idProdus;
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductFromCart other = (ProductFromCart) obj;
+		if (cantitateComandata != other.cantitateComandata)
+			return false;
+		if (id != other.id)
+			return false;
+		if (idProdus != other.idProdus)
+			return false;
+		return true;
+	}
+
 	
 	
 }

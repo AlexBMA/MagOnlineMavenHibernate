@@ -86,11 +86,46 @@ public class Cart  {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	
 
 	@Override
 	public String toString() {
 		return "Cart [id=" + id + ", totalPriceOfCart=" + totalPriceOfCart + ", productsFromCart=" + productsFromCart.toString()
 				+ "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((productsFromCart == null) ? 0 : productsFromCart.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(totalPriceOfCart);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cart other = (Cart) obj;
+		if (id != other.id)
+			return false;
+		if (productsFromCart == null) {
+			if (other.productsFromCart != null)
+				return false;
+		} else if (!productsFromCart.equals(other.productsFromCart))
+			return false;
+		if (Double.doubleToLongBits(totalPriceOfCart) != Double.doubleToLongBits(other.totalPriceOfCart))
+			return false;
+		return true;
 	}
 
 	

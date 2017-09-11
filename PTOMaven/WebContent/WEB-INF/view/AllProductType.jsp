@@ -83,7 +83,7 @@
 						<td><%=temp.getId() %> </td>
 						<td><%=temp.getProductTypeName() %> </td>
 						<td>
-							<form action="${pageContext.request.contextPath}/EditProductTypeServlet" method="post" class="pure-form">
+							<form action="${pageContext.request.contextPath}/EditProductTypeServlet" method="get" class="pure-form">
 								<input type="number" value="<%=temp.getId() %>" name="<%=AppRequestAttribute.PRODUCT_TYPE_ID%>" hidden>
 								<button type="submit" class="pure-button pure-button-primary">Edit</button>
 							</form>
