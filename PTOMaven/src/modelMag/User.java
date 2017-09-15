@@ -23,8 +23,7 @@ public class User {
 	@Column(name="pass")
 	private String pass;
 	
-	public User()
-	{
+	public User(){
 		
 	}
 	

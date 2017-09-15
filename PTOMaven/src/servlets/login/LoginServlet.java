@@ -4,10 +4,13 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.core.ApplicationSessionCookieConfig;
 
 import constantPack.AppConstants;
 import constantPack.AppJspPages;
@@ -59,6 +62,8 @@ public class LoginServlet extends HttpServlet {
 			theSession.setAttribute(AppSessionAttributes.USER_ID,loginService.getUser().getId());
 			theSession.setAttribute(AppSessionAttributes.USERNAME, userName);
 			theSession.setMaxInactiveInterval(AppConstants.MAX_INACTIVE_INTERVAL);
+			
+			
 			
 			if (role.equals(AppConstants.ROLE_ADMIN)) {
 				System.out.println("admin login");

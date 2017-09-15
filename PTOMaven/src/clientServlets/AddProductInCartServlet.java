@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.SessionFactory;
+
 import constantPack.AppConstants;
+import constantPack.AppJspPages;
 import constantPack.AppRequestAttribute;
-import constantPack.AppServletsName;
 import constantPack.AppSessionAttributes;
+import dboperations.DB;
+import helperpack.ClientHelper;
 import helperpack.PageHelper;
 import modelMag.Cart;
 import services.AddInCartInterface;
@@ -48,6 +52,8 @@ public class AddProductInCartServlet extends HttpServlet {
 		
 		HttpSession theSession = request.getSession(false);
 		
+		//request.getServletContext().get
+		
 		if(theSession!=null){
 			int numberOfItems =1;
 			
@@ -63,15 +69,25 @@ public class AddProductInCartServlet extends HttpServlet {
 			//System.out.println("Number of itmes: "+numberOfItems);
 			Cart theCart = (Cart) theSession.getAttribute(AppSessionAttributes.CART);
 			AddInCartInterface<Integer,Cart> addInCartProducts = new AddInCartImplementation();
-			addInCartProducts.addInCartOneItemMultipleTimes(idProduct, numberOfItems, theCart);
+			addInCartProducts.addInCartItem(idProduct, numberOfItems, theCart);
 			
 			theSession.setAttribute(AppSessionAttributes.CART, theCart);
-			PageHelper.nextPageServlet(request, response, AppServletsName.VIEW_PRODUCTS_CLIENT);
+			
+			String msg = "Product was added in cart";
+			request.setAttribute(AppRequestAttribute.MSG, msg);
+			
+			SessionFactory sessionFactory = DB.getSessionFactory();
+			ClientHelper.getAndSetDataForAllProductsClient(request, sessionFactory);
+			
+			//RequestDispatcher requestDispatcher = request.getRequestDispatcher(AppServletsName.VIEW_PRODUCTS_CLIENT);
+			//requestDispatcher.forward(request, response);
+			PageHelper.nextPageJsp(request, response, AppJspPages.ALL_PRODUCTS_CLIENT);
 		}
 		else{
 				System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}		
 		
 	}
+
 
 }

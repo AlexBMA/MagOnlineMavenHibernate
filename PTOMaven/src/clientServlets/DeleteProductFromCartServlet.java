@@ -61,7 +61,6 @@ public class DeleteProductFromCartServlet extends HttpServlet {
 			AddInCartInterface<Integer, Cart> addInCartProduct = new AddInCartImplementation();
 			addInCartProduct.calculateTotalPriceForCart(theCart,DB.getSessionFactory());
 			
-
 			PageHelper.nextPageJsp(request, response, AppJspPages.VIEW_CART);;
 		}else {
 			System.out.println(AppConstants.SESSION_HAS_EXPIRED);

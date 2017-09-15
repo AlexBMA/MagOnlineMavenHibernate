@@ -72,6 +72,10 @@
 			</nav>
 		</section>
  		-->
+ 		
+ 		<c:if test="${requestScope[AppRequestAttribute.MSG]!=null}">
+ 			<h2>${requestScope[AppRequestAttribute.MSG]}</h2>
+ 		</c:if>
 		<br />
 
 		<table class="pure-table pure-table-horizontal">

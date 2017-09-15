@@ -18,6 +18,7 @@ import constantPack.AppConstants;
 import constantPack.AppJspPages;
 import constantPack.AppRequestAttribute;
 import dboperations.DB;
+import helperpack.ClientHelper;
 import helperpack.PageHelper;
 import modelMag.Product;
 import modelMag.ProductType;
@@ -50,23 +51,25 @@ public class ViewProductsClient extends HttpServlet {
 		if (theSession != null) {
 			
 			SessionFactory sessionFactory = DB.getSessionFactory();
-			
-			List<Product> listProduct = ProductServiceImplementation.getInstance().getAllRow(sessionFactory);	
-			List<ProductType> listProductType = ProductTypeServiceImplementation.getInstance().getAllRow(sessionFactory);
-
-			Map<Integer, ProductType> mapProductTypeService = new HashMap<>();
-
-			for (ProductType temp : listProductType) {
-				mapProductTypeService.put(temp.getId(), temp);
-			}
-			request.setAttribute(AppRequestAttribute.LIST_PRODUCTS, listProduct);
-			request.setAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE, mapProductTypeService);
-
+			ClientHelper.getAndSetDataForAllProductsClient(request, sessionFactory);
 			PageHelper.nextPageJsp(request, response, AppJspPages.ALL_PRODUCTS_CLIENT);
 		} else {
 				System.out.println(AppConstants.SESSION_HAS_EXPIRED);
 		}
 
+	}
+
+	public void getAndPutDataInRequest(HttpServletRequest request, SessionFactory sessionFactory) {
+		List<Product> listProduct = ProductServiceImplementation.getInstance().getAllRow(sessionFactory);	
+		List<ProductType> listProductType = ProductTypeServiceImplementation.getInstance().getAllRow(sessionFactory);
+
+		Map<Integer, ProductType> mapProductTypeService = new HashMap<>();
+
+		for (ProductType temp : listProductType) {
+			mapProductTypeService.put(temp.getId(), temp);
+		}
+		request.setAttribute(AppRequestAttribute.LIST_PRODUCTS, listProduct);
+		request.setAttribute(AppRequestAttribute.MAP_PRODUCT_TYPE, mapProductTypeService);
 	}
 
 	/**

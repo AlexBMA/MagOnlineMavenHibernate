@@ -35,7 +35,10 @@ public class S1 extends HttpServlet {
 		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		
+		 System.out.println("The default session tracking modes: " +
+                request.getServletContext()
+                      .getDefaultSessionTrackingModes());
+
 	
 	}
 

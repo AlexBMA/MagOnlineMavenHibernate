@@ -12,7 +12,7 @@ import services.AddInCartInterface;
 public class AddInCartImplementation implements AddInCartInterface<Integer, Cart> {
 
 	@Override
-	public void addInCartOneItemMultipleTimes(Integer idProduct, int numberOfItems, Cart theCart) {
+	public void addInCartItem(Integer idProduct, int numberOfItems, Cart theCart) {
 
 		System.out.println("HERE IN ADD IN CART");
 		System.out.println(idProduct);
