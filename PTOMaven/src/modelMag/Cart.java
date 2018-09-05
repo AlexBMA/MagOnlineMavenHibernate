@@ -63,6 +63,8 @@ public class Cart  {
 		this.productsFromCart = builder.productsFromCart;
 	}
 
+	
+	
 	public double getTotalPriceForProductFormCart() {
 		return totalPriceOfCart;
 	}
@@ -126,6 +128,14 @@ public class Cart  {
 		if (Double.doubleToLongBits(totalPriceOfCart) != Double.doubleToLongBits(other.totalPriceOfCart))
 			return false;
 		return true;
+	}
+
+	public double getTotalPriceOfCart() {
+		return totalPriceOfCart;
+	}
+
+	public void setTotalPriceOfCart(double totalPriceOfCart) {
+		this.totalPriceOfCart = totalPriceOfCart;
 	}
 
 	

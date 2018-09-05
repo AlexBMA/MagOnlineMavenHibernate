@@ -14,10 +14,10 @@ public class AddInCartImplementation implements AddInCartInterface<Integer, Cart
 	@Override
 	public void addInCartItem(Integer idProduct, int numberOfItems, Cart theCart) {
 
-		System.out.println("HERE IN ADD IN CART");
+		/*System.out.println("HERE IN ADD IN CART");
 		System.out.println(idProduct);
 		System.out.println(numberOfItems);
-		
+		*/
 		int rez = checkIfItemAlreadyInCart(idProduct, numberOfItems, theCart);
 		System.out.println(rez);
 		if (rez == -1) {

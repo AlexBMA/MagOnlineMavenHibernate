@@ -27,16 +27,6 @@ public class ProductFromCart  {
 		
 	}
 	
-	
-	/*
-	public ProductFromCart(int id, int idProdus) {
-		super();
-		this.id = id;
-		this.idProdus = idProdus;
-	}
-	*/
-
-
 	public ProductFromCart(int idProdus, int cantitateComandata) {
 		super();
 		this.idProdus = idProdus;

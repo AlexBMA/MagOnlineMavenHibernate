@@ -23,7 +23,7 @@
 	<div id="container">
 	
 		<header id="header">
-			<h2>Welcome <%=session.getAttribute(AppSessionAttributes.USERNAME)%></h2>
+			<h2>Welcome ${sessionScope[AppSessionAttributes.USERNAME]}</h2>
 		
 			<nav>
 				<ul class="pure-menu-list">
@@ -51,35 +51,27 @@
 		</header>
 		<br/>
 		<main id="cart">
-			<%
-				Cart theCart = (Cart)session.getAttribute(AppSessionAttributes.CART);
-				String msg = (String)request.getAttribute(AppRequestAttribute.MSG);
-			%>
-			<% if(msg!=null){    %>
-				<h4><%=msg %></h4>
+		
+			<c:set var="theCart" value="${sessionScope[AppSessionAttributes.CART]}"></c:set>
+			<c:set var="msg" value="${sessionScope[AppRequestAttribute.MSG]}"></c:set>
 			
-			<%}
-			%>
+			<c:if test="${msg !=null}">
+				<h4>${msg}</h4>
+			</c:if>
 			
-			<%  List<ProductFromCart> list = theCart.getProductsFromCart();
-				int size = list.size();
-				ProductFromCart temp;
-				for(int i=0;i<size;i++)
-				{ temp = list.get(i);
-				%>
+			<c:forEach items="${theCart.productsFromCart}" var="temp"  varStatus="loop">
 					<img src="" id="cosimg"/>
-					<label>Number of items <%=temp.getCantitateComandata()%></label>
+					<label>Number of items ${temp.cantitateComandata}</label>
 					<label>Price of items </label>
-					
-				<form action="${pageContext.request.contextPath}/DeleteProductFromCartServlet" method="post" class="pure-form">
-					<input type="text" readonly hidden  value="<%=i%>" name="<%=AppRequestAttribute.INDEX_OF_PRODUCT%>"/>
+					<form action="${pageContext.request.contextPath}/DeleteProductFromCartServlet" method="post" class="pure-form">
+					<input type="text" readonly hidden  value="${loop.index}" name="<%=AppRequestAttribute.INDEX_OF_PRODUCT%>"/>
 					<button type="submit" class="pure-button pure-button-primary" >Delete product from cart</button>
 				</form>
-					
-			<%	}
-			%>
 			
-			<h4><%=theCart.getTotalPriceForProductFormCart() %></h4>
+			</c:forEach>
+			
+		
+			<h4>${theCart.totalPriceOfCart}</h4>
 			
 			<form action="${pageContext.request.contextPath}/SaveCartServlet" method="post" class="pure-form">
 			

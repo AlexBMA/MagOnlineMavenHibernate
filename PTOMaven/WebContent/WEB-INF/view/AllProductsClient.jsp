@@ -74,7 +74,7 @@
  		-->
  		
  		<c:if test="${requestScope[AppRequestAttribute.MSG]!=null}">
- 			<h2>${requestScope[AppRequestAttribute.MSG]}</h2>
+ 			<h4>${requestScope[AppRequestAttribute.MSG]}</h4>
  		</c:if>
 		<br />
 

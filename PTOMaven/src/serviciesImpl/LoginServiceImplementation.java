@@ -12,10 +12,10 @@ public class LoginServiceImplementation {
 	private   User user;
 	
 	
-	
-	
 	public boolean checkLogin(String userName,String userPass,  SessionFactory theSessionFactory)
 	{
+		
+		 System.out.println(" ###$$$###");
 		
 		 DBOperationUser op  = new DBOperationUser();
 	

@@ -69,17 +69,6 @@ public class Product  {
 		this.productTypeId = builder.priceTypeId;
 	}
 	
-/*
-	public Product( String name, int numberOfItems, double price,int produtcTypeId,String linkImg) {
-		this.name = name;
-		this.numberOfItems = numberOfItems;
-		this.price = price;
-	    this.productTypeId = produtcTypeId;
-	    this.linkImg = linkImg;
-
-	}
-	*/
-
 	public String getName() {
 		return name;
 	}
